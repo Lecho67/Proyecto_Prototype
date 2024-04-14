@@ -11,7 +11,7 @@
 .BarraNav nav {
     display: flex;
     justify-content: center; /* Centra los elementos horizontalmente */
-    align-items: center;
+    /* align-items: center; */
 }
 
 /* Estilos para los elementos de la lista de navegación */
@@ -48,9 +48,9 @@
     margin-right: 20px; /* Agrega espacio a la derecha del logo */
 }
 
-/* body {
+body {
     margin: 0;
-} */
+}
 
 /* Estilos para los elementos de la lista de navegación */
 .BarraNav nav ul li a {
@@ -71,3 +71,6 @@
 .BarraNav nav ul li a:active {
     transform: translateY(3px); /* Mueve ligeramente hacia abajo */
 }
+
+
+/* que bueno que esta quedando el cp*/
