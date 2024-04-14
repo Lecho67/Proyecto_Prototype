@@ -1,24 +1,34 @@
-/* Estilos para el contenedor cuadrado */
-.container {
-    margin: 20px auto; /* Margen superior e inferior de 20px y centrado horizontal */
+/* Estilos generales */
+body {
+    font-family: 'Monda', sans-serif; /* Cambia la fuente a Monda */
+  }
+  
+  /* Estilos para el contenedor cuadrado */
+  .container {
+    margin: 50px auto; /* Margen superior e inferior de 50px y centrado horizontal */
     max-width: 800px; /* Ancho máximo del contenedor */
     background-color: #D3DEE8; /* Color de fondo */
     border-radius: 20px; /* Bordes redondeados */
-    padding: 20px; /* Espaciado interno */
+    padding: 40px; /* Espaciado interno aumentado */
+  }
+  
+  /* Estilos para el titulo Cartelera */
+  .container h1 {
+    text-align: center; /* Centrar el texto */
   }
   
   /* Estilos para el grid */
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Columnas responsivas */
-    gap: 20px; /* Espacio entre elementos */
+    gap: 40px; /* Espacio entre elementos aumentado */
   }
   
   /* Estilos para los contenedores de películas */
   .movie {
     background-color: #F9FBFC; /* Color de fondo */
     border-radius: 10px; /* Bordes redondeados */
-    padding: 10px; /* Espaciado interno */
+    padding: 20px; /* Espaciado interno */
     text-align: center; /* Centrar contenido */
   }
   

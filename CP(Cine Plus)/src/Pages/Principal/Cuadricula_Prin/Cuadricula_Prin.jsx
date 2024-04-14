@@ -29,7 +29,7 @@ const Cartelera = () => {
 
   return (
     <div className="container">
-      <h1>Cartelera de películas</h1>
+      <h1>Cartelera</h1>
       <div className="grid">
         {peliculas.map((pelicula) => (
           <div key={pelicula.id} className="movie">
