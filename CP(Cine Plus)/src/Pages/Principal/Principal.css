@@ -1,3 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 /* Estilos para la barra de navegación */
 /* Estilos para la barra de navegación */
 .BarraNav {
@@ -11,7 +14,7 @@
 .BarraNav nav {
     display: flex;
     justify-content: center; /* Centra los elementos horizontalmente */
-    /* align-items: center; */
+    align-items: center;
 }
 
 /* Estilos para los elementos de la lista de navegación */
@@ -48,9 +51,7 @@
     margin-right: 20px; /* Agrega espacio a la derecha del logo */
 }
 
-body {
-    margin: 0;
-}
+
 
 /* Estilos para los elementos de la lista de navegación */
 .BarraNav nav ul li a {
@@ -74,3 +75,16 @@ body {
 
 
 /* que bueno que esta quedando el cp*/
+
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(calc(-400px * 5 - 0.5rem * 10));
+	}
+}
+
+.animate-scroll {
+	animation: scroll 40s linear infinite;
+}
