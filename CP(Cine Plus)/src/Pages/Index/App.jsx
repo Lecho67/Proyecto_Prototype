@@ -1,4 +1,4 @@
-import {Navigation, Carousel, MovieRow} from '../Principal/Principal.jsx'
+import {Navigation, Carousel, MovieRow} from '../../Principal/Principal.jsx'
 
 function App() {
   return (
