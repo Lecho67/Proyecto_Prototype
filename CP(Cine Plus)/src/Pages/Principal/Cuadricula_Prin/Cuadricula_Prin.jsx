@@ -14,7 +14,7 @@ const Cartelera = () => {
             params: {
               api_key: '3b24534de9f3e0c2935e3edd6446ad0c',
               language: 'es',
-              page: 1,
+              page: 3,
             },
           }
         );
@@ -33,10 +33,12 @@ const Cartelera = () => {
       <div className="grid">
         {peliculas.map((pelicula) => (
           <div key={pelicula.id} className="movie">
-            <img
-              src={`https://image.tmdb.org/t/p/w300/${pelicula.poster_path}`}
-              alt={pelicula.title}
-            />
+            <a href={``}>
+              <img
+                src={`https://image.tmdb.org/t/p/w300/${pelicula.poster_path}`}
+                alt={pelicula.title}
+              />
+            </a>
             <h2>{pelicula.title}</h2>
             <p>Clasificación: {pelicula.vote_average}</p>
           </div>
@@ -47,4 +49,3 @@ const Cartelera = () => {
 };
 
 export default Cartelera;
-
