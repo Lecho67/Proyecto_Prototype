@@ -1,12 +1,15 @@
 
-/* Estilos para la barra de navegación */
-/* Estilos para la barra de navegación */
+
 .BarraNav {
-    background-color: #000915; /* Cambia el color de fondo a negro (#000915) */
+    background-color: #000915; 
     text-align: center;
     padding-left: 10px; 
     padding-right: 10px;
-    /*margin-top: 0; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 /* Estilos para la lista de navegación dentro de la barra */
@@ -95,13 +98,19 @@
 }
 /* que bueno que esta quedando el cp*/
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 820px) {
     .linksContainer {
         display: none;
     }
     .toggleButton {
         display: block;
         cursor: pointer;
-
+        transition: all 0.3s ease;
+    }
+    .toggleButton:hover {
+        transform: scale(1.1);
+    }
+    .toggleButton:active {
+        transform: scale(0.9);
     }
 }

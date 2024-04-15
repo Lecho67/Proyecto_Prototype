@@ -5,7 +5,7 @@ body {
   
   /* Estilos para el contenedor cuadrado */
   .container {
-    margin: 50px auto; /* Margen superior e inferior de 50px y centrado horizontal */
+    margin: auto; /* Margen superior e inferior de 50px y centrado horizontal */
     max-width: 800px; /* Ancho máximo del contenedor */
     background-color: #D3DEE8; /* Color de fondo */
     border-radius: 20px; /* Bordes redondeados */
@@ -13,10 +13,10 @@ body {
   }
   
   /* Estilos para el titulo Cartelera */
-  .container h1 {
-    text-align: center; /* Centrar el texto */
+  .carteleraTitulo {
+    text-align: center;
+    font-family: "Monda", sans-serif;
   }
-  
   /* Estilos para el grid */
   .grid {
     display: grid;
@@ -30,6 +30,14 @@ body {
     border-radius: 10px; /* Bordes redondeados */
     padding: 20px; /* Espaciado interno */
     text-align: center; /* Centrar contenido */
+    transition: transform 0.3s ease; 
+  }
+  .movie:hover {
+    transform: translateY(-5px);
+  }
+  
+  .movie:active {
+    transform: translateY(+5px);
   }
   
   /* Estilos para la imagen de la película */
