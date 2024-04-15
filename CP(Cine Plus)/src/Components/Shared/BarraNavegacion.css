@@ -4,15 +4,19 @@
 .BarraNav {
     background-color: #000915; /* Cambia el color de fondo a negro (#000915) */
     text-align: center;
-    padding: 10px 20px; /* Agrega un poco de espacio interno a la barra de navegación */
-    margin-top: 0; /* Elimina cualquier margen superior */
+    padding-left: 10px; 
+    padding-right: 10px;
+    /*margin-top: 0; */
 }
 
 /* Estilos para la lista de navegación dentro de la barra */
 .BarraNav nav {
     display: flex;
-    justify-content: center; /* Centra los elementos horizontalmente */
+    justify-content: space-between; 
     align-items: center;
+    height: 100px;
+    flex-wrap: nowrap;
+    
 }
 
 /* Estilos para los elementos de la lista de navegación */
@@ -33,15 +37,33 @@
     margin-right: 0; /* Elimina el margen derecho del último elemento */
 }
 
-.BarraNav nav ul li a {
-    display: block; /* Hace que los enlaces se muestren como bloques */
-    font-family: 'Arial', sans-serif; /* Utiliza la fuente Arial o una fuente sans-serif genérica */
-    color: #ffffff; /* Cambia el color del texto a blanco */
-    text-decoration: none; /* Quita el subrayado de los enlaces */
-    padding: 10px 20px; /* Agrega espaciado interno */
-    transition: transform 0.3s ease; /* Agrega transición suave para la transformación */
-    
+
+/* Dirección antes: .BarraNav nav ul li a */
+
+
+
+.BarraNav nav div a {
+    display: block; 
+    font-family: 'Josefin Sans','Arial', sans-serif; 
+    font-size: 20px;    
+    color: #ffffff; 
+    text-decoration: none; 
+    padding: 10px 20px; 
+    transition: transform 0.3s ease; 
+    white-space: nowrap;    
 }
+.logoContainer {
+    display: flex;
+    justify-items: center;
+    width: auto;
+}
+
+
+
+.linksContainer {
+    display: flex;
+    justify-content: center;
+  }
 
 /* Estilos para el logo en la barra de navegación */
 .BarraNav img {
@@ -49,27 +71,37 @@
     margin-right: 20px; /* Agrega espacio a la derecha del logo */
 }
 
-
-
-/* Estilos para los elementos de la lista de navegación */
-.BarraNav nav ul li a {
-    font-family: 'Arial', sans-serif; /* Utiliza la fuente Arial o una fuente sans-serif genérica */
-    color: #ffffff; /* Cambia el color del texto a blanco */
-    text-decoration: none; /* Quita el subrayado de los enlaces */
-    transition: transform 0.3s ease; /* Agrega transición suave para la transformación */
-    display: inline-block; /* Asegura que el elemento tenga un tamaño para aplicar transformaciones */
-}
-
 /* Efecto cuando el cursor está sobre el enlace */
-.BarraNav nav ul li a:hover {
+.BarraNav nav div a:hover {
     transform: translateY(-3px); /* Mueve ligeramente hacia arriba */
 
 }
 
 /* Efecto cuando el enlace está activo (clickeado) */
-.BarraNav nav ul li a:active {
+.BarraNav nav div a:active {
     transform: translateY(3px); /* Mueve ligeramente hacia abajo */
 }
 
+.toggleButton {
+    display: none;
+}
 
+.menuDesplegable {
+    display: none;
+}
+
+.menuDesplegable {
+    display: flexbox;
+}
 /* que bueno que esta quedando el cp*/
+
+@media screen and (max-width: 850px) {
+    .linksContainer {
+        display: none;
+    }
+    .toggleButton {
+        display: block;
+        cursor: pointer;
+
+    }
+}
