@@ -11,7 +11,7 @@
 .BarraNav nav {
     display: flex;
     justify-content: center; /* Centra los elementos horizontalmente */
-    align-items: center;
+    /* align-items: center; */
 }
 
 /* Estilos para los elementos de la lista de navegación */

@@ -1,4 +1,4 @@
-import './Principal.css'; // Importa el archivo de estilos CSS
+import './BarraNavegacion.css'; // Importa el archivo de estilos CSS
 export  function Navigation() {
     return (
     <>
