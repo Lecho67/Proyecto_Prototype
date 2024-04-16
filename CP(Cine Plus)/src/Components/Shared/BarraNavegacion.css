@@ -1,0 +1,176 @@
+
+
+.BarraNav {
+    background-color: #000915; 
+    text-align: center;
+    padding-left: 20px; 
+    padding-right: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+}
+
+/* Estilos para la lista de navegación dentro de la barra */
+.BarraNav nav {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    height: 100px;
+    flex-wrap: nowrap;
+    
+}
+
+/* Estilos para los elementos de la lista de navegación */
+.BarraNav nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0; /* Elimina cualquier margen interno */
+}
+
+.BarraNav nav ul li {
+    display: inline-block;
+    margin: 0 20px; /* Aumenta el espacio entre los elementos de la barra de navegación */
+    flex-grow: 1; /* Hace que cada elemento ocupe todo el ancho disponible */
+    margin: 0 45px; /* Ajusta el margen horizontal */
+}
+
+.BarraNav nav ul li:last-child {
+    margin-right: 0; /* Elimina el margen derecho del último elemento */
+}
+
+
+/* Dirección antes: .BarraNav nav ul li a */
+
+
+
+.BarraNav nav div a {
+    display: block; 
+    font-family: 'Josefin Sans','Arial', sans-serif; 
+    font-size: 20px;    
+    color: #ffffff; 
+    text-decoration: none; 
+    transition: transform 0.3s ease; 
+    white-space: nowrap;    
+}
+.logoContainer {
+    display: flex;
+    justify-items: center;
+    width: auto;
+}
+
+
+
+.linksContainer {
+    display: flex;
+    flex-grow: 1;
+    min-width: 500px;
+    max-width: 800px;
+    justify-content: space-between;
+  }
+
+/* Estilos para el logo en la barra de navegación */
+.logo {
+    height: 50px; /* Ajusta la altura del logo */
+    margin-right: 20px; /* Agrega espacio a la derecha del logo */
+}
+
+/* Efecto cuando el cursor está sobre el enlace */
+.BarraNav nav div a:hover {
+    transform: translateY(-3px); /* Mueve ligeramente hacia arriba */
+
+}
+
+/* Efecto cuando el enlace está activo (clickeado) */
+.BarraNav nav div a:active {
+    transform: translateY(3px); /* Mueve ligeramente hacia abajo */
+}
+
+
+.buttonContainer {
+    display: none;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.btnHamburguesa {
+    width: 100%;
+    padding-block: 0px;
+    padding-inline: 0px;
+    background-color:#002657;
+}
+.imgHamburgesa {
+    display: none;
+    width: 100%;
+    margin: 0%;
+}
+
+.menuDesplegableInvisible {
+    display: none;
+}
+.menuDesplegableVisible {
+    display: none; /* Hace que el menu desplegable no aparezca cuando la página tenga mas de 670px */
+    background-color: #c4e2ff;
+    border-radius: 10px;
+    padding: 10px 0 10px 0;
+    z-index: 1000;
+}
+.menuDesplegableVisible a {
+    text-decoration: none;
+    color: #000915;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.menuDesplegableVisible a:hover {
+    transform: translateY(-3px);
+}
+
+.itemMenuDesplegable {
+    padding: 0 20px 0 20px;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+
+.itemMenuDesplegable:hover {
+    background-color: #b9d0f1;
+
+}
+
+/* que bueno que esta quedando el cp*/
+
+@media screen and (max-width: 670px) {
+    .linksContainer {
+        display: none;
+    }
+
+    .buttonContainer {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .imgHamburgesa {
+        display: block;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .imgHamburgesa:hover {
+        transform: scale(1.05);
+    }
+    .imgHamburgesa:active {
+        transform: scale(0.95);
+    }
+    .menuDesplegableVisible{
+        display: flex; 
+        position: fixed;
+        flex-direction: column;
+        right: 15px;
+    }
+}
