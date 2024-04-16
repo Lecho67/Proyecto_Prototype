@@ -5,7 +5,7 @@ function Principal() {
   return (
     <>
       <Navigation />
-      <Cartelera></Cartelera>
+      <Cartelera/>
     </>
   )
 }
