@@ -40,8 +40,10 @@ const Cartelera = () => {
   }, [numeroDePeliculas]);
 
   return (
+    <>
+    <br />
+    <h1 className='carteleraTitulo'>Cartelera</h1>
     <div className="container">
-      <h1>Cartelera</h1>
       <div className="grid">
         {peliculas.map((pelicula) => (
           <div key={pelicula.id} className="movie">
@@ -57,6 +59,8 @@ const Cartelera = () => {
         ))}
       </div>
     </div>
+    </>
+    
   );
 };
 
