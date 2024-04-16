@@ -14,14 +14,6 @@ import { useState } from 'react';
         <div className="BarraNav">
           <nav className="BarraNav">
             <div className='logoContainer'><img className="logo" src={logo} alt=''></img></div>
-            <ul className={`menuDesplegable ${menuVisible ? 'showMenu' : 'invisible'}`}>
-              <li><a href="#">Inicio</a></li>
-              <li><a href="#">Cartelera</a></li>
-              <li><a href="#">Comidas</a></li>
-              <li><a href="#">Próximos Estrenos</a></li>
-              <li><a href="#">Mi Perfil</a></li>
-              <li><a href="#">Mi Orden</a></li>
-            </ul>
             <div className="linksContainer">  
               <div><a href="#">Inicio</a></div>
               <div><a href="#">Cartelera</a></div>
@@ -30,8 +22,19 @@ import { useState } from 'react';
               <div><a href="#">Mi Perfil</a></div>
               <div><a href="#">Mi Orden</a></div>
             </div>
-            <img src={botonHamburguesa} alt="Botón de hamburguesa" className="toggleButton" />
+            <div className='buttonContainer'>
+              <button className='btnHamburguesa' onClick={toggleMenu}><img src={botonHamburguesa} alt="Botón de hamburguesa" className="imgHamburgesa" /></button>
+            </div>
+            
           </nav>
+        </div>
+        <div className={`${menuVisible ? 'menuDesplegableVisible' : 'menuDesplegableInvisible'}`}>
+            <a href="#"><div className='itemMenuDesplegable'>Inicio</div></a>
+            <a href="#"><div className='itemMenuDesplegable'>Cartelera</div></a>
+            <a href="#"><div className='itemMenuDesplegable'>Comidas</div></a>
+            <a href="#"><div className='itemMenuDesplegable'>Próximos Estrenos</div></a>
+            <a href="#"><div className='itemMenuDesplegable'>Mi Perfil</div></a>
+            <a href="#"><div className='itemMenuDesplegable'>Mi Orden</div></a>
         </div>
       </>
     );

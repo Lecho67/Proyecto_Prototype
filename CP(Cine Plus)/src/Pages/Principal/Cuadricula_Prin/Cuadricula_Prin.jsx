@@ -41,6 +41,7 @@ const Cartelera = () => {
 
   return (
     <>
+    <br />
     <h1 className='carteleraTitulo'>Cartelera</h1>
     <div className="container">
       <div className="grid">
