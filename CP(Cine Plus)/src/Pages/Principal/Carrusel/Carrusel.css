@@ -12,10 +12,12 @@
     aspect-ratio: 5 / 9;
     width: 360px;
     transition: all 0.3s ease;
+    border-radius: 10px;
 }
 
 .CarruselMovieImg:hover {
     width: 400px;
+    border-radius: 30px;
 }
 
 @media screen and (max-width: 1340px) {
