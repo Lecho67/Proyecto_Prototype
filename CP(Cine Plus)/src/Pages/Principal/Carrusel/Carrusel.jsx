@@ -44,7 +44,7 @@ const Carrusel = () => {
       <div className='CarruselContainer'>
        {peliculas.map((pelicula) => (
         <div key={pelicula.id} className="CarruselMovie">
-          <a href={`https://www.themoviedb.org/movie/${pelicula.id}`}>
+          <a className='aCarruselMovie' href={`https://www.themoviedb.org/movie/${pelicula.id}`}>
             <img className='CarruselMovieImg'
               src={`https://image.tmdb.org/t/p/w300/${pelicula.poster_path}`}
               alt={pelicula.title}
