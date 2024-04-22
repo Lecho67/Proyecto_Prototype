@@ -12,7 +12,7 @@
     font-family: MuseoModerno, sans-serif;
     color: aliceblue;
     font-weight: normal;
-    font-size: 2.5vw;
+    font-size: 3vw;
     max-height: 30vw;
 }
 
@@ -40,16 +40,16 @@
 }
 .PortadaImgContainer{
     width: 50%;
-    height: 60vw;
+    height: 50vw;
     align-self: flex-start;
     position: static;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: flex-end;
-    padding-right: 5%;
-    padding-left: 5%;
-    padding-top: 25%;
+    padding-right: 7%;
+    padding-left: 2%;
+    padding-top: 18%;
 }
 
 .PortadaImg{
@@ -57,5 +57,6 @@
     height: 100%;
     object-fit: cover;
     border-radius: 1.5vw;
+    z-index: 1;
 }
 
