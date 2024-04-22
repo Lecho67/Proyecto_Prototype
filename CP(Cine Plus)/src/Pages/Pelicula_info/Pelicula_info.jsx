@@ -14,7 +14,7 @@ const Pelicula_info = () => {
     try {
       const data = await useFetchPelicula(id);
       setPelicula(data);
-      console.log(pelicula);
+      console.log(data);
     }
     catch (error) {
       console.error('Error al obtener las páliculas:', error);
@@ -27,7 +27,7 @@ const Pelicula_info = () => {
   return (
     <>
       <Navigation/>
-      <Portada titulo={pelicula?.title}/>
+      <Portada pelicula={pelicula}/>
     </>
   )
 }
