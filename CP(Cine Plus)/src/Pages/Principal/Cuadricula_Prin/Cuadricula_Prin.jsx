@@ -47,7 +47,7 @@ const Cartelera = () => {
       <div className="grid">
         {peliculas.map((pelicula) => (
           <div key={pelicula.id} className="movie">
-            <a href={`https://www.themoviedb.org/movie/${pelicula.id}`}>
+            <a href={`/Pelicula?id=${pelicula.id}`}>
               <img
                 src={`https://image.tmdb.org/t/p/w300/${pelicula.poster_path}`}
                 alt={pelicula.title}
