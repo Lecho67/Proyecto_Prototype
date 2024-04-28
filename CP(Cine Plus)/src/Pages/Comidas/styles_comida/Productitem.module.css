@@ -1,0 +1,23 @@
+.container_product {
+  width: auto;
+  height: auto; /* Cambiado a auto para permitir contenido variable */
+  background-color: #EEF1F3;
+  border-radius: 5px;
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten a la fila */
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  padding: 10px; /* Añadido espacio entre los elementos */
+}
+
+.btnProduct {
+  width: calc(50% - 10px); /* Ajustado el ancho para dos columnas con espacio entre ellos */
+  height: 40px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #2569C3;
+  color: white;
+  font-weight: 500;
+  margin-bottom: 10px; /* Añadido espacio entre los botones */
+}

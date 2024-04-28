@@ -1,8 +1,8 @@
-import { blogs } from "../../Helpers/data/data"
+/*import { blogs } from "../../Helpers/data/data"
 import { CardBlog } from "../Principal/Carrusel/CardBlog"
 import { Navigation } from "../Principal/Principal"
 
-
+*/
 function App() {
 	const carouselBlogs = [...blogs, ...blogs];
 
