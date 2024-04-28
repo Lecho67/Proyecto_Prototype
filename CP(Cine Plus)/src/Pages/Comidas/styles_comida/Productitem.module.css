@@ -1,16 +1,20 @@
 .container_product {
-  width: auto;
-  height: auto; /* Cambiado a auto para permitir contenido variable */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   background-color: #EEF1F3;
   border-radius: 5px;
-  display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten a la fila */
-  justify-content: space-between; /* Distribuye el espacio entre los elementos */
-  padding: 10px; /* Añadido espacio entre los elementos */
+  padding: 20px;
+}
+
+/* Ajustamos el ancho para que ocupen el 50% del contenedor padre */
+.container_product > div {
+  width: calc(50% - 10px); /* Le restamos el espacio entre los elementos */
+  margin-bottom: 20px; /* Añadimos margen inferior para separar los productos */
 }
 
 .btnProduct {
-  width: calc(50% - 10px); /* Ajustado el ancho para dos columnas con espacio entre ellos */
+  width: 100%;
   height: 40px;
   outline: none;
   cursor: pointer;
@@ -19,5 +23,19 @@
   background-color: #2569C3;
   color: white;
   font-weight: 500;
-  margin-bottom: 10px; /* Añadido espacio entre los botones */
+}
+
+/* Ajuste del tamaño de texto para el precio */
+p {
+  font-size: 16px;
+}
+
+.productContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container_product {
+  width: calc(50% - 10px);
+  /* otros estilos */
 }
