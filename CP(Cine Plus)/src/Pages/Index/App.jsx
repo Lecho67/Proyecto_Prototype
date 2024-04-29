@@ -2,7 +2,7 @@
 import "./App.css"
 import {BrowserRouter, Routes, Route } from "react-router-dom"
 import Principal from "../Principal/Principal"
-import Comidas from "../Comidas/Comidas"
+import {Comidas} from "../Comidas/Comidas"
 import Pelicula_info from "../Pelicula_info/Pelicula_info"
 import Estrenos from "../Estrenos/Estrenos"
 
@@ -15,7 +15,7 @@ function App() {
 					<Route path="/Comidas" element={<Comidas />} />
 					<Route path="/Pelicula" element={<Pelicula_info />} />
 					<Route path="/Estrenos" element={<Estrenos/>}/>
-					<Route path="/Estrenos" element={<Estrenos/>}/>
+					<Route path="/Comidas" element={<Comidas />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
