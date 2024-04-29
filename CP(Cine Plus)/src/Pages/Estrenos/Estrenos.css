@@ -1,0 +1,24 @@
+.wrapper{
+    background-color:#021438;
+    width:100%;
+    height: auto;
+}
+
+.estrenosTitulo{
+    font-family: "Monda", sans-serif;
+    text-align:left;
+}
+
+.separador{
+    width: 100%;
+    height: 50px;
+}
+
+.container1 {
+    margin: auto;
+    max-width: 800px;
+    background-color: #D3DEE8;
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: -20px; /* Aplica un margen superior negativo */
+}
