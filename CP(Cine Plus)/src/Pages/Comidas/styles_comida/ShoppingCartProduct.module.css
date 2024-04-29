@@ -1,0 +1,21 @@
+.container_productCart {
+    width: auto;
+    height: 150px;
+    background-color: #EEF1F3;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+  
+  .btnProductCart {
+    width: 100px;
+    height: 40px;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #2569C3;
+    color: white;
+  }
