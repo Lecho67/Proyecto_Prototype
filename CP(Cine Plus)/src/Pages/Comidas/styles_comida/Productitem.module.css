@@ -1,0 +1,41 @@
+.container_product {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #EEF1F3;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+/* Ajustamos el ancho para que ocupen el 50% del contenedor padre */
+.container_product > div {
+  width: calc(50% - 10px); /* Le restamos el espacio entre los elementos */
+  margin-bottom: 20px; /* Añadimos margen inferior para separar los productos */
+}
+
+.btnProduct {
+  width: 100%;
+  height: 40px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: #2569C3;
+  color: white;
+  font-weight: 500;
+}
+
+/* Ajuste del tamaño de texto para el precio */
+p {
+  font-size: 16px;
+}
+
+.productContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.container_product {
+  width: calc(50% - 10px);
+  /* otros estilos */
+}
