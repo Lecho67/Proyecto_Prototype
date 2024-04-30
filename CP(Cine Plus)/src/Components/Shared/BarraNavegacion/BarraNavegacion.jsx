@@ -1,7 +1,9 @@
 import './BarraNavegacion.css'; // Importa el archivo de estilos CSS
-import logo from '../../assets/Logo.png';
-import botonHamburguesa from '../../assets/BotonHamburguesa.png';
+import '../../Shared/CarritoCompras/Car.css';
+import logo from '../../../assets/Logo.png';
+import botonHamburguesa from '../../../assets/BotonHamburguesa.png';
 import { useState } from 'react';
+import { Carrito } from '../CarritoCompras/Carrito';
 
   export function Navigation() {
     const [menuVisible, setMenuVisible] = useState(false);
@@ -9,6 +11,9 @@ import { useState } from 'react';
     const toggleMenu = () => {
     setMenuVisible(!menuVisible);
     };
+    const [allProducts, setAllProducts] = useState([]);
+	  const [total, setTotal] = useState(0);
+	  const [countProducts, setCountProducts] = useState(0);
     return (
       <>
         <div className="BarraNav">
@@ -20,6 +25,13 @@ import { useState } from 'react';
               <div><a href="/Estrenos">Estrenos</a></div>
               <div><a href="/Perfil">Mi Perfil</a></div>
               <div><a href="/Perfil/Orden">Mi Orden</a></div>
+              <div><Carrito allProducts={allProducts}
+                            setAllProducts={setAllProducts}
+                            total={total}
+                            setTotal={setTotal}
+                            countProducts={countProducts}
+                            setCountProducts={setCountProducts}/>
+        </div>
             </div>
             <div className='buttonContainer'>
               <button className='btnHamburguesa' onClick={toggleMenu}><img src={botonHamburguesa} alt="Botón de hamburguesa" className="imgHamburgesa" /></button>

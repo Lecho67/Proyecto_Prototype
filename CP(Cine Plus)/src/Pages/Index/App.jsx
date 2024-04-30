@@ -2,9 +2,9 @@
 import "./App.css"
 import {BrowserRouter, Routes, Route } from "react-router-dom"
 import Principal from "../Principal/Principal"
-import {Comidas} from "../Comidas/Comidas"
 import Pelicula_info from "../Pelicula_info/Pelicula_info"
 import Estrenos from "../Estrenos/Estrenos"
+import { Orden } from "../Orden/Orden"
 
 function App() {
 	return (
@@ -15,7 +15,7 @@ function App() {
 					
 					<Route path="/Pelicula" element={<Pelicula_info />} />
 					<Route path="/Estrenos" element={<Estrenos/>}/>
-					<Route path="/MiOrden" element={<Comidas />} />
+					<Route path="/MiOrden" element={<Orden />} />
 				</Routes>
 			</BrowserRouter>
 		</div>
