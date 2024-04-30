@@ -10,10 +10,6 @@ export const Carrito = ({
 }) => {
 	const [active, setActive] = useState(false);
 
-	
-
-	
-
 	return (
         <>
 			<div className='container-icon'>
