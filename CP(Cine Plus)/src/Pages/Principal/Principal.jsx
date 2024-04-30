@@ -1,4 +1,4 @@
-import { Navigation } from '../../Components/Shared/BarraNavegacion.jsx'
+import { Navigation } from '../../Components/Shared/BarraNavegacion/BarraNavegacion.jsx'
 import Cartelera from '../Principal/Cuadricula_Prin/Cuadricula_Prin.jsx'
 import Carrusel from './Carrusel/Carrusel.jsx'
 
