@@ -1,5 +1,7 @@
 import { data } from "../../Helpers/data";
 import React from 'react'
+import { Navigation } from "../../Components/Shared/BarraNavegacion/BarraNavegacion";
+import '../../Components/Shared/CarritoCompras/Car.css';
 
 export const Comidas = ({
     allProducts,
@@ -28,6 +30,8 @@ export const Comidas = ({
 
   return (
     (
+        <>
+        <Navigation/>
 		<div className='container-items'>
 			{data.map(product => (
 				<div className='item' key={product.id}>
@@ -44,7 +48,7 @@ export const Comidas = ({
 				</div>
 			))}
 		</div>
-	
+        </>
   )
 )
 };
