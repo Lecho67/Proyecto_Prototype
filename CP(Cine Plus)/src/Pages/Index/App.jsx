@@ -1,23 +1,23 @@
-import { blogs } from "../../Helpers/data/data"
-import { CardBlog } from "../Principal/Carrusel/CardBlog"
-import { Navigation } from "../Principal/Principal"
 
+import "./App.css"
+import {BrowserRouter, Routes, Route } from "react-router-dom"
+import Principal from "../Principal/Principal"
+import Pelicula_info from "../Pelicula_info/Pelicula_info"
+import Estrenos from "../Estrenos/Estrenos"
+import { Orden } from "../Orden/Orden"
 
 function App() {
-	const carouselBlogs = [...blogs, ...blogs];
-
 	return (
-		<div className='App'>
-			<Navigation />
-			<div className='container my-5'>
-				<div className='overflow-hidden w-full'>
-					<div className='flex whitespace-nowrap animate-scroll'>
-						{carouselBlogs.map((blog, index) => (
-							<CardBlog blog={blog} key={index} />
-						))}
-					</div>
-				</div>
-			</div>
+		<div>
+			<BrowserRouter>
+				<Routes>	
+					<Route index element={<Principal />} />
+					
+					<Route path="/Pelicula" element={<Pelicula_info />} />
+					<Route path="/Estrenos" element={<Estrenos/>}/>
+					<Route path="/MiOrden" element={<Orden />} />
+				</Routes>
+			</BrowserRouter>
 		</div>
 	);
 }

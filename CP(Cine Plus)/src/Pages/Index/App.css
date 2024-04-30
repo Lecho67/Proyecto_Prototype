@@ -1,0 +1,14 @@
+body {
+    
+    margin: 0;
+    background-color: #B5C7D8;
+}
+
+button {
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-family: inherit;
+    background-color: #1a1a1a;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }

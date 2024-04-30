@@ -1,0 +1,48 @@
+/* Estilos generales */
+body {
+    font-family: 'Monda', sans-serif; /* Cambia la fuente a Monda */
+  }
+  
+  /* Estilos para el contenedor cuadrado */
+  .container {
+    margin: auto; /* Margen superior e inferior de 50px y centrado horizontal */
+    max-width: 800px; /* Ancho máximo del contenedor */
+    background-color: #D3DEE8; /* Color de fondo */
+    border-radius: 20px; /* Bordes redondeados */
+    padding: 40px; /* Espaciado interno aumentado */
+  }
+  
+  /* Estilos para el titulo Cartelera */
+  .carteleraTitulo {
+    text-align: center;
+    font-family: "Monda", sans-serif;
+  }
+  /* Estilos para el grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Columnas responsivas */
+    gap: 40px; /* Espacio entre elementos aumentado */
+  }
+  
+  /* Estilos para los contenedores de películas */
+  .movie {
+    background-color: #F9FBFC; /* Color de fondo */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    text-align: center; /* Centrar contenido */
+    transition: transform 0.3s ease; 
+  }
+  .movie:hover {
+    transform: translateY(-5px);
+  }
+  
+  .movie:active {
+    transform: translateY(+5px);
+  }
+  
+  /* Estilos para la imagen de la película */
+  .movie img {
+    max-width: 100%; /* Imagen ajustada al ancho del contenedor */
+    border-radius: 5px; /* Bordes redondeados para la imagen */
+  }
+  

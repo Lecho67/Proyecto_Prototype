@@ -1,17 +1,15 @@
-import './Principal.css'; // Importa el archivo de estilos CSS
-export  function Navigation() {
-    return (
-    
-    <div className="BarraNav">
-      <nav className="BarraNav">
-        <ul>
-          <li><a href="#">Inicio</a></li>
-          <li><a href="#">Cartelera</a></li>
-          <li><a href="#">Comidas</a></li>
-          <li><a href="#">Próximos Estrenos</a></li>
-          <li><a href="#">Mi Perfil</a></li>
-        </ul>
-      </nav>
-    </div>
-    );
-  }
+import { Navigation } from '../../Components/Shared/BarraNavegacion/BarraNavegacion.jsx'
+import Cartelera from '../Principal/Cuadricula_Prin/Cuadricula_Prin.jsx'
+import Carrusel from './Carrusel/Carrusel.jsx'
+
+function Principal() {
+  return (
+    <>
+      <Navigation />
+      <Carrusel/>
+      <Cartelera/>
+    </>
+  )
+}
+
+export default Principal
