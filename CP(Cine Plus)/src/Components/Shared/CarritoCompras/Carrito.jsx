@@ -9,6 +9,22 @@ export const Carrito = ({
 	setTotal,
 }) => {
 	const [active, setActive] = useState(false);
+	const onDeleteProduct = product => {
+		const results = allProducts.filter(
+			item => item.id !== product.id
+		);
+
+		setTotal(total - product.price * product.quantity);
+		setCountProducts(countProducts - product.quantity);
+		setAllProducts(results);
+	};
+
+	const onCleanCart = () => {
+		setAllProducts([]);
+		setTotal(0);
+		setCountProducts(0);
+	};
+
 
 	return (
         <>

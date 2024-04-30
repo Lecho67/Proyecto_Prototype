@@ -5,7 +5,7 @@ import botonHamburguesa from '../../../assets/BotonHamburguesa.png';
 import { useState } from 'react';
 import { Carrito } from '../CarritoCompras/Carrito';
 
-  export function Navigation() {
+export function Navigation() {
     const [menuVisible, setMenuVisible] = useState(false);
 
     const toggleMenu = () => {

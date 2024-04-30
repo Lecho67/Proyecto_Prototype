@@ -27,11 +27,19 @@ export const Comidas = ({
 		setCountProducts(countProducts + product.quantity);
 		setAllProducts([...allProducts, product]);
 	};
-
+	
+	
   return (
     (
         <>
-        <Navigation/>
+        <Navigation
+		allProducts={allProducts}
+		setAllProducts={setAllProducts}
+		total={total}
+		setTotal={setTotal}
+		countProducts={countProducts}
+		setCountProducts={setCountProducts}
+		/>
 		<div className='container-items'>
 			{data.map(product => (
 				<div className='item' key={product.id}>
