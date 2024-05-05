@@ -1,5 +1,5 @@
 import './Estrenos.css'
-import { Navigation } from "../../Components/Shared/BarraNavegacion"
+import { Navigation } from "../../Components/Shared/BarraNavegacion/BarraNavegacion"
 import {useState,useEffect} from 'react'
 import axios from 'axios';
 const Estrenos = ()=>{
