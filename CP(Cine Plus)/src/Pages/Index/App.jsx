@@ -59,8 +59,29 @@ function App() {
 							setCountProducts={setCountProducts}
        					 />
 					</>} />
-					<Route path="/Estrenos" element={<Estrenos/>}/>
-					<Route path="/MiOrden" element={<Orden />} />
+					<Route path="/Estrenos" element={<>
+						<Navigation
+							allProducts={allProducts}
+							setAllProducts={setAllProducts}
+							total={total}
+							setTotal={setTotal}
+							countProducts={countProducts}
+							setCountProducts={setCountProducts}
+       					 />
+						<Estrenos/>
+					
+					</>}/>
+					<Route path="/MiOrden" element={<>
+						<Navigation
+							allProducts={allProducts}
+							setAllProducts={setAllProducts}
+							total={total}
+							setTotal={setTotal}
+							countProducts={countProducts}
+							setCountProducts={setCountProducts}
+       					 />
+					<Orden /></>} />
+
 				</Routes>
 			</BrowserRouter>
 		</div>
