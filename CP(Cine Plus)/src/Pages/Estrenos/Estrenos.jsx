@@ -32,9 +32,6 @@ const Estrenos = ()=>{
     
     return (
         <>
-
-        <Navigation/>
-
         <div className="wrapper">
             <div className='separador'></div>
 

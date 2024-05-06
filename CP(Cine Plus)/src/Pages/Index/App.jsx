@@ -1,6 +1,6 @@
 
 import "./App.css"
-import {BrowserRouter, Routes, Route } from "react-router-dom"
+import {BrowserRouter, Routes, Route, Link } from "react-router-dom"
 import Principal from "../Principal/Principal"
 import Pelicula_info from "../Pelicula_info/Pelicula_info"
 import Estrenos from "../Estrenos/Estrenos"
@@ -9,6 +9,7 @@ import { useState } from "react"
 import { Comidas } from "../Comidas/Comidas"
 import { Navigation } from "../../Components/Shared/BarraNavegacion/BarraNavegacion"
 
+
 function App() {
 	const [allProducts, setAllProducts] = useState([]);
 	const [total, setTotal] = useState(0);
@@ -16,29 +17,16 @@ function App() {
 
 	return (
 		<div>
+			<Navigation allProducts={allProducts}
+							setAllProducts={setAllProducts}
+							total={total}
+							setTotal={setTotal}
+							countProducts={countProducts}
+							setCountProducts={setCountProducts}/>
 			<BrowserRouter>
 				<Routes>	
-					<Route index element={<>
-						<Navigation
-							allProducts={allProducts}
-							setAllProducts={setAllProducts}
-							total={total}
-							setTotal={setTotal}
-							countProducts={countProducts}
-							setCountProducts={setCountProducts}
-       					 />
-						<Principal/>
-						
-					</>} />
+					<Route path='/' element={<Principal/>}/>
 					<Route path="/Comidas"  element={<>
-						<Navigation
-							allProducts={allProducts}
-							setAllProducts={setAllProducts}
-							total={total}
-							setTotal={setTotal}
-							countProducts={countProducts}
-							setCountProducts={setCountProducts}
-       					/>
 						<Comidas
 							allProducts={allProducts}
 							setAllProducts={setAllProducts}
@@ -50,36 +38,12 @@ function App() {
 					</>} />
 					<Route path="/Pelicula" element={<>
 						<Pelicula_info />
-						<Navigation
-							allProducts={allProducts}
-							setAllProducts={setAllProducts}
-							total={total}
-							setTotal={setTotal}
-							countProducts={countProducts}
-							setCountProducts={setCountProducts}
-       					 />
 					</>} />
 					<Route path="/Estrenos" element={<>
-						<Navigation
-							allProducts={allProducts}
-							setAllProducts={setAllProducts}
-							total={total}
-							setTotal={setTotal}
-							countProducts={countProducts}
-							setCountProducts={setCountProducts}
-       					 />
 						<Estrenos/>
 					
 					</>}/>
 					<Route path="/MiOrden" element={<>
-						<Navigation
-							allProducts={allProducts}
-							setAllProducts={setAllProducts}
-							total={total}
-							setTotal={setTotal}
-							countProducts={countProducts}
-							setCountProducts={setCountProducts}
-       					 />
 					<Orden /></>} />
 
 				</Routes>
