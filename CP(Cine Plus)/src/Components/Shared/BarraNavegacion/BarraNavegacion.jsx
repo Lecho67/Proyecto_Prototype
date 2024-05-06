@@ -3,7 +3,7 @@ import '../../Shared/CarritoCompras/Car.css';
 import logo from '../../../assets/Logo.png';
 import botonHamburguesa from '../../../assets/BotonHamburguesa.png';
 import { useState } from 'react';
-
+import { Link } from 'react-router-dom';
 
 export const Navigation =({
 	allProducts,
@@ -40,12 +40,13 @@ export const Navigation =({
           <nav className="BarraNav">
             <div className='logoContainer'><img className="logo" src={logo} alt=''></img></div>
             <div className="linksContainer">  
-              <div><a href="/">Inicio</a></div>
-              <div><a href="/Comidas">Comidas</a></div>
-              <div><a href="/Estrenos">Estrenos</a></div>
-              <div><a href="/Perfil">Mi Perfil</a></div>
-              <div><a href="/Perfil/Orden">Mi Orden</a></div>
-              <div><div className='container-icon'>
+				<Link to="/" className="nav-inicio">Inicio</Link>
+            	<Link to="/Comidas" className="nav-comidas">Comidas</Link>
+				<Link to="/Estrenos" className="nav-estrenos">Estrenos</Link>
+              	<div><a href="/Estrenos">Estrenos</a></div>
+              	<div><a href="/Perfil">Mi Perfil</a></div>
+              	<div><a href="/Perfil/Orden">Mi Orden</a></div>
+              	<div><div className='container-icon'>
 				<div
 					className='container-cart-icon'
 					onClick={() => setActive(!active)}
