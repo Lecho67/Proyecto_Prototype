@@ -31,7 +31,7 @@ export const Login = () =>{
                         <a href="#">Olvide mi contraseña</a>
                     </div>
 
-                    <button>Iniciar Sesión</button>
+                    <button className='btnLogin'>Iniciar Sesión</button>
 
                     <div className="register">
                         <p>
@@ -42,7 +42,6 @@ export const Login = () =>{
                 </form>
 
             </div>
-
 
         </div>
         </>
