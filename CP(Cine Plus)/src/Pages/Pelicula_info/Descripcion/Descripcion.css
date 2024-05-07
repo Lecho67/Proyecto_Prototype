@@ -32,6 +32,8 @@
     width: 50%;
     box-sizing: border-box;
     margin-top: 10vw;
+    display: flex;
+    align-items: flex-end;
 }
 
 .InfoContainer{
@@ -41,6 +43,7 @@
     padding: 2%;   
     box-sizing: border-box;
     border-radius: 2vw;
+    display: flex;
 }
 .MayorContainer{
     width: 100%;
