@@ -19,7 +19,7 @@ const Estrenos = ()=>{
             }
           );
     
-          const peliculasData = response.data.results
+          const peliculasData = response.data.results.filter((x)=> x.poster_path != null)
           console.log(peliculasData)
           setPeliculas(peliculasData);
         } catch (error) {
