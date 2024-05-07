@@ -1,5 +1,5 @@
 import './Estrenos.css'
-import { Navigation } from "../../Components/Shared/BarraNavegacion"
+import { Navigation } from "../../Components/Shared/BarraNavegacion/BarraNavegacion"
 import {useState,useEffect} from 'react'
 import axios from 'axios';
 const Estrenos = ()=>{
@@ -19,7 +19,7 @@ const Estrenos = ()=>{
             }
           );
     
-          const peliculasData = response.data.results.filter((x)=> x.poster_path != null)
+          const peliculasData = response.data.results.filter((x)=> x.poster_path != null).filter((x)=>x.poster_path !== null);
           console.log(peliculasData)
           setPeliculas(peliculasData);
         } catch (error) {
@@ -32,9 +32,6 @@ const Estrenos = ()=>{
     
     return (
         <>
-
-        <Navigation/>
-
         <div className="wrapper">
             <div className='separador'></div>
 

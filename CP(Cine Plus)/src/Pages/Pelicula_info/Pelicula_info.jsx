@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {Navigation} from '../../Components/Shared/BarraNavegacion.jsx'
+import {Navigation} from '../../Components/Shared/BarraNavegacion/BarraNavegacion.jsx'
 import Portada from './Portada/Portada.jsx'
 import {useLocation} from 'react-router-dom'
 import useFetchPelicula from '../../Hooks/useFetchPelicula'
@@ -31,7 +31,6 @@ const Pelicula_info = () => {
   }, [])
   return (
     <>
-      <Navigation/>
       <Portada pelicula={pelicula}/>
       <Descripcion pelicula={pelicula} credits={credits}/>
     </>
