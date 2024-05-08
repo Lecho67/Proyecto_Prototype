@@ -4,7 +4,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
+    /* font-family: "Poppins", sans-serif; */
     background-color: aqua;
     min-height: 100vh;
     display:flex;
@@ -110,5 +110,23 @@
     margin-left: 10px;
 }
 
+.register p a:hover{
+    text-decoration: underline;
+}
 
 
+
+/* media queries */
+
+
+@media screen and (max-width: 480px) {
+    .wrapperLogin {
+        min-width: 100%;
+        height: 100vh;
+    }
+    .remember-forgot {
+      flex-direction: column;
+      margin: 10px 0;
+    }
+  }
+  
