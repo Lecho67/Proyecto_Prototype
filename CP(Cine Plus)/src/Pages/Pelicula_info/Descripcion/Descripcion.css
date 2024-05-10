@@ -1,0 +1,52 @@
+.DescriptionContainer{
+    width: 50%;
+    box-sizing: border-box;
+    padding-right: 7.4%;
+    margin-top: 10vw;
+}
+
+.DescriptionContainer p{
+    font-size: 1.1vw;
+    font-family: MuseoModerno, sans-serif;
+}
+
+.DescriptionContainer h6{
+    font-size: 1.3vw;
+    font-family: MuseoModerno, sans-serif;
+    font-weight: normal;
+    margin-bottom : 10px;
+    margin-top: 0;
+}
+
+.DescriptionContainer h3{
+    color: rgb(0, 26, 91);
+}
+
+.DescriptionContainer h4{
+    color: rgb(0, 26, 91);
+    margin: 0;
+}
+
+
+.CalendarioContainer{
+    width: 50%;
+    box-sizing: border-box;
+    margin-top: 10vw;
+    display: flex;
+    align-items: flex-end;
+}
+
+.InfoContainer{
+    width: 72%;
+    background-color: aliceblue;
+    margin-top: 6vw;
+    padding: 2%;   
+    box-sizing: border-box;
+    border-radius: 2vw;
+    display: flex;
+}
+.MayorContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
