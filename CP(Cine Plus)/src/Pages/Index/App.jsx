@@ -7,6 +7,7 @@ import Estrenos from "../Estrenos/Estrenos"
 import { Orden } from "../Orden/Orden"
 import { useState } from "react"
 import { Comidas } from "../Comidas/Comidas"
+import Reserva from "../Reserva/Reserva"
 
 function App() {
 	const [allProducts, setAllProducts] = useState([]);
@@ -28,6 +29,7 @@ function App() {
 					<Route path="/Pelicula" element={<Pelicula_info />} />
 					<Route path="/Estrenos" element={<Estrenos/>}/>
 					<Route path="/MiOrden" element={<Orden />} />
+					<Route path="/Reserva" element={<Reserva/>}></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
