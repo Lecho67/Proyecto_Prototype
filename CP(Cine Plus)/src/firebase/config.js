@@ -1,28 +1,22 @@
 // Import the functions you need from the SDKs you need
-import {getAuth} from "firebase/app" 
+// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import {getStorage} from "firebase/storage";
+import {getAuth} from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCMdngLF6-Os2eFg0O0o3ytSMX9NdUe_SY",
-  authDomain: "cp-cineplus.firebaseapp.com",
-  projectId: "cp-cineplus",
-  storageBucket: "cp-cineplus.appspot.com",
-  messagingSenderId: "198409333987",
-  appId: "1:198409333987:web:77f13fe6392733dfae29d6",
-  measurementId: "G-MTX425WZKV"
+  apiKey: "AIzaSyDcqkFiZ01slSkc2UVg_nQRwv49zQD_S8Q",
+  authDomain: "cineplus-b9a8f.firebaseapp.com",
+  projectId: "cineplus-b9a8f",
+  storageBucket: "cineplus-b9a8f.appspot.com",
+  messagingSenderId: "1076575442183",
+  appId: "1:1076575442183:web:ffb66210558b327b15a1a2"
 };
 
 // Initialize Firebase
-const firebaseApp = initializeApp(firebaseConfig);
-const auth = getAuth()
-const firebaseStorage = getStorage(firebaseApp);
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
-const analytics = getAnalytics(firebaseApp);
-
-export {firebaseApp, auth, firebaseStorage, analytics}
+export {app, auth}
