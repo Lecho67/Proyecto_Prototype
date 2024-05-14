@@ -43,7 +43,6 @@ export const Navigation =({
 				<Link to="/" className="nav-inicio">Inicio</Link>
             	<Link to="/Comidas" className="nav-comidas">Comidas</Link>
 				<Link to="/Estrenos" className="nav-estrenos">Estrenos</Link>
-              	<div><a href="/Estrenos">Estrenos</a></div>
               	<div><a href="/Perfil">Mi Perfil</a></div>
               	<div><a href="/Perfil/Orden">Mi Orden</a></div>
               	<div><div className='container-icon'>

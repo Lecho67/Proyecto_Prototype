@@ -1,4 +1,4 @@
-
+import noNavBar from './NoNavBar.module.css'
 import './Login.css'
 import 'boxicons'
 export const Login = () =>{
@@ -6,6 +6,7 @@ export const Login = () =>{
 
     return (
         <>
+        <div className={noNavBar.BarraNav}> ajflkasjfsaklfjasl</div>
         <div className="loginPage">
 
             <div className="wrapperLogin">
@@ -13,7 +14,7 @@ export const Login = () =>{
                 <form action="">
                     <h1>Login</h1>
                     <div className="input-box">
-                        <input type="text" placeholder='Email' required />
+                        <input type="email" placeholder='Email' required />
                         <box-icon type='solid' name='user'></box-icon>
                     </div>
 
