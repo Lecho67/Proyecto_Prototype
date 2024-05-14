@@ -78,7 +78,11 @@ function App() {
                         <Estrenos />
                     </div>
                 } />
-                <Route path="/MiOrden" element={
+
+
+                <Route element={<PrivateRoutes />}>
+                {/*aqui deben ir las rutas privadas*/}
+                <Route path="/Perfil/Orden" element={
                     <div>
                         <Navigation
                             allProducts={allProducts}
@@ -91,12 +95,28 @@ function App() {
                         <Orden />
                     </div>
                 } />
+
+                    <Route path="/Perfil" element={
+                    <div>
+                        <Navigation
+                            allProducts={allProducts}
+                            setAllProducts={setAllProducts}
+                            total={total}
+                            setTotal={setTotal}
+                            countProducts={countProducts}
+                            setCountProducts={setCountProducts}
+                        />
+                    </div>
+                } />
+                </Route>
+
+                
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Registro" element={<Registro />} />
 
-                <Route element={<PrivateRoutes />}>
-                    {/*aqui deben ir las rutas privadas*/}
-                </Route>
+                
+                    
+                
 
                 <Route path="/*" element={<Error404 />}/>
 
