@@ -22,10 +22,17 @@ export const AuthSlice = createSlice({
             state.uid = null
         },
 
+        login: (state, action) => {
+            state.status = 'authenticated',
+            state.email = action.payload.email
+        },
+
         checkingCredentials: (state, action) => {
             console.log('checking credentials')
         }
+
+
 }
 })
 
-export const { register, logout, checkingCredentials } = AuthSlice.actions
+export const { register, logout, checkingCredentials,login } = AuthSlice.actions

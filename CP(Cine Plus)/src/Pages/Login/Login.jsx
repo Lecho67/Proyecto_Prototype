@@ -1,25 +1,39 @@
-import noNavBar from './NoNavBar.module.css'
+
 import './Login.css'
 import 'boxicons'
+import { useForm } from '../../Hooks/useForm'
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../../redux/slices/auth/Thunks';
 export const Login = () =>{
+    const dispatch = useDispatch();
+    const {email,password,formState,onInputChange,onResetForm} = useForm({email:'',password:''})
+
+    const onSubmitForm = (evt) => {
+        evt.preventDefault();
+        console.log(formState)
+        dispatch(loginUser(email, password))
+        onResetForm();
+    }
+
+
 
 
     return (
         <>
-        <div className={noNavBar.BarraNav}> ajflkasjfsaklfjasl</div>
+        
         <div className="loginPage">
 
             <div className="wrapperLogin">
 
-                <form action="">
+                <form action="" onSubmit={(evt) => onSubmitForm(evt)}>
                     <h1>Login</h1>
                     <div className="input-box">
-                        <input type="email" placeholder='Email' required />
+                        <input type="email" placeholder='Email' name='email' value={email} onChange={(evt) => onInputChange(evt)} required />
                         <box-icon type='solid' name='user'></box-icon>
                     </div>
 
                     <div className="input-box">
-                        <input type="password" placeholder='Contraseña' required />
+                        <input type="password" placeholder='Contraseña' value={password} name='password' onChange={(evt) => onInputChange(evt)} required />
                         <box-icon type='solid' name='lock-alt'></box-icon>
                     </div>
 

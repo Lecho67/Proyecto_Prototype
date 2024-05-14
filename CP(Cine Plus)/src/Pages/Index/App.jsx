@@ -9,6 +9,8 @@ import { Comidas } from "../Comidas/Comidas";
 import { Navigation } from "../../Components/Shared/BarraNavegacion/BarraNavegacion";
 import {Login} from "../Login/Login.jsx"
 import {Registro} from "../Login/Registro.jsx"
+import Error404 from "../../Components/Shared/NoEncontrado/Error404.jsx";
+import { PrivateRoutes } from "./privateRoutes/PrivateRoutes.jsx";
 function App() {
     const [allProducts, setAllProducts] = useState([]);
     const [total, setTotal] = useState(0);
@@ -91,6 +93,13 @@ function App() {
                 } />
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Registro" element={<Registro />} />
+
+                <Route element={<PrivateRoutes />}>
+                    {/*aqui deben ir las rutas privadas*/}
+                </Route>
+
+                <Route path="/*" element={<Error404 />}/>
+
             </Routes>
         </BrowserRouter>
     );
