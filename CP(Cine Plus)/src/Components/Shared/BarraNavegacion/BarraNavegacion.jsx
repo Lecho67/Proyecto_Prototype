@@ -14,10 +14,15 @@ export const Navigation = ({
     setCountProducts,
     setTotal,
 }) => {
-    const [menuVisible, setMenuVisible] = useState(false);
     const [active, setActive] = useState(false);
+    const [menuVisible, setMenuVisible] = useState(false);
     const toggleMenu = () => {
         setMenuVisible(!menuVisible);
+    };
+    const [menuPerfilVisible, setMenuPerfilVisible] = useState(false);
+    const toggleMenuPerfil = () => {
+        setMenuPerfilVisible(!menuPerfilVisible);
+        setActive(false);
     };
 
     const onDeleteProduct = (product) => {
@@ -53,7 +58,10 @@ export const Navigation = ({
                         <div className="container-icon">
                             <div
                                 className="container-cart-icon"
-                                onClick={() => setActive(!active)}
+                                onClick={() => {
+                                    setActive(!active)
+                                    setMenuPerfilVisible(false)
+                                }}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +155,7 @@ export const Navigation = ({
                             </div>
                         </div>
 						<div className="ProfileButtonContainer">
-                        <button className="btnPerfil" onClick={toggleMenu}>
+                        <button className="btnPerfil" onClick={toggleMenuPerfil}>
                             <img
                                 src={perfil}
                                 alt="Botón de perfil"
@@ -190,6 +198,23 @@ export const Navigation = ({
                 <a href="/Perfil/Orden">
                     <div className="itemMenuDesplegable">Mi Orden</div>
                 </a>
+            </div>
+            <div
+                className={`${
+                    menuPerfilVisible
+                        ? "menuPerfilDesplegableVisible"
+                        : "menuPerfilDesplegableInvisible"
+                }`}
+            >
+                <Link to="/Perfil">
+                    <div className="itemMenuPerfilDesplegable">Mi Perfil</div>
+                </Link>
+                <Link to="/Perfil/Orden">
+                    <div className="itemMenuPerfilDesplegable">Mi Orden</div>
+                </Link>
+                <Link to="">
+                    <div className="itemMenuPerfilDesplegable">Cerrar Sesión</div>
+                </Link>
             </div>
         </>
     );
