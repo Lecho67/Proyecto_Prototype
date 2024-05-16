@@ -10,7 +10,7 @@ export const PrivateRoutes = () => {
 
     useEffect(() => {
 
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if(user){
                 setIsAuth(true);
                 setLoading(false);

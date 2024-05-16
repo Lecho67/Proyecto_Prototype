@@ -112,7 +112,7 @@ function App() {
 
                 
                 <Route path="/Login" element={<Login />} />
-                <Route path="/Registro" element={<Registro />} />
+                <Route path="/Register" element={<Registro />} />
 
                 
                     

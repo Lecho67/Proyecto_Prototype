@@ -1,7 +1,7 @@
 import { createUserWithEmailAndPassword, updateProfile,signInWithEmailAndPassword} from "firebase/auth";
-
+import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase/config.js";
-import { register,login } from "./AuthSlice";
+import { register,login,logout } from "./AuthSlice";
 
 
 export const registerUser = (email, password) => {
@@ -26,6 +26,13 @@ export const loginUser = (email, password) => {
         }else{
             throw new Error('Error al iniciar sesion')
         }
+    }
+}
+
+export const cerrarSesion = () => {
+    return async (dispatch) => {
+        const response = await signOut(auth);
+        console.log(response)
     }
 }
 

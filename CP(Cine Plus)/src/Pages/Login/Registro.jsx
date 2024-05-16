@@ -4,6 +4,7 @@ import 'boxicons'
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/slices/auth/Thunks';
 import { useForm } from '../../Hooks/useForm';
+import { Link } from 'react-router-dom';
 export const Registro = () =>{
 
     const dispatch = useDispatch();
@@ -42,7 +43,7 @@ export const Registro = () =>{
                     <div className="register">
                         <p>
                             ¿Ya tienes una cuenta?
-                            <a href="#">Iniciar Sesión</a>
+                            <Link to="/login">Iniciar Sesión</Link>
                         </p>
                     </div>
                 </form>

@@ -4,8 +4,10 @@ import logo from "../../../assets/Logo.png";
 import botonHamburguesa from "../../../assets/BotonHamburguesa.png";
 import perfil from "../../../assets/Perfil.png";
 import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { Link, Navigate } from "react-router-dom";
+import { cerrarSesion } from "../../../redux/slices/auth/Thunks";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 export const Navigation = ({
     allProducts,
     setAllProducts,
@@ -38,6 +40,12 @@ export const Navigation = ({
         setTotal(0);
         setCountProducts(0);
     };
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        dispatch(cerrarSesion());
+        navigate("/");
+    }
     return (
         <>
             <div className="BarraNav">
@@ -206,15 +214,22 @@ export const Navigation = ({
                         : "menuPerfilDesplegableInvisible"
                 }`}
             >
+                <Link to="/Login">
+                    <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
+                </Link>
                 <Link to="/Perfil">
                     <div className="itemMenuPerfilDesplegable">Mi Perfil</div>
                 </Link>
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuPerfilDesplegable">Mi Orden</div>
                 </Link>
-                <Link to="">
-                    <div className="itemMenuPerfilDesplegable">Cerrar Sesión</div>
-                </Link>
+                
+                <div className="itemMenuPerfilDesplegable" onClick={()=>{
+                    
+                    handleLogout()
+
+                }} >Cerrar Sesión</div>
+                
             </div>
         </>
     );
