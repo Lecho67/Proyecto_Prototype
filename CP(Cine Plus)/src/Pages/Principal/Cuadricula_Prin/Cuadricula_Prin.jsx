@@ -30,7 +30,7 @@ const Cartelera = () => {
 
         const responses = await Promise.all(requests);
         const peliculasData = responses.flatMap(response => response.data.results);
-        setPeliculas(peliculasData.slice(0, numeroDePeliculas));
+        setPeliculas(peliculasData.slice(0, numeroDePeliculas))
       } catch (error) {
         console.error('Error al obtener las películas:', error);
       }

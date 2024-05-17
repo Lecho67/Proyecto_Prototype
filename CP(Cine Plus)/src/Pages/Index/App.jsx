@@ -7,7 +7,10 @@ import { Orden } from "../Orden/Orden";
 import { useState } from "react";
 import { Comidas } from "../Comidas/Comidas";
 import { Navigation } from "../../Components/Shared/BarraNavegacion/BarraNavegacion";
-
+import {Login} from "../Login/Login.jsx"
+import {Registro} from "../Login/Registro.jsx"
+import Error404 from "../../Components/Shared/NoEncontrado/Error404.jsx";
+import { PrivateRoutes } from "./privateRoutes/PrivateRoutes.jsx";
 function App() {
     const [allProducts, setAllProducts] = useState([]);
     const [total, setTotal] = useState(0);
@@ -15,36 +18,109 @@ function App() {
 
     return (
         <BrowserRouter>
-            <div>
-                <Navigation
-                    allProducts={allProducts}
-                    setAllProducts={setAllProducts}
-                    total={total}
-                    setTotal={setTotal}
-                    countProducts={countProducts}
-                    setCountProducts={setCountProducts}
-                />
+            <Routes>
+                <Route path="/" element={
+                    <div>
+                        <Navigation
+                            allProducts={allProducts}
+                            setAllProducts={setAllProducts}
+                            total={total}
+                            setTotal={setTotal}
+                            countProducts={countProducts}
+                            setCountProducts={setCountProducts}
+                        />
+                        <Principal />
+                    </div>
+                } />
+                <Route path="/Comidas" element={
+                    <div>
+                        <Navigation
+                            allProducts={allProducts}
+                            setAllProducts={setAllProducts}
+                            total={total}
+                            setTotal={setTotal}
+                            countProducts={countProducts}
+                            setCountProducts={setCountProducts}
+                        />
+                        <Comidas
+                            allProducts={allProducts}
+                            setAllProducts={setAllProducts}
+                            total={total}
+                            setTotal={setTotal}
+                            countProducts={countProducts}
+                            setCountProducts={setCountProducts}
+                        />
+                    </div>
+                } />
+                <Route path="/Pelicula" element={
+                    <div>
+                        <Navigation
+                            allProducts={allProducts}
+                            setAllProducts={setAllProducts}
+                            total={total}
+                            setTotal={setTotal}
+                            countProducts={countProducts}
+                            setCountProducts={setCountProducts}
+                        />
+                        <Pelicula_info />
+                    </div>
+                } />
+                <Route path="/Estrenos" element={
+                    <div>
+                        <Navigation
+                            allProducts={allProducts}
+                            setAllProducts={setAllProducts}
+                            total={total}
+                            setTotal={setTotal}
+                            countProducts={countProducts}
+                            setCountProducts={setCountProducts}
+                        />
+                        <Estrenos />
+                    </div>
+                } />
 
-                <Routes>
-                    <Route path="/" element={<Principal />} />
-                    <Route
-                        path="/Comidas"
-                        element={
-                            <Comidas
-                                allProducts={allProducts}
-                                setAllProducts={setAllProducts}
-                                total={total}
-                                setTotal={setTotal}
-                                countProducts={countProducts}
-                                setCountProducts={setCountProducts}
-                            />
-                        }
-                    />
-                    <Route path="/Pelicula" element={<Pelicula_info />} />
-                    <Route path="/Estrenos" element={<Estrenos />} />
-                    <Route path="/MiOrden" element={<Orden />} />
-                </Routes>
-            </div>
+
+                <Route element={<PrivateRoutes />}>
+                {/*aqui deben ir las rutas privadas*/}
+                <Route path="/Perfil/Orden" element={
+                    <div>
+                        <Navigation
+                            allProducts={allProducts}
+                            setAllProducts={setAllProducts}
+                            total={total}
+                            setTotal={setTotal}
+                            countProducts={countProducts}
+                            setCountProducts={setCountProducts}
+                        />
+                        <Orden />
+                    </div>
+                } />
+
+                    <Route path="/Perfil" element={
+                    <div>
+                        <Navigation
+                            allProducts={allProducts}
+                            setAllProducts={setAllProducts}
+                            total={total}
+                            setTotal={setTotal}
+                            countProducts={countProducts}
+                            setCountProducts={setCountProducts}
+                        />
+                    </div>
+                } />
+                </Route>
+
+                
+                <Route path="/Login" element={<Login />} />
+                <Route path="/Registro" element={<Registro />} />
+
+                
+                    
+                
+
+                <Route path="/*" element={<Error404 />}/>
+
+            </Routes>
         </BrowserRouter>
     );
 }

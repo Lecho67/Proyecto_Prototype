@@ -4,7 +4,7 @@
     background-color: #000915; 
     text-align: center;
     padding-left: 20px; 
-    padding-right: 20px;
+    padding-right: 30px;
     position: sticky;
     top: 0;
     left: 0;
@@ -66,9 +66,10 @@
 .linksContainer {
     display: flex;
     flex-grow: 1;
-    min-width: 400px;
-    max-width: 670px;
+    min-width: 200px;
+    max-width: 470px;
     justify-content: space-between;
+    align-items: center;
   }
 
 /* Estilos para el logo en la barra de navegación */
@@ -89,7 +90,7 @@
 }
 
 
-.buttonContainer {
+.BurgerButtonContainer {
     display: none;
     box-sizing: border-box;
     width: 50px;
@@ -107,6 +108,36 @@
     display: none;
     width: 100%;
     margin: 0%;
+}
+
+.ProfileButtonContainer {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.btnPerfil {
+    width: 100%;
+    padding-block: 0px;
+    padding-inline: 0px;
+    background-color:#ffffff00;
+}
+.imgPerfil {
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin: 0%;
+    filter: brightness(0) invert(1) saturate(100%) hue-rotate(0deg);
+}
+.imgPerfil:hover {
+    transform: scale(1.05);
+}
+.imgPerfil:active {
+    transform: scale(0.95);
 }
 
 .menuDesplegableInvisible {
@@ -146,12 +177,12 @@
 
 /* que bueno que esta quedando el cp*/
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 600px) {
     .linksContainer {
         display: none;
     }
 
-    .buttonContainer {
+    .BurgerButtonContainer {
         display: flex;
         justify-content: center;
     }
