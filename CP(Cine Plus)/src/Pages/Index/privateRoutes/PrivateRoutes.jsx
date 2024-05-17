@@ -14,6 +14,8 @@ export const PrivateRoutes = () => {
             if(user){
                 setIsAuth(true);
                 setLoading(false);
+            }else{
+                setLoading(false);
             }
         })
     }, [])
