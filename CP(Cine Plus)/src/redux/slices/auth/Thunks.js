@@ -19,13 +19,21 @@ export const registerUser = (email, password) => {
 
 export const loginUser = (email, password) => {
     return async (dispatch) => {
+
+    try {
         const response = await signInWithEmailAndPassword(auth,email, password);
         if(response){
             console.log(response)
             dispatch(login({email: response.user.email}))
+            return Promise.resolve(response)
         }else{
             throw new Error('Error al iniciar sesion')
         }
+    } catch (error) {
+        return Promise.reject(error)
+        
+    }    
+
     }
 }
 
