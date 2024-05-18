@@ -5,11 +5,13 @@ import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/slices/auth/Thunks';
 import { useForm } from '../../Hooks/useForm';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 export const Registro = () =>{
 
     const dispatch = useDispatch();
     const {email,password,onInputChange,onResetForm,formState} = useForm({email:'',password:''})
 
+    const navigate = useNavigate();
 
 
     const onSubmit = (evt) => {
@@ -17,6 +19,8 @@ export const Registro = () =>{
         console.log(formState)
         dispatch(registerUser(email, password))
         onResetForm();
+        const lastPath = localStorage.getItem('lastPath') || '/';
+        navigate(lastPath, {replace:true})
     }
 
 
@@ -49,7 +53,7 @@ export const Registro = () =>{
                 </form>
 
             </div>
-
+            <div className='loginGoHome'> <Link to="/">Volver a la pagina de inicio</Link></div>
         </div>
         </>
     )

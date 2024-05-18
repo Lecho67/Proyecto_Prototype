@@ -3,11 +3,12 @@ import "../../Shared/CarritoCompras/Car.css";
 import logo from "../../../assets/Logo.png";
 import botonHamburguesa from "../../../assets/BotonHamburguesa.png";
 import perfil from "../../../assets/Perfil.png";
-import { useState } from "react";
+import { useState} from "react";
 import { Link, Navigate } from "react-router-dom";
 import { cerrarSesion } from "../../../redux/slices/auth/Thunks";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 export const Navigation = ({
     allProducts,
     setAllProducts,
@@ -42,10 +43,14 @@ export const Navigation = ({
     };
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {pathname,search} = useLocation();
+    const lastPath = localStorage.setItem('lastPath', `${pathname}${search}`); 
+
     const handleLogout = () => {
         dispatch(cerrarSesion());
-        navigate("/");
+        navigate("/",{replace:true});
     }
+
     return (
         <>
             <div className="BarraNav">
@@ -223,13 +228,13 @@ export const Navigation = ({
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuPerfilDesplegable">Mi Orden</div>
                 </Link>
-                
+                <a href="#">
                 <div className="itemMenuPerfilDesplegable" onClick={()=>{
                     
                     handleLogout()
 
                 }} >Cerrar Sesión</div>
-                
+                </a>
             </div>
         </>
     );
