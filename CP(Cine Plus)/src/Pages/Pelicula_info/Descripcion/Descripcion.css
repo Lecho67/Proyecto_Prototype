@@ -31,7 +31,10 @@
 .CalendarioContainer{
     width: 50%;
     box-sizing: border-box;
-    margin-top: 10vw;
+    margin-top: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .InfoContainer{
@@ -41,9 +44,17 @@
     padding: 2%;   
     box-sizing: border-box;
     border-radius: 2vw;
+    display: flex;
 }
 .MayorContainer{
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+.TrailerContainer{
+    border-color: brown;
+    border-style: solid;
+    width: 100%;
+    height: 25%;
 }

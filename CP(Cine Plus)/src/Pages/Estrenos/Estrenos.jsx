@@ -19,8 +19,7 @@ const Estrenos = ()=>{
             }
           );
     
-          const peliculasData = response.data.results.filter((x)=>x.poster_path !== null);
-          console.log(peliculasData)
+          const peliculasData = response.data.results.filter((x)=> x.poster_path != null).filter((x)=>x.poster_path !== null);
           setPeliculas(peliculasData);
         } catch (error) {
           console.error('Error al obtener las películas:', error);
@@ -32,9 +31,6 @@ const Estrenos = ()=>{
     
     return (
         <>
-
-        <Navigation/>
-
         <div className="wrapper">
             <div className='separador'></div>
 

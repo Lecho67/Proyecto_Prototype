@@ -4,7 +4,7 @@
     background-color: #000915; 
     text-align: center;
     padding-left: 20px; 
-    padding-right: 20px;
+    padding-right: 30px;
     position: sticky;
     top: 0;
     left: 0;
@@ -66,9 +66,10 @@
 .linksContainer {
     display: flex;
     flex-grow: 1;
-    min-width: 400px;
-    max-width: 670px;
+    min-width: 200px;
+    max-width: 470px;
     justify-content: space-between;
+    align-items: center;
   }
 
 /* Estilos para el logo en la barra de navegación */
@@ -89,7 +90,7 @@
 }
 
 
-.buttonContainer {
+.BurgerButtonContainer {
     display: none;
     box-sizing: border-box;
     width: 50px;
@@ -109,11 +110,55 @@
     margin: 0%;
 }
 
+.ProfileButtonContainer {
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    flex-shrink: 0;
+}
+
+.btnPerfil {
+    width: 100%;
+    padding-block: 0px;
+    padding-inline: 0px;
+    background-color:#ffffff00;
+}
+.imgPerfil {
+    display: block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin: 0%;
+    filter: brightness(0) invert(1) saturate(100%) hue-rotate(0deg);
+}
+.imgPerfil:hover {
+    transform: scale(1.05);
+}
+.imgPerfil:active {
+    transform: scale(0.95);
+}
+
 .menuDesplegableInvisible {
     display: none;
 }
 .menuDesplegableVisible {
     display: none; /* Hace que el menu desplegable no aparezca cuando la página tenga mas de 670px */
+    background-color: #c4e2ff;
+    border-radius: 10px;
+    padding: 10px 0 10px 0;
+    z-index: 1000;
+}
+
+.menuPerfilDesplegableInvisible {
+    display: none;
+}
+.menuPerfilDesplegableVisible {
+    display: flex; 
+    position: fixed;
+    flex-direction: column;
+    right: 15px;
     background-color: #c4e2ff;
     border-radius: 10px;
     padding: 10px 0 10px 0;
@@ -129,6 +174,16 @@
 .menuDesplegableVisible a:hover {
     transform: translateY(-3px);
 }
+.menuPerfilDesplegableVisible a {
+    text-decoration: none;
+    color: #000915;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.menuPerfilDesplegableVisible a:hover {
+    transform: translateY(-3px);
+}
 
 .itemMenuDesplegable {
     padding: 0 20px 0 20px;
@@ -138,20 +193,28 @@
     align-items: center;
 }
 
+.itemMenuPerfilDesplegable {
+    padding: 0 20px 0 20px;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .itemMenuDesplegable:hover {
     background-color: #b9d0f1;
-
 }
 
 /* que bueno que esta quedando el cp*/
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 600px) {
     .linksContainer {
         display: none;
     }
 
-    .buttonContainer {
+    .BurgerButtonContainer {
         display: flex;
         justify-content: center;
     }

@@ -1,17 +1,13 @@
 import { data } from "../../Helpers/data";
-import React from 'react'
-import { Navigation } from "../../Components/Shared/BarraNavegacion/BarraNavegacion";
-import '../../Components/Shared/CarritoCompras/Car.css';
-
 export const Comidas = ({
-    allProducts,
+	allProducts,
 	setAllProducts,
 	countProducts,
 	setCountProducts,
 	total,
 	setTotal,
 }) => {
-    const onAddProduct = product => {
+	const onAddProduct = product => {
 		if (allProducts.find(item => item.id === product.id)) {
 			const products = allProducts.map(item =>
 				item.id === product.id
@@ -27,19 +23,8 @@ export const Comidas = ({
 		setCountProducts(countProducts + product.quantity);
 		setAllProducts([...allProducts, product]);
 	};
-	
-	
-  return (
-    (
-        <>
-        <Navigation
-		allProducts={allProducts}
-		setAllProducts={setAllProducts}
-		total={total}
-		setTotal={setTotal}
-		countProducts={countProducts}
-		setCountProducts={setCountProducts}
-		/>
+
+	return (
 		<div className='container-items'>
 			{data.map(product => (
 				<div className='item' key={product.id}>
@@ -56,7 +41,5 @@ export const Comidas = ({
 				</div>
 			))}
 		</div>
-        </>
-  )
-)
+	);
 };

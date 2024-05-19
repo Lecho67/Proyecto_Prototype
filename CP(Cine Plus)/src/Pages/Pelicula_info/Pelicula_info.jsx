@@ -31,7 +31,6 @@ const Pelicula_info = () => {
   }, [])
   return (
     <>
-      <Navigation/>
       <Portada pelicula={pelicula}/>
       <Descripcion pelicula={pelicula} credits={credits}/>
     </>

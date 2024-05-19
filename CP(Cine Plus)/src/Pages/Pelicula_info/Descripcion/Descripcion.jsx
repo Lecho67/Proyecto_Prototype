@@ -1,6 +1,9 @@
 import React from 'react'
 import './Descripcion.css'
+import Calendario from './Calendario/Calendario.jsx'
 
+const fecha = new Date();
+ 
 const defPelicula = {
     production_countries: [{name: ''}], 
     genres: [{name: 'buscando'}],
@@ -28,7 +31,10 @@ const Descripcion = ({pelicula = defPelicula, credits = defCredits}) => {
                 <h4>Para todo publico: {pelicula.adult ? 'No' : 'Si'}</h4>
                 <h3>Rating: {pelicula.vote_average.toFixed(1)}/10</h3>
             </div>
-            <div className='CalendarioContainer'></div>
+            <div className='CalendarioContainer'>
+                <div className='TrailerContainer'></div>
+                <Calendario diaInicial={fecha.getDate()} mesInicial={fecha.getMonth() + 1} añoInicial={fecha.getFullYear()}/>
+            </div>
         </div>
     </div>
   )
