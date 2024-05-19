@@ -43,7 +43,7 @@ export const Navigation = ({
     };
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {status}= useSelector((state)=>state.auth)
+    const {status,email}= useSelector((state)=>state.auth)
     const {pathname,search} = useLocation();
     const lastPath = localStorage.setItem('lastPath', `${pathname}${search}`); 
 
@@ -222,9 +222,10 @@ export const Navigation = ({
                         : "menuPerfilDesplegableInvisible"
                 }`}
             >
-                <Link to="/Login">
+                {status?<div >{email}</div>:<Link to="/Login">
                     <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
-                </Link>
+                </Link>}
+                
                 <Link to="/Perfil">
                     <div className="itemMenuPerfilDesplegable">Mi Perfil</div>
                 </Link>

@@ -16,7 +16,6 @@ export const Login = () =>{
     const [error,setError] = useState(false);
     const onSubmitForm = async (evt) => {
         evt.preventDefault();
-        console.log(formState)
         try{
             
             await dispatch(loginUser(email, password));

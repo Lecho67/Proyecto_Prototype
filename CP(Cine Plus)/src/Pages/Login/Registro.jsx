@@ -5,22 +5,29 @@ import { useDispatch } from 'react-redux';
 import { registerUser } from '../../redux/slices/auth/Thunks';
 import { useForm } from '../../Hooks/useForm';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 export const Registro = () =>{
 
     const dispatch = useDispatch();
     const {email,password,onInputChange,onResetForm,formState} = useForm({email:'',password:''})
-
+    const [error,setError] = useState(false);
     const navigate = useNavigate();
 
 
-    const onSubmit = (evt) => {
+    const onSubmit = async (evt) => {
         evt.preventDefault();
-        console.log(formState)
-        dispatch(registerUser(email, password))
-        onResetForm();
-        const lastPath = localStorage.getItem('lastPath') || '/';
-        navigate(lastPath, {replace:true})
+        try{
+            console.log(formState)
+            await dispatch(registerUser(email, password))
+            onResetForm();
+            const lastPath = localStorage.getItem('lastPath') || '/';
+            navigate(lastPath, {replace:true})
+        }catch(e){
+            onResetForm();
+            setError(true)
+        }
+
     }
 
 
@@ -41,7 +48,7 @@ export const Registro = () =>{
                         <input type="password" placeholder='Contraseña' value={password} name='password' onChange={(evt) => onInputChange(evt)} required />
                         <box-icon type='solid' name='lock-alt'></box-icon>
                     </div>
-
+                    {error && <div className='loginErrorContainer'> <box-icon name='error-alt' animation='tada' color='red'></box-icon> <p>Este email ya se encuentra registrado</p></div>}
                     <button className='btnLogin'>Registrarme</button>
 
                     <div className="register">
