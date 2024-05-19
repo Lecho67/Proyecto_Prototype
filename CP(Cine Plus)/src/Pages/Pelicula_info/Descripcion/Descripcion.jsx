@@ -32,6 +32,7 @@ const Descripcion = ({pelicula = defPelicula, credits = defCredits}) => {
                 <h3>Rating: {pelicula.vote_average.toFixed(1)}/10</h3>
             </div>
             <div className='CalendarioContainer'>
+                <div className='TrailerContainer'></div>
                 <Calendario diaInicial={fecha.getDate()} mesInicial={fecha.getMonth() + 1} añoInicial={fecha.getFullYear()}/>
             </div>
         </div>

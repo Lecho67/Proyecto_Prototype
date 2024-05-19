@@ -5,12 +5,13 @@
     padding: 0;
     box-sizing: border-box;
     /* font-family: "Poppins", sans-serif; */
-    background-color: aqua;
+    background-color: #021438;
     min-height: 100vh;
     display:flex;
     justify-content: center;
     align-items: center;
     width:100%;
+    flex-direction: column;
 }
 
 .loginPage .wrapperLogin{
@@ -38,6 +39,7 @@
 }
 
 .input-box input{
+    box-sizing: border-box;
     width: 100%;
     height: 100%;
     border:none;
@@ -63,7 +65,7 @@
 }
 
 .remember-forgot label input{
-    accent-color: #03a9f4;
+    accent-color: #063c83;
     margin-right: 10px;
 }
 
@@ -75,7 +77,7 @@
 
 .remember-forgot a:hover{
     text-decoration: underline;
-    color:#03a9f4;
+    color:#063c83;
 }
 
 .wrapperLogin .btnLogin{
@@ -84,7 +86,7 @@
     border:none;
     outline: none;
     border-radius: 35px;
-    background-color: #03a9f4;
+    background-color: #021438;
     color: #fff;
     font-size: 16px;
     font-weight: 500;
@@ -93,7 +95,7 @@
 }
 
 .wrapperLogin .btnLogin:hover{
-    background-color: #0065f2;
+    background-color: #063c83;
     transition: all 0.3s ease;
 }
 
@@ -104,9 +106,27 @@
 
 }
 
+.loginErrorContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+
+    margin: 10px 0;
+}
+
+.loginErrorContainer p{
+    color: red;
+    margin: 0;
+    margin-left: 5px;
+    padding: 0;
+}
+
+
+
 .wrapperLogin .register p a{
     text-decoration: none;
-    color: #03a9f4;
+    color: #063c83;
     margin-left: 10px;
 }
 
@@ -115,6 +135,17 @@
 }
 
 
+.loginGoHome{
+    margin-top: 10px;
+}
+.loginGoHome a{
+    color: #fff;
+    text-decoration: none;
+}
+
+.loginGoHome a:hover{
+    text-decoration: underline;
+}
 
 /* media queries */
 

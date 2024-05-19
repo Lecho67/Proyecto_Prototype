@@ -16,11 +16,19 @@ export const useForm = (initialState = {}) => {
         setFormState(initialState);
     }
 
+    const onResetPasswd = () => {
+        setFormState({
+            ...formState,
+            ['password']: ''
+        })
+    }
+
     return {
         ...formState,
         formState,
         onInputChange,
-        onResetForm
+        onResetForm,
+        onResetPasswd
     }
 }
 

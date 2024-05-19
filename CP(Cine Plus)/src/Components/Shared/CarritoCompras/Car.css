@@ -47,12 +47,12 @@ header {
 }
 
 .container-cart-products {
-	position: absolute;
-	top: 50px;
-	right: 0;
+	position: fixed;
+	top: 100px;
+	right: 15px;
 
-	background-color: #fff;
-	width: 400px;
+	background-color: #c4e2ff;
+	width: 350px;
 	z-index: 1;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;

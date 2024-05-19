@@ -150,6 +150,20 @@
     padding: 10px 0 10px 0;
     z-index: 1000;
 }
+
+.menuPerfilDesplegableInvisible {
+    display: none;
+}
+.menuPerfilDesplegableVisible {
+    display: flex; 
+    position: fixed;
+    flex-direction: column;
+    right: 15px;
+    background-color: #c4e2ff;
+    border-radius: 10px;
+    padding: 10px 0 10px 0;
+    z-index: 1000;
+}
 .menuDesplegableVisible a {
     text-decoration: none;
     color: #000915;
@@ -158,6 +172,16 @@
 }
 
 .menuDesplegableVisible a:hover {
+    transform: translateY(-3px);
+}
+.menuPerfilDesplegableVisible a {
+    text-decoration: none;
+    color: #000915;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.menuPerfilDesplegableVisible a:hover {
     transform: translateY(-3px);
 }
 
@@ -169,10 +193,18 @@
     align-items: center;
 }
 
+.itemMenuPerfilDesplegable {
+    padding: 0 20px 0 20px;
+    width: 150px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 .itemMenuDesplegable:hover {
     background-color: #b9d0f1;
-
 }
 
 /* que bueno que esta quedando el cp*/

@@ -3,9 +3,12 @@ import "../../Shared/CarritoCompras/Car.css";
 import logo from "../../../assets/Logo.png";
 import botonHamburguesa from "../../../assets/BotonHamburguesa.png";
 import perfil from "../../../assets/Perfil.png";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-
+import { useState} from "react";
+import { Link, Navigate } from "react-router-dom";
+import { cerrarSesion } from "../../../redux/slices/auth/Thunks";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 export const Navigation = ({
     allProducts,
     setAllProducts,
@@ -14,10 +17,15 @@ export const Navigation = ({
     setCountProducts,
     setTotal,
 }) => {
-    const [menuVisible, setMenuVisible] = useState(false);
     const [active, setActive] = useState(false);
+    const [menuVisible, setMenuVisible] = useState(false);
     const toggleMenu = () => {
         setMenuVisible(!menuVisible);
+    };
+    const [menuPerfilVisible, setMenuPerfilVisible] = useState(false);
+    const toggleMenuPerfil = () => {
+        setMenuPerfilVisible(!menuPerfilVisible);
+        setActive(false);
     };
 
     const onDeleteProduct = (product) => {
@@ -33,6 +41,19 @@ export const Navigation = ({
         setTotal(0);
         setCountProducts(0);
     };
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {status,email}= useSelector((state)=>state.auth)
+    const {pathname,search} = useLocation();
+    const lastPath = localStorage.setItem('lastPath', `${pathname}${search}`); 
+
+    const handleLogout = () => {
+        if(status){
+            dispatch(cerrarSesion());
+            navigate("/",{replace:true});
+        }
+    }
+
     return (
         <>
             <div className="BarraNav">
@@ -53,7 +74,10 @@ export const Navigation = ({
                         <div className="container-icon">
                             <div
                                 className="container-cart-icon"
-                                onClick={() => setActive(!active)}
+                                onClick={() => {
+                                    setActive(!active)
+                                    setMenuPerfilVisible(false)
+                                }}
                             >
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +171,7 @@ export const Navigation = ({
                             </div>
                         </div>
 						<div className="ProfileButtonContainer">
-                        <button className="btnPerfil" onClick={toggleMenu}>
+                        <button className="btnPerfil" onClick={toggleMenuPerfil}>
                             <img
                                 src={perfil}
                                 alt="Botón de perfil"
@@ -189,6 +213,31 @@ export const Navigation = ({
                 </a>
                 <a href="/Perfil/Orden">
                     <div className="itemMenuDesplegable">Mi Orden</div>
+                </a>
+            </div>
+            <div
+                className={`${
+                    menuPerfilVisible
+                        ? "menuPerfilDesplegableVisible"
+                        : "menuPerfilDesplegableInvisible"
+                }`}
+            >
+                {status?<div >{email}</div>:<Link to="/Login">
+                    <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
+                </Link>}
+                
+                <Link to="/Perfil">
+                    <div className="itemMenuPerfilDesplegable">Mi Perfil</div>
+                </Link>
+                <Link to="/Perfil/Orden">
+                    <div className="itemMenuPerfilDesplegable">Mi Orden</div>
+                </Link>
+                <a href="">
+                <div className="itemMenuPerfilDesplegable" onClick={()=>{
+                    
+                    handleLogout()
+
+                }} >Cerrar Sesión</div>
                 </a>
             </div>
         </>
