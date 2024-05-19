@@ -111,7 +111,10 @@ function App() {
                             countProducts={countProducts}
                             setCountProducts={setCountProducts}
                         />
-                        <Orden />
+                        <Orden 
+                            allProducts={allProducts} 
+                            total={total} 
+                        />
                     </div>
                 } />
 
@@ -128,15 +131,8 @@ function App() {
                     </div>
                 } />
                 </Route>
-
-                
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Register" element={<Registro />} />
-
-                
-                    
-                
-
                 <Route path="/*" element={<Error404 />}/>
 
             </Routes>
