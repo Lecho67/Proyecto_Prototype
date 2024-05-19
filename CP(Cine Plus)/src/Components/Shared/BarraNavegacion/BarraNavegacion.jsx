@@ -6,7 +6,7 @@ import perfil from "../../../assets/Perfil.png";
 import { useState} from "react";
 import { Link, Navigate } from "react-router-dom";
 import { cerrarSesion } from "../../../redux/slices/auth/Thunks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 export const Navigation = ({
@@ -43,12 +43,15 @@ export const Navigation = ({
     };
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const {status}= useSelector((state)=>state.auth)
     const {pathname,search} = useLocation();
     const lastPath = localStorage.setItem('lastPath', `${pathname}${search}`); 
 
     const handleLogout = () => {
-        dispatch(cerrarSesion());
-        navigate("/",{replace:true});
+        if(status){
+            dispatch(cerrarSesion());
+            navigate("/",{replace:true});
+        }
     }
 
     return (
