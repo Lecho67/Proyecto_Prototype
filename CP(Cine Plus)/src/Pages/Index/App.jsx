@@ -111,7 +111,10 @@ function App() {
                             countProducts={countProducts}
                             setCountProducts={setCountProducts}
                         />
-                        <Orden />
+                        <Orden 
+                            allProducts={allProducts} 
+                            total={total} 
+                        />
                     </div>
                 } />
 
