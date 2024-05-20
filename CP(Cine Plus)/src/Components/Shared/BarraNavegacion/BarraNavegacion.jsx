@@ -4,11 +4,13 @@ import logo from "../../../assets/Logo.png";
 import botonHamburguesa from "../../../assets/BotonHamburguesa.png";
 import perfil from "../../../assets/Perfil.png";
 import { useState} from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { cerrarSesion } from "../../../redux/slices/auth/Thunks";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+
+import { useParams } from 'react-router-dom';
+
 export const Navigation = ({
     allProducts,
     setAllProducts,
@@ -17,6 +19,8 @@ export const Navigation = ({
     setCountProducts,
     setTotal,
 }) => {
+    const { id } = useParams();
+    console.log('ID de la película en Navigation:', id);
     const [active, setActive] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
     const toggleMenu = () => {
@@ -43,16 +47,16 @@ export const Navigation = ({
     };
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {status,email}= useSelector((state)=>state.auth)
-    const {pathname,search} = useLocation();
+    const {status, email} = useSelector((state) => state.auth);
+    const {pathname, search} = useLocation();
     const lastPath = localStorage.setItem('lastPath', `${pathname}${search}`); 
 
     const handleLogout = () => {
-        if(status){
+        if (status) {
             dispatch(cerrarSesion());
-            navigate("/",{replace:true});
+            navigate("/", { replace: true });
         }
-    }
+    };
 
     return (
         <>
@@ -71,6 +75,13 @@ export const Navigation = ({
                         <Link to="/Estrenos" className="nav-estrenos">
                             Estrenos
                         </Link>
+                        <Link to="/Reserva" className="nav-reserva">
+
+                        </Link>
+                        <Link to={{ pathname: `/Pelicula`, search: `?id=${id}` }} className="nav-pelicula">
+</Link>
+                        
+
                         <div className="container-icon">
                             <div
                                 className="container-cart-icon"
@@ -199,21 +210,24 @@ export const Navigation = ({
                         : "menuDesplegableInvisible"
                 }`}
             >
-                <a href="/">
+                <Link to="/">
                     <div className="itemMenuDesplegable">Inicio</div>
-                </a>
-                <a href="/Comidas">
+                </Link>
+                <Link to="/Comidas">
                     <div className="itemMenuDesplegable">Comidas</div>
-                </a>
-                <a href="/Estrenos">
+                </Link>
+                <Link to="/Estrenos">
                     <div className="itemMenuDesplegable">Próximos Estrenos</div>
-                </a>
-                <a href="/Perfil">
+                </Link>
+                <Link to="/Reserva">
+                    <div className="itemMenuDesplegable">Reserva</div>
+                </Link>
+                <Link to="/Perfil">
                     <div className="itemMenuDesplegable">Mi Perfil</div>
-                </a>
-                <a href="/Perfil/Orden">
+                </Link>
+                <Link to="/Perfil/Orden">
                     <div className="itemMenuDesplegable">Mi Orden</div>
-                </a>
+                </Link>
             </div>
             <div
                 className={`${
@@ -222,9 +236,13 @@ export const Navigation = ({
                         : "menuPerfilDesplegableInvisible"
                 }`}
             >
-                {status?<div >{email}</div>:<Link to="/Login">
-                    <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
-                </Link>}
+                {status ? (
+                    <div>{email}</div>
+                ) : (
+                    <Link to="/Login">
+                        <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
+                    </Link>
+                )}
                 
                 <Link to="/Perfil">
                     <div className="itemMenuPerfilDesplegable">Mi Perfil</div>
@@ -232,13 +250,9 @@ export const Navigation = ({
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuPerfilDesplegable">Mi Orden</div>
                 </Link>
-                <a href="">
-                <div className="itemMenuPerfilDesplegable" onClick={()=>{
-                    
-                    handleLogout()
-
-                }} >Cerrar Sesión</div>
-                </a>
+                <div className="itemMenuPerfilDesplegable" onClick={handleLogout}>
+                    Cerrar Sesión
+                </div>
             </div>
         </>
     );
