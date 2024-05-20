@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Principal from "../Principal/Principal";
 import Pelicula_info from "../Pelicula_info/Pelicula_info";
 import Estrenos from "../Estrenos/Estrenos";
+import { PlsSignIn } from "../../Components/Shared/PorfavorInicieSesion/PlsSignIn.jsx";
 import { Orden } from "../Orden/Orden";
 import { useState,useEffect } from "react";
 import { Comidas } from "../Comidas/Comidas";
@@ -114,7 +115,7 @@ function App() {
                         <Orden 
                             allProducts={allProducts} 
                             total={total} 
-                        />
+          />
                     </div>
                 } />
 
@@ -135,7 +136,7 @@ function App() {
                 
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Register" element={<Registro />} />
-
+                <Route path="/PlsSignIn" element={<PlsSignIn />}/>
                 
                     
                 
