@@ -199,21 +199,21 @@ export const Navigation = ({
                         : "menuDesplegableInvisible"
                 }`}
             >
-                <a href="/">
+                <Link to="/">
                     <div className="itemMenuDesplegable">Inicio</div>
-                </a>
-                <a href="/Comidas">
+                </Link>
+                <Link to="/Comidas">
                     <div className="itemMenuDesplegable">Comidas</div>
-                </a>
-                <a href="/Estrenos">
+                </Link>
+                <Link to="/Estrenos">
                     <div className="itemMenuDesplegable">Próximos Estrenos</div>
-                </a>
-                <a href="/Perfil">
+                </Link>
+                <Link to="/Perfil">
                     <div className="itemMenuDesplegable">Mi Perfil</div>
-                </a>
-                <a href="/Perfil/Orden">
+                </Link>
+                <Link to="/Perfil/Orden">
                     <div className="itemMenuDesplegable">Mi Orden</div>
-                </a>
+                </Link>
             </div>
             <div
                 className={`${
