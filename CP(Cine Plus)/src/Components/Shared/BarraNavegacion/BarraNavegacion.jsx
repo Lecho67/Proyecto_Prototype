@@ -222,7 +222,7 @@ export const Navigation = ({
                         : "menuPerfilDesplegableInvisible"
                 }`}
             >
-                {status?<div >{email}</div>:<Link to="/Login">
+                {status?<Link><div className="itemMenuPerfilDesplegable">{email}</div></Link>:<Link to="/Login">
                     <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
                 </Link>}
                 

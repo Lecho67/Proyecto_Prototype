@@ -49,10 +49,10 @@ header {
 .container-cart-products {
 	position: fixed;
 	top: 100px;
-	right: 15px;
+	right: 80px;
 
 	background-color: #c4e2ff;
-	width: 350px;
+	width: fit-content;
 	z-index: 1;
 	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 	border-radius: 10px;
