@@ -1,7 +1,9 @@
-import React from 'react'
-import './Portada.css'
+import React from 'react';
+import './Portada.css';
 
-const Portada = ({pelicula={}}) => {
+const Portada = ({ pelicula = {}}) => {
+  // Aquí puedes usar los productos pasados como propiedades
+
   return (
     <div className='PortadaContainer'>
       <div className='PortadaBgContainer' style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500/${pelicula.poster_path})`}}>
@@ -13,7 +15,7 @@ const Portada = ({pelicula={}}) => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Portada
+export default Portada;
