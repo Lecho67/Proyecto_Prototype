@@ -5,7 +5,7 @@ import Calendario from './Calendario/Calendario.jsx'
 const fecha = new Date();
  
 const defPelicula = {
-    production_countries: [{name: ''}], 
+    production_countries: [{name: 'cargando'}], 
     genres: [{name: 'buscando'}],
     spoken_languages: [{english_name: 'buscando'}],
     adult : false,
@@ -21,7 +21,6 @@ const Descripcion = ({pelicula = defPelicula, credits = defCredits}) => {
             <div className='DescriptionContainer'>
                 <p>{pelicula.overview}</p>
                 <h6>Título original: {pelicula.original_title}</h6>
-                <h6>País de origen: {pelicula.production_countries[0].name}</h6>
                 <h6>Director: {director.name}</h6>
                 <h6>Fecha de estreno: {pelicula.release_date}</h6>
                 <h6>Generos: {pelicula.genres.map(genre => genre.name).join(', ')}</h6>
