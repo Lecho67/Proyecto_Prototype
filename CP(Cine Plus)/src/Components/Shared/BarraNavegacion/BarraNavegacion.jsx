@@ -20,7 +20,6 @@ export const Navigation = ({
     setTotal,
 }) => {
     const { id } = useParams();
-    console.log('ID de la película en Navigation:', id);
     const [active, setActive] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
     const toggleMenu = () => {
