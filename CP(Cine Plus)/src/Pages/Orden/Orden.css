@@ -1,7 +1,7 @@
 .order-container {
     padding: 20px;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 40px auto;
     background-color: #f7f7f7; /* Fondo del contenedor principal */
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para destacar */

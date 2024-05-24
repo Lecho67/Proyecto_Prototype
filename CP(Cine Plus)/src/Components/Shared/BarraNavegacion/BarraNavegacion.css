@@ -37,6 +37,7 @@
     margin: 0 45px; /* Ajusta el margen horizontal */
 }
 
+
 .BarraNav nav ul li:last-child {
     margin-right: 0; /* Elimina el margen derecho del último elemento */
 }
@@ -161,7 +162,7 @@
     right: 15px;
     background-color: #c4e2ff;
     border-radius: 10px;
-    padding: 10px 0 10px 0;
+    padding: 10px 20px 10px 20px;
     z-index: 1000;
 }
 .menuDesplegableVisible a {
@@ -211,6 +212,9 @@
 
 @media screen and (max-width: 600px) {
     .linksContainer {
+        display: none;
+    }
+    .menuPerfilDesplegableVisible {
         display: none;
     }
 

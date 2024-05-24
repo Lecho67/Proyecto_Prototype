@@ -180,12 +180,6 @@ const Calendario = ({
                                 ? "435px"
                                 : "385px"
                         };
-                        margin-bottom: ${
-                            (dias == 31 && calcularDiaInicial(mes, año) >= 6) ||
-                            (dias == 30 && calcularDiaInicial(mes, año) >= 7)
-                                ? "0px"
-                                : "50px"
-                        };
                     }
                     `}
                 </style>

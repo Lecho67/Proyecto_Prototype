@@ -1,10 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import "./Reserva.css"
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSeats, toggleSeatSelection, updateSeats } from "../../redux/slices/auth/seatSlices.js";
+import { Link } from 'react-router-dom'; // Importa Link
+import './Reserva.css';
 
 function Reserva() {
-  const [selectedSeats, setSelectedSeats] = useState([]);
-  const [ticketPrice, setTicketPrice] = useState(25950);
-  const [seats, setSeats] = useState(generateSeats());
+  const dispatch = useDispatch();
+  const { selectedSeats, ticketPrice, seats } = useSelector(state => state.seats);
+
+  useEffect(() => {
+    const initialSeats = generateSeats();
+    dispatch(setSeats(initialSeats));
+  }, [dispatch]);
 
   useEffect(() => {
     updateSelectedCount();
@@ -19,16 +26,7 @@ function Reserva() {
   }
 
   function handleSeatClick(seatId) {
-    const updatedSeats = seats.map(seat => {
-      if (seat.id === seatId) {
-        return { ...seat, state: seat.state === 'selected' ? 'free' : seat.state === 'occupied' ? 'occupied' : 'selected' };
-      }
-      return seat;
-    });
-
-    setSeats(updatedSeats);
-    const updatedSelectedSeats = updatedSeats.filter(seat => seat.state === 'selected').map(seat => seat.id);
-    setSelectedSeats(updatedSelectedSeats);
+    dispatch(toggleSeatSelection(seatId));
   }
 
   function generateSeats() {
@@ -38,7 +36,6 @@ function Reserva() {
       for (let column = 1; column <= 8; column++) {
         const state = Math.random() < 0.3 ? 'occupied' : 'free';
         seats.push({ id: seatId++, state });
-        console.log(seatId);
       }
     }
     return seats;
@@ -49,7 +46,6 @@ function Reserva() {
       <div className="seats-container">
         <div className="container">
           <div className="screen"></div>
-          {/* Render seats dynamically */}
           {Array.from({ length: 6 }, (_, row) => (
             <div className="row" key={row}>
               {seats.slice(row * 8, (row + 1) * 8).map(seat => (
@@ -86,11 +82,11 @@ function Reserva() {
             </li>
           </ul>
         </div>
-
         <p className="text">
           <strong>Cantidad: </strong> <span id="count">0</span> <strong>Precio: </strong>$<span id="total">0</span>
         </p>
-        <button className="add-to-order-btn">Agregar a Orden</button>
+        {/* Utiliza Link para redirigir a la página de orden */}
+        <Link to="/Perfil/Orden" className="add-to-order-btn">Agregar a Orden</Link>
       </div>
     </div>
   );

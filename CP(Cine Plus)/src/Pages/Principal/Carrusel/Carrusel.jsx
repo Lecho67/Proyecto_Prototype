@@ -1,5 +1,6 @@
 import React from 'react'
 import './Carrusel.css'
+import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import useFetchPeliculas from '../../../Hooks/useFetchPeliculas'
 
@@ -25,12 +26,12 @@ const Carrusel = ({numeroDePeliculas = 5, pageSize = 20}) => {
       <div className='CarruselContainer'>
        {peliculas.map((pelicula) => (
         <div key={pelicula.id} className="CarruselMovie">
-          <a className='aCarruselMovie' href={`Pelicula?id=${pelicula.id}`}>
+          <Link className='aCarruselMovie' to={`Pelicula?id=${pelicula.id}`}>
             <img className='CarruselMovieImg'
               src={`https://image.tmdb.org/t/p/w300/${pelicula.poster_path}`}
               alt={pelicula.title}
             />
-          </a>
+          </Link>
         </div>
       ))} </div>
     </>

@@ -1,35 +1,49 @@
-.DescriptionContainer{
+.DescriptionContainer {
     width: 50%;
     box-sizing: border-box;
     padding-right: 7.4%;
     margin-top: 10vw;
 }
 
-.DescriptionContainer p{
+.DescriptionContainer p {
     font-size: 1.1vw;
     font-family: MuseoModerno, sans-serif;
 }
 
-.DescriptionContainer h6{
+.DescriptionContainer h6 {
     font-size: 1.3vw;
     font-family: MuseoModerno, sans-serif;
     font-weight: normal;
-    margin-bottom : 10px;
+    margin-bottom: 10px;
     margin-top: 0;
 }
 
-.DescriptionContainer h3{
+.DescriptionContainer h3 {
     color: rgb(0, 26, 91);
 }
 
-.DescriptionContainer h4{
+.DescriptionContainer h4 {
     color: rgb(0, 26, 91);
     margin: 0;
 }
 
+.ReservaButton {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
 
-.CalendarioContainer{
+.ReservaButton:hover {
+    background-color: #0056b3;
+}
+
+.CalendarioContainer {
     width: 50%;
+    height: fit-content;
     box-sizing: border-box;
     margin-top: 0;
     display: flex;
@@ -37,24 +51,105 @@
     flex-wrap: wrap;
 }
 
-.InfoContainer{
+.InfoContainer {
     width: 72%;
+    height: fit-content;
     background-color: aliceblue;
     margin-top: 6vw;
-    padding: 2%;   
+    padding: 2%;
     box-sizing: border-box;
     border-radius: 2vw;
     display: flex;
 }
-.MayorContainer{
+
+.MayorContainer {
     width: 100%;
     display: flex;
     justify-content: center;
 }
 
-.TrailerContainer{
-    border-color: brown;
-    border-style: solid;
+.TrailerContainer {
     width: 100%;
-    height: 25%;
+    height: auto;
+    margin-bottom: 20px;
+    position: relative; 
 }
+
+.YouTubePlayer {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 20vw;
+}
+
+
+.FiltrosContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: fit-content;
+    flex-shrink: 1;
+}
+
+.FuncionesContainer {
+    margin-top: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    height: fit-content;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
+    flex-shrink: 1;
+}
+.button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    color: white;
+    font-size: 1.5vw;
+    font-family: MuseoModerno, sans-serif;
+    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+}
+.nodisponible {
+    background-color: #b1c6d4;
+    cursor: not-allowed;
+}
+.seleccionado{    
+    background-color: #2683cf;
+}
+.noseleccionado {
+    background-color: #072336;
+    cursor: pointer;
+}
+
+.funcion {
+    background-color: #87a4b8;
+    cursor: pointer;
+}
+
+.funcion:hover {
+    background-color: #b2c4cf;
+    transform: translateY(-2px);
+}
+.funcion:active {
+    transform: translateY(3px);
+}
+.funcionlink {
+    text-decoration: none;
+}
+.noseleccionado:hover {
+    background-color: #224b66;
+    transform: translateY(-2px);
+}
+
+.noseleccionado:active {
+    transform: translateY(3px);
+}
+
