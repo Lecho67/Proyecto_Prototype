@@ -16,6 +16,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import {useDispatch } from "react-redux";
 import { checkingCredentials } from "../../redux/slices/auth/AuthSlice.js";
+import Reserva from "../Reserva/Reserva.jsx";
 function App() {
     const [allProducts, setAllProducts] = useState([]);
     const [total, setTotal] = useState(0);
