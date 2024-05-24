@@ -8,10 +8,7 @@ const MovieTrailer = ({ videoKey }) => {
             <iframe
                 className="YouTubePlayer"
                 title="movie-trailer"
-                width="560"
-                height="315"
                 src={videoUrl}
-                frameBorder="0"
                 allowFullScreen
             />
         </div>
