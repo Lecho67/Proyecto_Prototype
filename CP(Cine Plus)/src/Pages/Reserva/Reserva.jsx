@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation } from 'react-router-dom';
-import { setSeats, toggleSeatSelection, updateSeats } from "../../redux/slices/auth/seatSlices.js";
+import { setSeats, toggleSeatSelection } from "../../redux/slices/auth/seatSlices.js";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Reserva.css';
@@ -19,7 +19,7 @@ function Reserva() {
   const movieId = queryParams.get('movieId');
   const dimension = queryParams.get('dimension');
   const doblaje = queryParams.get('doblaje');
-  const entryTime = queryParams.get('entryTime') || (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+  const startTime = queryParams.get('entryTime');
 
   useEffect(() => {
     const initialSeats = generateSeats();
@@ -37,14 +37,10 @@ function Reserva() {
   }, [movieId]);
 
   useEffect(() => {
-    setEntryTime(entryTime);
-  }, [setEntryTime, entryTime]);
-
-  useEffect(() => {
-    if (entryTime && movieDetails) {
+    if (startTime && movieDetails) {
       calculateEndTime();
     }
-  }, [entryTime, movieDetails]);
+  }, [startTime, movieDetails]);
 
   function updateSelectedCount() {
     const selectedSeatsCount = selectedSeats.length;
@@ -85,8 +81,8 @@ function Reserva() {
   }
 
   function calculateEndTime() {
-    if (movieDetails.runtime && entryTime) {
-      const [hours, minutes] = entryTime.split(':').map(Number);
+    if (movieDetails.runtime && startTime) {
+      const [hours, minutes] = startTime.split(':').map(Number);
       const entryDate = new Date();
       entryDate.setHours(hours);
       entryDate.setMinutes(minutes);
@@ -125,7 +121,7 @@ function Reserva() {
             <p><strong>Doblaje:</strong> {doblaje}</p>
           </>
         )}
-        <p><strong>Hora de Ingreso:</strong> {entryTime}</p>
+        <p><strong>Hora de Ingreso:</strong> {startTime}</p>
         <p><strong>Hora de Finalización:</strong> {endTime}</p>
         <p><strong>Cantidad de Asientos:</strong> 48</p>
         <p><strong>Sala:</strong> 1</p>
