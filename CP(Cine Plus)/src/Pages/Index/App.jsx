@@ -168,6 +168,7 @@ function App() {
         </Route>
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Registro />} />
+        <Route path="/plssignin" element={<PlsSignIn />}/>
         <Route path="/*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>

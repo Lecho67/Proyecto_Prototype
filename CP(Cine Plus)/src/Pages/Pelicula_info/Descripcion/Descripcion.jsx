@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Descripcion.css';
 import Calendario from './Calendario/Calendario.jsx';
 import MovieTrailer from './Trailer/Trailer.jsx';
-
+import { useSelector } from 'react-redux';
 const fecha = new Date();
 
 const defPelicula = {
@@ -31,6 +31,8 @@ const defVideos = {
 
 
 const Descripcion = ({ pelicula = defPelicula, credits = defCredits, videos = defVideos }) => {
+
+    const {status} = useSelector(state => state.auth);
     const director = credits.crew ? credits.crew.find(crew => crew.job === 'Director') : { name: 'No disponible' };
 
     const [dimension, setDimension] = React.useState("2d");
@@ -89,7 +91,7 @@ const Descripcion = ({ pelicula = defPelicula, credits = defCredits, videos = de
                     </div>
                     <div className='FuncionesContainer'>
                         {funciones.map(funcion => {
-                            return <Link key={funcion.id} className='funcionlink' to={`/reserva?id=${funcion.id}`}><div className="button funcion">{funcion.hora}</div></Link>
+                            return <Link key={funcion.id} className='funcionlink' to={status?`/reserva?id=${funcion.id}`: "/plssignin"}><div className="button funcion">{funcion.hora}</div></Link>
                         })}
                     </div>
                 </div>
