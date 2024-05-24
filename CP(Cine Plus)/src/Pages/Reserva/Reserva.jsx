@@ -1,12 +1,17 @@
-import React, { useEffect } from 'react';
+// src/components/Reserva/Reserva.jsx
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSeats, toggleSeatSelection, updateSeats } from "../../redux/slices/auth/seatSlices.js";
-import { Link } from 'react-router-dom'; // Importa Link
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Reserva.css';
+import { useMovieContext } from '../../context/movieContext'; // Importa el hook del contexto
 
 function Reserva() {
   const dispatch = useDispatch();
   const { selectedSeats, ticketPrice, seats } = useSelector(state => state.seats);
+  const { movieId, allProducts, setAllProducts, total, setTotal, countProducts, setCountProducts } = useMovieContext(); // Usa el contexto
+  const [movieDetails, setMovieDetails] = useState(null);
 
   useEffect(() => {
     const initialSeats = generateSeats();
@@ -16,6 +21,12 @@ function Reserva() {
   useEffect(() => {
     updateSelectedCount();
   }, [selectedSeats]);
+
+  useEffect(() => {
+    if (movieId) {
+      fetchMovieDetails(movieId);
+    }
+  }, [movieId]);
 
   function updateSelectedCount() {
     const selectedSeatsCount = selectedSeats.length;
@@ -41,6 +52,20 @@ function Reserva() {
     return seats;
   }
 
+  async function fetchMovieDetails(id) {
+    try {
+      const response = await axios.get(`https://api.themoviedb.org/3/movie/${id}`, {
+        params: {
+          api_key: '3b24534de9f3e0c2935e3edd6446ad0c',
+          language: 'es',
+        },
+      });
+      setMovieDetails(response.data);
+    } catch (error) {
+      console.error('Error al obtener los detalles de la película:', error);
+    }
+  }
+
   return (
     <div className="reservation-container">
       <div className="seats-container">
@@ -60,11 +85,16 @@ function Reserva() {
         </div>
       </div>
       <div className="info-container">
-        <p><strong>Pelicula:</strong> The Room </p>
-        <p><strong>Fecha:</strong> May 10, 2024 <strong> Hora:</strong> 18:00</p>
+        {movieDetails && (
+          <>
+            <p><strong>Pelicula:</strong> {movieDetails.title}</p>
+            <p><strong>Fecha de lanzamiento:</strong> {new Date(movieDetails.release_date).toLocaleDateString()}</p>
+            <p><strong>Resumen:</strong> {movieDetails.overview}</p>
+          </>
+        )}
         <p><strong>Cantidad de Asientos:</strong> 48</p>
         <p><strong>Sala:</strong> 1</p>
-        <p><strong>Precio del boleto:</strong> ${ticketPrice} </p>
+        <p><strong>Precio del boleto:</strong> ${ticketPrice}</p>
         <div className="seat-types">
           <p><strong>Tipos de Asientos:</strong></p>
           <ul className="showcase">
@@ -85,7 +115,6 @@ function Reserva() {
         <p className="text">
           <strong>Cantidad: </strong> <span id="count">0</span> <strong>Precio: </strong>$<span id="total">0</span>
         </p>
-        {/* Utiliza Link para redirigir a la página de orden */}
         <Link to="/Perfil/Orden" className="add-to-order-btn">Agregar a Orden</Link>
       </div>
     </div>

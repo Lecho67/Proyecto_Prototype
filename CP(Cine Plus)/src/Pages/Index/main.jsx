@@ -11,7 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Provider store={store}>
       <MovieProvider>
         <App />
-      </MovieProvider>
+    </MovieProvider>
     </Provider>
   </React.StrictMode>,
   

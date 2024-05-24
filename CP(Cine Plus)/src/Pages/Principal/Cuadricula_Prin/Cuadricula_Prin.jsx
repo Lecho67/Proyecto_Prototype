@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Cuadricula_Prin.css'; // Importar el archivo de estilos
 import { useMovieContext } from '../../../context/movieContext';
+import { Link } from 'react-router-dom';
 
 const Cartelera = () => {
   const [peliculas, setPeliculas] = useState([]);
@@ -54,12 +55,12 @@ const Cartelera = () => {
         <div className="grid">
           {peliculas.map((pelicula) => (
             <div key={pelicula.id} className="movie" onClick={() => handleMovieClick(pelicula.id)}>
-              <a href={`/Pelicula?id=${pelicula.id}`}>
+              <Link to={`/Pelicula?id=${pelicula.id}`}>
                 <img
                   src={`https://image.tmdb.org/t/p/w300/${pelicula.poster_path}`}
                   alt={pelicula.title}
                 />
-              </a>
+              </Link>
               <h2>{pelicula.title}</h2>
               <p>Clasificación: {pelicula.vote_average}</p>
             </div>
