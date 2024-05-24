@@ -3,10 +3,12 @@ import './Login.css'
 import 'boxicons'
 import { useForm } from '../../Hooks/useForm'
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../redux/slices/auth/Thunks';
+import { loginUser,loginGoogle } from '../../redux/slices/auth/Thunks';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import GoogleButton from 'react-google-button'
+
 
 export const Login = () =>{
     const dispatch = useDispatch();
@@ -27,6 +29,12 @@ export const Login = () =>{
             onResetPasswd();
         }
 
+    }
+
+    const onGoogleLogin = async () => {
+        await dispatch(loginGoogle())
+        const lastPath = localStorage.getItem('lastPath') || '/';
+        navigate(lastPath, {replace:true})
     }
 
     
@@ -60,6 +68,11 @@ export const Login = () =>{
                     {error && <div className='loginErrorContainer'> <box-icon name='error-alt' animation='tada' color='red'></box-icon> <p>Email o contraseña incorrectos</p></div>}
                     <button className='btnLogin'>Iniciar Sesión</button>
 
+                    <div className="btnGoogleContainer">
+                        <GoogleButton className='btnGoogle'  onClick={() => { onGoogleLogin()}}/>
+                    </div>
+                    
+                                    
                     <div className="register">
                         <p>
                             ¿No tienes cuenta?
@@ -69,6 +82,7 @@ export const Login = () =>{
                 </form>
 
             </div>
+
 
             <div className='loginGoHome'> <Link to="/">Volver a la pagina de inicio</Link></div>
 

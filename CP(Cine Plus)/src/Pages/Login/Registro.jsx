@@ -2,11 +2,12 @@
 import './Login.css'
 import 'boxicons'
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../redux/slices/auth/Thunks';
+import { registerUser,loginGoogle } from '../../redux/slices/auth/Thunks';
 import { useForm } from '../../Hooks/useForm';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import GoogleButton from 'react-google-button'
 export const Registro = () =>{
 
     const dispatch = useDispatch();
@@ -30,6 +31,13 @@ export const Registro = () =>{
 
     }
 
+    const onGoogleLogin = async () => {
+        await dispatch(loginGoogle())
+        const lastPath = localStorage.getItem('lastPath') || '/';
+        navigate(lastPath, {replace:true})
+    }
+
+
 
     return (
         <>
@@ -50,6 +58,10 @@ export const Registro = () =>{
                     </div>
                     {error && <div className='loginErrorContainer'> <box-icon name='error-alt' animation='tada' color='red'></box-icon> <p>Este email ya se encuentra registrado</p></div>}
                     <button className='btnLogin'>Registrarme</button>
+
+                    <div className="btnGoogleContainer">
+                        <GoogleButton className='btnGoogle'  onClick={() => { onGoogleLogin() }}/>
+                    </div>
 
                     <div className="register">
                         <p>
