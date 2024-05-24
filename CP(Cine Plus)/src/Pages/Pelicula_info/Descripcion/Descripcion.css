@@ -81,11 +81,23 @@
     display: flex;
     justify-content: space-between;
     height: fit-content;
+    flex-shrink: 1;
+}
+
+.FuncionesContainer {
+    margin-top: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    height: fit-content;
 }
 
 .button-group {
     display: flex;
     gap: 10px; /* Espacio entre los botones */
+    flex-shrink: 1;
 }
 .button {
     padding: 10px 20px;
@@ -109,6 +121,21 @@
     cursor: pointer;
 }
 
+.funcion {
+    background-color: #87a4b8;
+    cursor: pointer;
+}
+
+.funcion:hover {
+    background-color: #b2c4cf;
+    transform: translateY(-2px);
+}
+.funcion:active {
+    transform: translateY(3px);
+}
+.funcionlink {
+    text-decoration: none;
+}
 .noseleccionado:hover {
     background-color: #224b66;
     transform: translateY(-2px);

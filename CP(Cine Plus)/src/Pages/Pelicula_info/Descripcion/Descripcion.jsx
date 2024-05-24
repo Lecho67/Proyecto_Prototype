@@ -25,6 +25,22 @@ const Descripcion = ({ pelicula = defPelicula, credits = defCredits }) => {
     const dispSub = true;
     const dispDob = true;
 
+    const funciones = [
+        {hora : "10:00", dia : 23, mes : 5, año : 2024, id : 123456},
+        {hora : "11:00", dia : 23, mes : 5, año : 2024, id : 123457},
+        {hora : "12:00", dia : 23, mes : 5, año : 2024, id : 123458},
+        {hora : "13:00", dia : 23, mes : 5, año : 2024, id : 123459},
+        {hora : "14:00", dia : 23, mes : 5, año : 2024, id : 123460},
+        {hora : "15:00", dia : 23, mes : 5, año : 2024, id : 123461},
+        {hora : "16:00", dia : 23, mes : 5, año : 2024, id : 123462},
+        {hora : "17:00", dia : 23, mes : 5, año : 2024, id : 123463},
+        {hora : "18:00", dia : 23, mes : 5, año : 2024, id : 123464},
+        {hora : "19:00", dia : 23, mes : 5, año : 2024, id : 123465},
+        {hora : "20:00", dia : 23, mes : 5, año : 2024, id : 123466},
+        {hora : "21:00", dia : 23, mes : 5, año : 2024, id : 123467},
+        {hora : "22:00", dia : 23, mes : 5, año : 2024, id : 123468},
+    ]
+
     return (
         <div className='MayorContainer'>
             <div className='InfoContainer'>
@@ -53,6 +69,11 @@ const Descripcion = ({ pelicula = defPelicula, credits = defCredits }) => {
                             {dispSub? <div class={`button ${doblaje === "Sub" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDoblaje("Sub")}>SUB</div> :<div class="button nodisponible">Subtitulado</div> }
                             {dispDob? <div class={`button ${doblaje === "Dob" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDoblaje("Dob")}>DOB</div> :<div class="button nodisponible">Doblado</div> }
                         </div>
+                    </div>
+                    <div className='FuncionesContainer'>
+                        {funciones.map(funcion => {
+                            return <Link className='funcionlink' to={`/reserva?id=${funcion.id}`}><div class="button funcion">{funcion.hora}</div></Link>
+                        })}
                     </div>
                 </div>
             </div>
