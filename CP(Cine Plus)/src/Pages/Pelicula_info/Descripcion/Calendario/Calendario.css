@@ -6,6 +6,7 @@
     border-radius: 10px;
     transition: all 0.3s ease;
     overflow: hidden;
+    margin-bottom: 20px;
 }
 
 .BotonesSuperiores{
@@ -19,7 +20,7 @@
     border: none;
     font-family: Nunito, sans-serif;
     font-weight: bold;
-    font-size: 2vw;
+    font-size: xx-large;
     transition: all 0.3s ease;
 }
 .BotonMesRestar{
@@ -28,7 +29,7 @@
     border: none;
     font-family: Nunito, sans-serif;
     font-weight: bold;
-    font-size: 2vw;
+    font-size: xx-large;
     transition: all 0.3s ease;
 }
 
@@ -50,7 +51,7 @@
 .DiasSemana{
     color: rgb(0, 26, 91);
     font-family: Nunito, sans-serif;
-    font-size: 1.35vw;
+    font-size: large;
     font-weight: bold;
     margin-bottom : 10px;
     margin-top: 0;
@@ -72,7 +73,7 @@
     border: none;
     font-family: Nunito, sans-serif;
     font-weight: bold;
-    font-size: 1.2vw;
+    font-size: large;
     padding: 0;
     transition: all 0.3s ease;
 }
@@ -81,4 +82,16 @@
     background-color: rgb(0, 26, 91);
     color: white;
     font-weight: bold;
+}
+
+@media screen and (max-width: 910px) {
+    .Calendario h1{
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .Calendario h1{
+        font-size: 20px;
+    }
 }

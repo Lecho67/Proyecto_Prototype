@@ -1,0 +1,68 @@
+.order-container {
+    padding: 20px;
+    max-width: 800px;
+    margin: 40px auto;
+    background-color: #f7f7f7; /* Fondo del contenedor principal */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #fff; /* Fondo de cada producto */
+    border: 1px solid #ddd; /* Borde del cuadro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+    padding: 10px; /* Espacio interno */
+}
+
+.order-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 10px; /* Bordes redondeados para la imagen */
+}
+
+.order-item-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.order-item-info h2 {
+    margin: 0 0 10px 0; /* Espaciado entre el título y el precio */
+    font-size: 1.2em; /* Tamaño de fuente del título */
+    color: #333; /* Color del texto */
+}
+
+.order-item-info p {
+    margin: 5px 0;
+    font-size: 1em; /* Tamaño de fuente del texto */
+    color: #666; /* Color del texto */
+}
+
+.order-total {
+    margin-top: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: #fff; /* Fondo del total */
+    border: 1px solid #ddd; /* Borde del cuadro */
+    border-radius: 10px; /* Bordes redondeados */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+h2 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}

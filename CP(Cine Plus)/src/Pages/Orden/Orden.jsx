@@ -1,67 +1,55 @@
-import React from 'react'
-import { useReducer } from 'react'
-import Productitem from './Productitem'
-import ShoppingCartProduct from './ShoppingCartProduct'
-import { reducerCart, productsInitialState } from './reducers/shoppingCart_reducer'
-import TYPES from './reducers/actionTypes'
-export const Orden = () => {
-  const [state, dispatch] = useReducer(reducerCart, productsInitialState);
+import React from "react";
+import { useSelector } from 'react-redux';
+import "./Orden.css";
 
-  const addToCart = (id) => {
-    dispatch({
-      type: TYPES.ADD_TO_CART,
-      payload: id
-    })
-  }
-  const deleteFromCart = (id) => {
-    dispatch({
-      type: TYPES.DELETE_PRODUCT_FROM_CART,
-      payload: id
-    })
-  }
+export const Orden = ({ allProducts, total }) => {
+  const { selectedSeats, seats, ticketPrice } = useSelector(state => state.seats);
+  const selectedSeatDetails = seats.filter(seat => selectedSeats.includes(seat.id));
+  const seatTotal = selectedSeats.length * ticketPrice;
+  const combinedTotal = total + seatTotal;
 
-  const clearCart = () => {
-    dispatch({
-      type: TYPES.DELETE_ALL_FROM_CART
-    })
-  }
-
-  const calculateTotalPriceOfCart = () => {
-    dispatch({ type: TYPES.CALCULATE_TOTAL_PRICE_OF_THE_CART })
-  }
   return (
-    <>
-    <h1 className='title'>SECCION DE COMIDAS</h1>
-    <hr />
-    <h2 className='subtitle_products'>Productos en Stock</h2>
-    <div className='container_grid_products'>
-      {
-        state.products.map((product) => {
-          return <Productitem key={product.id} data={product} addToCart={addToCart} />
-        })
-      }
+    <div className="order-container">
+      <h1>Carrito de Compras</h1>
+
+      {selectedSeats.length > 0 && (
+        <>
+          <h2>Asientos Seleccionados</h2>
+          {selectedSeatDetails.map(seat => (
+            <div className="order-item" key={seat.id}>
+              <div className="order-item-info">
+                <h2>Asiento {seat.id}</h2>
+                <p>Precio: ${ticketPrice}</p>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
+      {allProducts.length > 0 && (
+        <>
+          <h2>Productos</h2>
+          {allProducts.map(product => (
+            <div className="order-item" key={product.id}>
+              <img src={product.img} alt={product.nameProduct} />
+              <div className="order-item-info">
+                <h2>{product.nameProduct}</h2>
+                <p>Precio: ${product.price}</p>
+                <p>Cantidad: {product.quantity}</p>
+                <p>Total: ${product.price * product.quantity}</p>
+              </div>
+            </div>
+          ))}
+        </>
+      )}
+
+      {selectedSeats.length === 0 && allProducts.length === 0 && (
+        <p>No hay productos en el carrito</p>
+      )}
+
+      <div className="order-total">
+        <h2>Total a pagar: ${combinedTotal}</h2>
+      </div>
     </div>
-
-    <hr />
-    <h2 className='subtitle_shopping_cart'>Carro de Compra</h2>
-    <div className='container_buttons'>
-      <button className='btn btn_totalPrice' onClick={() => calculateTotalPriceOfCart()}>Precio Total</button>
-      {state.totalPriceShoppingCart > 0 && <p className='totalPrice_shoppingCart'>Precio Total: {state.totalPriceShoppingCart}</p>}
-      <button className='btn btn_ClearCart' onClick={() => clearCart()}>Clear cart</button>
-    </div>
-    {
-      state.cart.length === 0 && <p className='text_NoProductsInCart'>There are no products in the cart</p>
-    }
-
-    <div className='container_grid_shopping_cart'>
-
-
-      {
-        state.cart.map((productCart) => {
-          return <ShoppingCartProduct key={productCart.id + (Math.random() * 50)} data={productCart} deleteFromCart={deleteFromCart} />
-        })
-      }
-    </div>
-  </>
-  )
-}
+  );
+};

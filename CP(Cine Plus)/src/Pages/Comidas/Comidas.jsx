@@ -1,4 +1,6 @@
 import { data } from "../../Helpers/data";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 export const Comidas = ({
 	allProducts,
 	setAllProducts,
@@ -7,7 +9,14 @@ export const Comidas = ({
 	total,
 	setTotal,
 }) => {
+
+	const {status} = useSelector(state => state.auth);
+	const navigate = useNavigate();
 	const onAddProduct = product => {
+		if (!status) {
+			navigate('/plssignin');
+			return;
+		}
 		if (allProducts.find(item => item.id === product.id)) {
 			const products = allProducts.map(item =>
 				item.id === product.id
