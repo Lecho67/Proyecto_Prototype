@@ -6,6 +6,7 @@ const MovieTrailer = ({ videoKey }) => {
     return (
         <div className="TrailerContainer">
             <iframe
+                className="YouTubePlayer"
                 title="movie-trailer"
                 width="560"
                 height="315"

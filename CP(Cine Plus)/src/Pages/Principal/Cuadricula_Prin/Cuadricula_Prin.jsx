@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import './Cuadricula_Prin.css'; // Importar el archivo de estilos
 import { useMovieContext } from '../../../context/movieContext';
-import { Link } from 'react-router-dom';
 
 const Cartelera = () => {
   const [peliculas, setPeliculas] = useState([]);

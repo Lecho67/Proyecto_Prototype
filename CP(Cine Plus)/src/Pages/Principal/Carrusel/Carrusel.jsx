@@ -3,7 +3,6 @@ import './Carrusel.css'
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import useFetchPeliculas from '../../../Hooks/useFetchPeliculas'
-import { Link } from 'react-router-dom'
 
 const Carrusel = ({numeroDePeliculas = 5, pageSize = 20}) => {
   const [peliculas, setPeliculas] = useState([]);
