@@ -25,17 +25,19 @@ function App() {
   const [countProducts, setCountProducts] = useState(0);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
-        dispatch(checkingCredentials({ status: true, email: user.email }));
-      } else {
-        dispatch(checkingCredentials({ status: false, email: null }));
-      }
-    });
-    return () => unsubscribe();
-  }, [dispatch]);
+  const userAuthenticated = () => {
+    useEffect(() => {
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                dispatch(checkingCredentials({ status: true, email: user.email }));
+            } else {
+                dispatch(checkingCredentials({ status: false, email: null }));
+            }
+        });
+    }, []);
+}
 
+userAuthenticated();
   return (
     <BrowserRouter>
       <Routes>
@@ -167,8 +169,9 @@ function App() {
           />
         </Route>
         <Route path="/Login" element={<Login />} />
-        <Route path="/Register" element={<Registro />} />
-        <Route path="/*" element={<Error404 />} />
+                <Route path="/Register" element={<Registro />} />
+                <Route path="/PlsSignIn" element={<PlsSignIn />}/>
+                <Route path="/*" element={<Error404 />}/>
       </Routes>
     </BrowserRouter>
   );

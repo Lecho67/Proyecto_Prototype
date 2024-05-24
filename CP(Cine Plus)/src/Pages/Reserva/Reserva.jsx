@@ -1,6 +1,6 @@
-// src/components/Reserva/Reserva.jsx
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import { setSeats, toggleSeatSelection, updateSeats } from "../../redux/slices/auth/seatSlices.js";
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -10,9 +10,16 @@ import { useMovieContext } from '../../context/movieContext';
 function Reserva() {
   const dispatch = useDispatch();
   const { selectedSeats, ticketPrice, seats } = useSelector(state => state.seats);
-  const { movieId, entryTime, setEntryTime } = useMovieContext();
+  const { setEntryTime } = useMovieContext();
   const [movieDetails, setMovieDetails] = useState(null);
   const [endTime, setEndTime] = useState(null);
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const movieId = queryParams.get('movieId');
+  const dimension = queryParams.get('dimension');
+  const doblaje = queryParams.get('doblaje');
+  const entryTime = queryParams.get('entryTime') || (new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
 
   useEffect(() => {
     const initialSeats = generateSeats();
@@ -30,11 +37,7 @@ function Reserva() {
   }, [movieId]);
 
   useEffect(() => {
-    if (!entryTime) {
-      const now = new Date();
-      const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-      setEntryTime(formattedTime);
-    }
+    setEntryTime(entryTime);
   }, [setEntryTime, entryTime]);
 
   useEffect(() => {
@@ -118,6 +121,8 @@ function Reserva() {
             <p><strong>Pelicula:</strong> {movieDetails.title}</p>
             <p><strong>Fecha de lanzamiento:</strong> {new Date(movieDetails.release_date).toLocaleDateString()}</p>
             <p><strong>Duración:</strong> {movieDetails.runtime} minutos</p>
+            <p><strong>Dimension:</strong> {dimension}</p>
+            <p><strong>Doblaje:</strong> {doblaje}</p>
           </>
         )}
         <p><strong>Hora de Ingreso:</strong> {entryTime}</p>

@@ -19,7 +19,7 @@ const Descripcion = ({ pelicula = defPelicula, credits = defCredits }) => {
 
     const [dimension, setDimension] = React.useState("2d");
     const [doblaje, setDoblaje] = React.useState("Sub");
- 
+
     const disp2d = true;
     const disp3d = true;
     const dispSub = true;
@@ -45,13 +45,41 @@ const Descripcion = ({ pelicula = defPelicula, credits = defCredits }) => {
                     <Calendario diaInicial={fecha.getDate()} mesInicial={fecha.getMonth() + 1} añoInicial={fecha.getFullYear()} />
                     
                     <div className='FiltrosContainer'>
-                        <div class="button-group">
-                            {disp2d? <div class={`button ${dimension === "2d" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDimension("2d")}>2D</div> :<div class="button nodisponible">2D</div> }
-                            {disp3d? <div class={`button ${dimension === "3d" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDimension("3d")}>3D</div> :<div class="button nodisponible">3D</div> }
+                        <div className="button-group">
+                            {disp2d ? (
+                                <Link to={`/reserva?movieId=${pelicula.id}&dimension=2d&doblaje=${doblaje}`} className="button-link">
+                                    <div className={`button ${dimension === "2d" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDimension("2d")}>
+                                        2D
+                                    </div>
+                                </Link>
+                            ) : (
+                                <div className="button nodisponible">2D</div>
+                            )}
+                            {disp3d ? (
+                                <Link to={`/reserva?movieId=${pelicula.id}&dimension=3d&doblaje=${doblaje}`} className="button-link">
+                                    <div className={`button ${dimension === "3d" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDimension("3d")}>
+                                        3D
+                                    </div>
+                                </Link>
+                            ) : (
+                                <div className="button nodisponible">3D</div>
+                            )}
                         </div>
-                        <div class="button-group">
-                            {dispSub? <div class={`button ${doblaje === "Sub" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDoblaje("Sub")}>SUB</div> :<div class="button nodisponible">Subtitulado</div> }
-                            {dispDob? <div class={`button ${doblaje === "Dob" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDoblaje("Dob")}>DOB</div> :<div class="button nodisponible">Doblado</div> }
+                        <div className="button-group">
+                            {dispSub ? (
+                                <div className={`button ${doblaje === "Sub" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDoblaje("Sub")}>
+                                    SUB
+                                </div>
+                            ) : (
+                                <div className="button nodisponible">Subtitulado</div>
+                            )}
+                            {dispDob ? (
+                                <div className={`button ${doblaje === "Dob" ? "seleccionado" : "noseleccionado"}`} onClick={() => setDoblaje("Dob")}>
+                                    DOB
+                                </div>
+                            ) : (
+                                <div className="button nodisponible">Doblado</div>
+                            )}
                         </div>
                     </div>
                 </div>
