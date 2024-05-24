@@ -5,13 +5,14 @@ import { setSeats, toggleSeatSelection, updateSeats } from "../../redux/slices/a
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './Reserva.css';
-import { useMovieContext } from '../../context/movieContext'; // Importa el hook del contexto
+import { useMovieContext } from '../../context/movieContext';
 
 function Reserva() {
   const dispatch = useDispatch();
   const { selectedSeats, ticketPrice, seats } = useSelector(state => state.seats);
-  const { movieId, allProducts, setAllProducts, total, setTotal, countProducts, setCountProducts } = useMovieContext(); // Usa el contexto
+  const { movieId, entryTime, setEntryTime } = useMovieContext();
   const [movieDetails, setMovieDetails] = useState(null);
+  const [endTime, setEndTime] = useState(null);
 
   useEffect(() => {
     const initialSeats = generateSeats();
@@ -27,6 +28,20 @@ function Reserva() {
       fetchMovieDetails(movieId);
     }
   }, [movieId]);
+
+  useEffect(() => {
+    if (!entryTime) {
+      const now = new Date();
+      const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      setEntryTime(formattedTime);
+    }
+  }, [setEntryTime, entryTime]);
+
+  useEffect(() => {
+    if (entryTime && movieDetails) {
+      calculateEndTime();
+    }
+  }, [entryTime, movieDetails]);
 
   function updateSelectedCount() {
     const selectedSeatsCount = selectedSeats.length;
@@ -66,6 +81,19 @@ function Reserva() {
     }
   }
 
+  function calculateEndTime() {
+    if (movieDetails.runtime && entryTime) {
+      const [hours, minutes] = entryTime.split(':').map(Number);
+      const entryDate = new Date();
+      entryDate.setHours(hours);
+      entryDate.setMinutes(minutes);
+      entryDate.setSeconds(0);
+
+      const endDate = new Date(entryDate.getTime() + movieDetails.runtime * 60000);
+      setEndTime(endDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+    }
+  }
+
   return (
     <div className="reservation-container">
       <div className="seats-container">
@@ -89,9 +117,11 @@ function Reserva() {
           <>
             <p><strong>Pelicula:</strong> {movieDetails.title}</p>
             <p><strong>Fecha de lanzamiento:</strong> {new Date(movieDetails.release_date).toLocaleDateString()}</p>
-            <p><strong>Resumen:</strong> {movieDetails.overview}</p>
+            <p><strong>Duración:</strong> {movieDetails.runtime} minutos</p>
           </>
         )}
+        <p><strong>Hora de Ingreso:</strong> {entryTime}</p>
+        <p><strong>Hora de Finalización:</strong> {endTime}</p>
         <p><strong>Cantidad de Asientos:</strong> 48</p>
         <p><strong>Sala:</strong> 1</p>
         <p><strong>Precio del boleto:</strong> ${ticketPrice}</p>
