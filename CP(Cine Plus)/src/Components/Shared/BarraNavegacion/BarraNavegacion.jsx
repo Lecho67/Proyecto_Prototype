@@ -75,11 +75,9 @@ export const Navigation = ({
                         <Link to="/Estrenos" className="nav-estrenos">
                             Estrenos
                         </Link>
-                        <Link to="/Reserva" className="nav-reserva">
-
-                        </Link>
-                        <Link to={{ pathname: `/Pelicula`, search: `?id=${id}` }} className="nav-pelicula">
-</Link>
+                        {/* Wea de prueba no funcional que metió simón
+                        <Link to="/Reserva" className="nav-reserva"></Link>
+                        <Link to={{ pathname: `/Pelicula`, search: `?id=${id}` }} className="nav-pelicula"></Link> */}
                         
 
                         <div className="container-icon">
@@ -236,13 +234,9 @@ export const Navigation = ({
                         : "menuPerfilDesplegableInvisible"
                 }`}
             >
-                {status ? (
-                    <div>{email}</div>
-                ) : (
-                    <Link to="/Login">
-                        <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
-                    </Link>
-                )}
+                {status?<Link><div className="itemMenuPerfilDesplegable">{email}</div></Link>:<Link to="/Login">
+                    <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
+                </Link>}
                 
                 <Link to="/Perfil">
                     <div className="itemMenuPerfilDesplegable">Mi Perfil</div>
@@ -250,9 +244,11 @@ export const Navigation = ({
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuPerfilDesplegable">Mi Orden</div>
                 </Link>
-                <div className="itemMenuPerfilDesplegable" onClick={handleLogout}>
-                    Cerrar Sesión
-                </div>
+                <Link>
+                    <div className="itemMenuPerfilDesplegable" onClick={handleLogout}>
+                        Cerrar Sesión
+                    </div>
+                </Link>
             </div>
         </>
     );
