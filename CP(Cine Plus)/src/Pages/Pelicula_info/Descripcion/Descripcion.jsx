@@ -21,9 +21,19 @@ const defPelicula = {
 
 const defCredits = { crew: [{ job: 'Director', name: 'No disponible' }] };
 
-const Descripcion = ({ pelicula = defPelicula, credits = defCredits, videos }) => {
-    const director = credits.crew ? credits.crew.find(crew => crew.job === 'Director') : { name: 'No disponible' };
+const defVideos = {
+    "results": [
+      {
+        "key": "dQw4w9WgXcQ",
+      }
+    ]
+  }
 
+
+const Descripcion = ({ pelicula = defPelicula, credits = defCredits, videos = defVideos }) => {
+    const director = credits.crew ? credits.crew.find(crew => crew.job === 'Director') : { name: 'No disponible' };
+    console.log(videos)
+    console.log(pelicula)
     return (
         <div className='MayorContainer'>
             <div className='InfoContainer'>
@@ -41,7 +51,7 @@ const Descripcion = ({ pelicula = defPelicula, credits = defCredits, videos }) =
                     <h3>Rating: {pelicula.vote_average !== undefined ? pelicula.vote_average.toFixed(1) : '0.0'}/10</h3>
                 </div>
                 <div className='CalendarioContainer'>
-                    {videos && videos.length > 0 && <MovieTrailer videoKey={videos[0].key} />}
+                    {videos && videos.results.length > 0 && <MovieTrailer videoKey={videos.results[0].key} />}
                     <Calendario diaInicial={fecha.getDate()} mesInicial={fecha.getMonth() + 1} añoInicial={fecha.getFullYear()} />
                     <Link to="/Reserva" className="ReservaButton">Reservar</Link>
                 </div>

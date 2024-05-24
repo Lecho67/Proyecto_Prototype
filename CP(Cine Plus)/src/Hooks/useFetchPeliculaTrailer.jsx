@@ -23,7 +23,7 @@ const fetchPeliculas = async (id) => {
       return data;
 
     } catch (error) {
-      console.error('Error al obtener los creditos:', error);
+      console.error('Error al obtener los trailers:', error);
     }
   };
 
