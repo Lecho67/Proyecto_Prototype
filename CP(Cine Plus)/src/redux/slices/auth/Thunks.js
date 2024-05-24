@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, updateProfile,signInWithEmailAndPassword} from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile,signInWithEmailAndPassword,GoogleAuthProvider,signInWithPopup} from "firebase/auth";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase/config.js";
 import { register,login,logout } from "./AuthSlice";
@@ -40,6 +40,14 @@ export const loginUser = (email, password) => {
         return Promise.reject(error) 
     }    
 
+    }
+}
+
+export const loginGoogle = () => {
+
+    return async (dispatch) => {
+        const provider = new GoogleAuthProvider();
+        return await signInWithPopup(auth, provider);
     }
 }
 
