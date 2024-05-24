@@ -1,5 +1,6 @@
 import './Estrenos.css'
 import { Navigation } from "../../Components/Shared/BarraNavegacion/BarraNavegacion"
+import { Link } from 'react-router-dom';
 import {useState,useEffect} from 'react'
 import axios from 'axios';
 const Estrenos = ()=>{
@@ -41,12 +42,12 @@ const Estrenos = ()=>{
                 <div className="grid">
         {peliculas.map((pelicula) => (
           <div key={pelicula.id} className="movie">
-            <a href={`/Pelicula?id=${pelicula.id}`}>
+            <Link to={`/Pelicula?id=${pelicula.id}`}>
               <img
                 src={`https://image.tmdb.org/t/p/w300/${pelicula.poster_path}`}
                 alt={pelicula.title}
               />
-            </a>
+            </Link>
             <h2>{pelicula.title}</h2>
             <p>Clasificación: {pelicula.vote_average}</p>
           </div>
