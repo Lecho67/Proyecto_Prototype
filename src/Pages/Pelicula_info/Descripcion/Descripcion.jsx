@@ -35,30 +35,36 @@ const Descripcion = ({ pelicula = defPelicula, credits = defCredits, videos = de
     const {status} = useSelector(state => state.auth);
     const director = credits.crew ? credits.crew.find(crew => crew.job === 'Director') : { name: 'No disponible' };
 
-    const [dimension, setDimension] = React.useState("2d");
-    const [doblaje, setDoblaje] = React.useState("Sub");
+    const [dimension, setDimension] = React.useState("");
+    const [doblaje, setDoblaje] = React.useState("");
  
     const disp2d = true;
     const disp3d = true;
     const dispSub = true;
     const dispDob = true;
-
     const funciones = [
-        {hora : "10:00", dia : 23, mes : 5, año : 2024, id : 123456},
-        {hora : "11:00", dia : 23, mes : 5, año : 2024, id : 123457},
-        {hora : "12:00", dia : 23, mes : 5, año : 2024, id : 123458},
-        {hora : "13:00", dia : 23, mes : 5, año : 2024, id : 123459},
-        {hora : "14:00", dia : 23, mes : 5, año : 2024, id : 123460},
-        {hora : "15:00", dia : 23, mes : 5, año : 2024, id : 123461},
-        {hora : "16:00", dia : 23, mes : 5, año : 2024, id : 123462},
-        {hora : "17:00", dia : 23, mes : 5, año : 2024, id : 123463},
-        {hora : "18:00", dia : 23, mes : 5, año : 2024, id : 123464},
-        {hora : "19:00", dia : 23, mes : 5, año : 2024, id : 123465},
-        {hora : "20:00", dia : 23, mes : 5, año : 2024, id : 123466},
-        {hora : "21:00", dia : 23, mes : 5, año : 2024, id : 123467},
-        {hora : "22:00", dia : 23, mes : 5, año : 2024, id : 123468},
+        {hora: "10:00", dia: 23, mes: 5, año: 2024, id: 123456, dimension: "2d", doblaje: "Sub"},
+        {hora: "11:00", dia: 23, mes: 5, año: 2024, id: 123457, dimension: "3d", doblaje: "Dob"},
+        {hora: "12:00", dia: 23, mes: 5, año: 2024, id: 123458, dimension: "2d", doblaje: "Sub"},
+        {hora: "13:00", dia: 23, mes: 5, año: 2024, id: 123459, dimension: "3d", doblaje: "Sub"},
+        {hora: "14:00", dia: 23, mes: 5, año: 2024, id: 123460, dimension: "2d", doblaje: "Dob"},
+        {hora: "15:00", dia: 23, mes: 5, año: 2024, id: 123461, dimension: "3d", doblaje: "Sub"},
+        {hora: "16:00", dia: 23, mes: 5, año: 2024, id: 123462, dimension: "2d", doblaje: "Dob"},
+        {hora: "17:00", dia: 23, mes: 5, año: 2024, id: 123463, dimension: "3d", doblaje: "Sub"},
+        {hora: "18:00", dia: 23, mes: 5, año: 2024, id: 123464, dimension: "2d", doblaje: "Dob"},
+        {hora: "19:00", dia: 23, mes: 5, año: 2024, id: 123465, dimension: "3d", doblaje: "Sub"},
+        {hora: "20:00", dia: 23, mes: 5, año: 2024, id: 123466, dimension: "2d", doblaje: "Dob"},
+        {hora: "21:00", dia: 23, mes: 5, año: 2024, id: 123467, dimension: "3d", doblaje: "Sub"},
+        {hora: "22:00", dia: 23, mes: 5, año: 2024, id: 123468, dimension: "2d", doblaje: "Dob"},
     ]
 
+    const filteredFunciones = funciones.filter(funcion => {
+        const dimensionMatch = dimension ? funcion.dimension === dimension : true;
+        const doblajeMatch = doblaje ? funcion.doblaje === doblaje : true;
+        return dimensionMatch && doblajeMatch;
+    });
+
+    
     return (
         <div className='MayorContainer'>
             <div className='InfoContainer'>
@@ -90,7 +96,7 @@ const Descripcion = ({ pelicula = defPelicula, credits = defCredits, videos = de
                         </div>
                     </div>
                     <div className='FuncionesContainer'>
-                        {funciones.map(funcion => {
+                        {filteredFunciones.map(funcion => {
                             return <Link key={funcion.id} className='funcionlink' to={status?`/reserva?id=${funcion.id}`: "/plssignin"}><div className="button funcion">{funcion.hora}</div></Link>
                         })}
                     </div>
