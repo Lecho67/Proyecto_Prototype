@@ -112,9 +112,6 @@ const Descripcion = ({ pelicula = defPelicula, credits = defCredits, videos = de
         setDoblaje("");
         const nuevalista = [];
         funciones.forEach((funcion) => {
-            if (funcion.mes === fechaCalendario.mes){
-                console.log(funcion);
-            }
             if (funcion.mes === fechaCalendario.mes && funcion.año === fechaCalendario.año){
                 if (funcion.dia === fechaCalendario.dia ) {
                     if (funcion.dimension === '2d') {
