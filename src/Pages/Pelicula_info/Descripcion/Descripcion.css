@@ -123,6 +123,7 @@
 }
 .seleccionado{    
     background-color: #2683cf;
+    cursor: pointer;
 }
 .noseleccionado {
     background-color: #072336;
@@ -150,6 +151,15 @@
 }
 
 .noseleccionado:active {
+    transform: translateY(3px);
+}
+
+.seleccionado:hover {
+    background-color: #4e9acc;
+    transform: translateY(-2px);
+}
+
+.seleccionado:active {
     transform: translateY(3px);
 }
 
