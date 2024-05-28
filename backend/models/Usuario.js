@@ -10,11 +10,11 @@ const UsuarioSchema = Schema({
         type: String,
         required: true
     },
-    sillasReservadas: [
+    orden: 
         {
             type: Schema.Types.ObjectId,
-            ref: 'Silla'
-        }]
+            ref: 'Orden'
+        }
 });
 
 module.exports = model('Usuario',UsuarioSchema);

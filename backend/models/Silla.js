@@ -1,12 +1,20 @@
 const {Schema, model} = require('mongoose');
 
 const reservaSillaSchema = Schema({
-    user:{
+    orden:{
         type: Schema.Types.ObjectId,
-        ref: 'Usuario'},
+        ref: 'Orden'},
     funcion: {
         type: Schema.Types.ObjectId,
         ref: 'Funcion'
+    },
+    estado:{
+        type: Boolean,
+        require: true
+    },
+    precio: {
+        type: Number,
+        require: true
     }
     
 });
