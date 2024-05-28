@@ -155,23 +155,7 @@ const Calendario = ({
                 {iterableDias.map((dia) => (
                     <li key={dia} className={`${dia === 1 ? "Primero " : ""}`}>
                         <div className="ButtonContainer">
-                            <button
-                                className={
-                                    `${
-                                        seleccion === dia
-                                            ? "SeleccionActual "
-                                            : ""
-                                    }${
-                                        diasDisponibles.includes(dia)  
-                                        ? "diaDisponible" 
-                                        : "diaNoDisponible"}` + " Numero"
-                                }
-                                onClick={() => {
-                                    if (diasDisponibles.includes(dia)  ){
-                                        setSeleccion(dia)
-                                    }
-                                }
-                                }>
+                            <button className={`${seleccion === dia ? "SeleccionActual" : ""}` + " Numero"} onClick={() => setSeleccion(dia)}>
                                 {dia}
                             </button>
                         </div>
