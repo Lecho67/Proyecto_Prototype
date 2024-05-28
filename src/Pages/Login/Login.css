@@ -10,7 +10,6 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    width:100%;
     flex-direction: column;
 }
 
@@ -136,7 +135,9 @@
 
 
 .loginGoHome{
-    margin-top: 10px;
+    margin: 10px;
+    width: 100%;
+    text-align: center;
 }
 .loginGoHome a{
     color: #fff;
@@ -147,13 +148,42 @@
     text-decoration: underline;
 }
 
+.btnGoogleContainer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.btnGoogleContainer > div{
+    min-width: 100%;
+}
+
+
+
 /* media queries */
+
 
 @media screen and (max-width: 480px) {
     .wrapperLogin {
-        min-width: 100%;
+        position:absolute;
+        min-width: 100vw;
         height: 100vh;
+        overflow: hidden;
+        box-sizing:border-box;
     }
+
+    .loginPage{
+        position:relative;
+    }
+
+    .loginGoHome{
+        position:absolute;
+        z-index: 2;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    
     .remember-forgot {
       flex-direction: column;
       margin: 10px 0;
