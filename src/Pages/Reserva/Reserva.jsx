@@ -41,7 +41,8 @@ function Reserva() {
   }
 
   return (
-    <div className="reservation-container">
+    <>
+      <div className="reservation-container">
       <div className="seats-container">
         <div className='salaContainer'>
           <div className="sala">
@@ -63,25 +64,7 @@ function Reserva() {
         <p><strong>Pelicula:</strong> The Room </p>
         <p><strong>Fecha:</strong> May 10, 2024 <strong> Hora:</strong> 18:00</p>
         <p><strong>Cantidad de Asientos:</strong> 48</p>
-        <p><strong>Sala:</strong> 1</p>
-        <p><strong>Precio del boleto:</strong> ${ticketPrice} </p>
-        <div className="seat-types">
-          <p><strong>Tipos de Asientos:</strong></p>
-          <ul className="showcase">
-            <li>
-              <div className="seat occupied"></div>
-              <small>Ocupada</small>
-            </li>
-            <li>
-              <div className="seat free"></div>
-              <small>Libre</small>
-            </li>
-            <li>
-              <div className="seat selected"></div>
-              <small>Seleccionada</small>
-            </li>
-          </ul>
-        </div>
+        <p><strong>Precio por asiento:</strong> ${ticketPrice} </p>
         <p className="text">
           <strong>Cantidad: </strong> <span id="count">0</span> <strong>Precio: </strong>$<span id="total">0</span>
         </p>
@@ -89,6 +72,13 @@ function Reserva() {
         <Link to="/Perfil/Orden" className="add-to-order-btn">Agregar a Orden</Link>
       </div>
     </div>
+      <style>{
+        `body {
+          background-color: #000915;  
+        }`
+      }</style>
+    </>
+    
   );
 }
 
