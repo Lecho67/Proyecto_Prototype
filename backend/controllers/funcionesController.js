@@ -1,5 +1,4 @@
 const express = require('express');
-const producto = require('../models/producto.js');
 const Funcion = require('../models/Funcion.js');
 const Silla = require('../models/Silla.js');
 const app = express();
@@ -29,16 +28,6 @@ const crearFuncion = async (req, res) => {
 
 
 // crear un producto en la base de datos
-const crearProducto = (req, res) => {
-    const crearProducto = new producto(req.body);
-    crearProducto.save().then(() => res.json(req.body)).catch(err => console.log(err))
-}
-
-// listar los productos de la base de datos
-const listarProductos = async (req, res) => {
-    const productos = await producto.find();
-    res.json(productos);
-}
 
 
-module.exports = { crearFuncion,crearProducto,listarProductos }
+module.exports = { crearFuncion}
