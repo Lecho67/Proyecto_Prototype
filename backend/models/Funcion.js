@@ -16,12 +16,12 @@ const FuncionSchema = Schema({
     },
     año: {  
         type: Number,
-        required: true
-    },
-    id: {
-        type: Number,
-        required: true
-    },
+        required: true},
+    // },
+    // id: {
+    //     type: Number,
+    //     required: true
+    // },
     dimension: {
         type: String,
         required: true
