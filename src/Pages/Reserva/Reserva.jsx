@@ -61,6 +61,18 @@ function Reserva() {
         </div>
       </div>
       <div className="info-container">
+      <div className="info-models">
+        <div className="seatmodel">
+            <p>Disponible:</p>
+            <div className="seat model free"></div>
+        </div>
+        <div className="seatmodel">
+            <p>No Disponible:</p><div className="seat model occupied"></div>
+        </div>
+        <div className="seatmodel">
+            <p>Seleccionado:</p><div className="seat model selected"></div>
+        </div>
+      </div>
         <p><strong>Pelicula:</strong> The Room </p>
         <p><strong>Fecha:</strong> May 10, 2024 <strong> Hora:</strong> 18:00</p>
         <p><strong>Cantidad de Asientos:</strong> 48</p>
@@ -74,7 +86,7 @@ function Reserva() {
     </div>
       <style>{
         `body {
-          background-color: #000915;  
+          background-color: #021438;  
         }`
       }</style>
     </>

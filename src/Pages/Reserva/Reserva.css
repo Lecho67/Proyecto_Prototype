@@ -37,6 +37,7 @@
     grid-row-end: -1;
   }
   
+  
   .sala {
     box-sizing: border-box;
     perspective: 1000px;
@@ -77,15 +78,8 @@
   }
   .seat.occupied {
     filter: brightness(0);
+    cursor: not-allowed;
   }
-  
-  .seat.aisle {
-    visibility: hidden;
-  }
-  
-  
-  
-  
   .seat:not(.occupied):hover {
     cursor: pointer;
     transform: scale(1.15);
@@ -98,7 +92,11 @@
   .text {
     margin: 10px 0;
   }
-  
+  .model{
+    margin-left: 10px;
+    width: 60px;
+    height: 60px;
+  }
   .info-container {
     display: flex;
     justify-content: center;
@@ -119,7 +117,27 @@
     color: #b3cbe0;
     margin: 0;
     min-width: 220px;
-    max-width: 100%;
+    text-align: center;
+  }
+  .info-models {
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 20px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: #05101a;
+  }
+  .info-models h2 {
+    margin-bottom: 10px;
+  }
+  .info-models p {
+    color: #b3cbe0;
+    margin: 0;
+    min-width: fit-content;
     text-align: center;
   }
   
@@ -142,7 +160,15 @@
   .add-to-order-btn:active {
     transform: scale(0.95);
   }
-  
+  .seatmodel{
+    display: flex;
+    min-width: fit-content;
+    align-items: center;
+    height: 40px;
+  }
+  .seatmodel p{
+    width: 50%;
+  }
 
   
   .screen {
