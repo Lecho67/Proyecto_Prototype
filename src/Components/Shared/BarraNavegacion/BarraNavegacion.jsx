@@ -61,7 +61,7 @@ export const Navigation = ({
         <>
             <div className="BarraNav">
                 <nav className="BarraNav">
-                    <div className="logoContainer">
+                    <div className="logoContainer" onClick={() => navigate("/")}>
                         <img className="logo" src={logo} alt=""></img>
                     </div>
                     <div className="linksContainer">
