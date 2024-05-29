@@ -32,31 +32,31 @@ function Reserva() {
   function generateSeats() {
     const seats = [];
     let seatId = 0;
-    for (let row = 1; row <= 6; row++) {
-      for (let column = 1; column <= 8; column++) {
-        const state = Math.random() < 0.3 ? 'occupied' : 'free';
-        seats.push({ id: seatId++, state });
-      }
+    for (let asientos = 1; asientos <= 128; asientos++) {
+      const state = Math.random() < 0.3 ? 'occupied' : 'free';
+      seats.push({ id: seatId++, state });
     }
+
     return seats;
   }
 
   return (
     <div className="reservation-container">
       <div className="seats-container">
-        <div className="container">
-          <div className="screen"></div>
-          {Array.from({ length: 6 }, (_, row) => (
-            <div className="row" key={row}>
-              {seats.slice(row * 8, (row + 1) * 8).map(seat => (
-                <div
-                  className={`seat ${seat.state}`}
-                  key={seat.id}
-                  onClick={() => handleSeatClick(seat.id)}
-                ></div>
-              ))}
-            </div>
-          ))}
+        <div className='salaContainer'>
+          <div className="sala">
+            <div className="screen"></div>
+            <div className="espacio"></div>
+            <div className="espaciov1"></div>
+            <div className="espaciov2"></div>
+            {seats.map(seat => (
+              <div
+                className={`seat ${seat.state}`}
+                key={seat.id}
+                onClick={() => handleSeatClick(seat.id)}
+              ></div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="info-container">
