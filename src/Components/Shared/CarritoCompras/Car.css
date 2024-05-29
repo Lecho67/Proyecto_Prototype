@@ -134,7 +134,7 @@ header {
 	grid-template-columns: repeat(3, 1fr);
 	background-color: #c4e2ff;	;
 	gap: 20px;
-	padding: 100px;
+	padding: 50px;
 }
 .item {
 	border-radius: 10px;
@@ -216,14 +216,18 @@ header {
   border-radius: 10px;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1200px) {
 	.container-items {
 		grid-template-columns: repeat(2, 1fr);
+		padding: 10px;
 	}
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 510px) {
 	.container-items {
 		grid-template-columns: repeat(1, 1fr);
+	}
+	.item {
+		width: 100%;
 	}
 }

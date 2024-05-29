@@ -74,11 +74,6 @@ export const Navigation = ({
                         <Link to="/Estrenos" className="nav-estrenos">
                             Estrenos
                         </Link>
-                        {/* Wea de prueba no funcional que metió simón
-                        <Link to="/Reserva" className="nav-reserva"></Link>
-                        <Link to={{ pathname: `/Pelicula`, search: `?id=${id}` }} className="nav-pelicula"></Link> */}
-                        
-
                         <div className="container-icon">
                             <div
                                 className="container-cart-icon"
@@ -213,9 +208,6 @@ export const Navigation = ({
                 </Link>
                 <Link to="/Estrenos">
                     <div className="itemMenuDesplegable">Próximos Estrenos</div>
-                </Link>
-                <Link to="/Reserva">
-                    <div className="itemMenuDesplegable">Reserva</div>
                 </Link>
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuDesplegable">Mi Orden</div>
