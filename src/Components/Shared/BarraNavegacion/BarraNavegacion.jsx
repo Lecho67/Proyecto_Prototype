@@ -201,12 +201,10 @@ export const Navigation = ({
                 </nav>
             </div>
             <div
-                className={`${
-                    menuVisible
-                        ? "menuDesplegableVisible"
-                        : "menuDesplegableInvisible"
-                }`}
-            >
+                className={`${menuVisible? "menuDesplegableVisible": "menuDesplegableInvisible"}`}>
+                {status?<Link><div className="itemMenuDesplegable">{email}</div></Link>:<Link to="/Login">
+                    <div className="itemMenuDesplegable">Iniciar Sesión</div>
+                </Link>}
                 <Link to="/">
                     <div className="itemMenuDesplegable">Inicio</div>
                 </Link>
@@ -219,11 +217,11 @@ export const Navigation = ({
                 <Link to="/Reserva">
                     <div className="itemMenuDesplegable">Reserva</div>
                 </Link>
-                <Link to="/Perfil">
-                    <div className="itemMenuDesplegable">Mi Perfil</div>
-                </Link>
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuDesplegable">Mi Orden</div>
+                </Link>
+                <Link>
+                    <div className="itemMenuDesplegable" onClick={handleLogout}>Cerrar Sesión</div>
                 </Link>
             </div>
             <div
@@ -236,17 +234,11 @@ export const Navigation = ({
                 {status?<Link><div className="itemMenuPerfilDesplegable">{email}</div></Link>:<Link to="/Login">
                     <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
                 </Link>}
-                
-                <Link to="/Perfil">
-                    <div className="itemMenuPerfilDesplegable">Mi Perfil</div>
-                </Link>
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuPerfilDesplegable">Mi Orden</div>
                 </Link>
                 <Link>
-                    <div className="itemMenuPerfilDesplegable" onClick={handleLogout}>
-                        Cerrar Sesión
-                    </div>
+                    <div className="itemMenuPerfilDesplegable" onClick={handleLogout}>Cerrar Sesión</div>
                 </Link>
             </div>
         </>

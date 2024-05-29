@@ -163,7 +163,7 @@
     transform: translateY(3px);
 }
 
-@media screen and (max-width: 840px) {
+@media screen and (max-width: 840px){
     .DescriptionContainer {
         padding-right: 0;
         font-size: x-large;
@@ -198,5 +198,27 @@
     }
     .YouTubePlayer {
         height: 47.5vw;
+    }
+    .button-group {
+        gap:20px
+    }
+    .button {
+        font-size: 4vw;
+        padding: 8px 15px;
+    }
+
+}
+@media screen and (max-width: 430px) {
+    .button {
+        font-size: 5vw;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .button-group {
+        gap:15px
+    }
+    .button {
+        padding: 8px 10px;
     }
 }

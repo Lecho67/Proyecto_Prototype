@@ -40,7 +40,7 @@
 }
 .PortadaImgContainer{
     width: 50%;
-    height: 50vw;
+    height: 50vw;   
     align-self: flex-start;
     position: static;
     box-sizing: border-box;
@@ -60,4 +60,34 @@
     z-index: 1;
 }
 
+@media screen and (max-width: 840px){
+    .PortadaBgContainer{
+        flex-direction: column-reverse;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 90%;
+        margin-bottom: -5%;
+        height: 100%;
+        border-bottom-left-radius: 3%;
+        border-bottom-right-radius: 3%;
+    }
+    .PortadaContainer{
+        height: 73vw;
+    }
+    .PortadaImgContainer{
+        width: 100%;
+        padding-left: 7%;
+        padding-right: 7%;
+        padding-top: 0;
+        margin-bottom: -15%;
+        height: 60vw;
+    }
+    .PortadaTitle{
+        font-size: 5vw;
+    }
+    .PortadaTitleContainer{
+        width: 100%;
+        align-items: center;
+    }
+}
 
