@@ -47,6 +47,11 @@
     margin-bottom: 10px;
 }
 
+.diaNoDisponible{
+    cursor: not-allowed;
+    color: #838383; 
+}
+
 
 .DiasSemana{
     color: rgb(0, 26, 91);
