@@ -2,23 +2,18 @@ const Orden = require('../models/orden.js');
 const Usuario = require('../models/Usuario.js');
 const Silla = require('../models/Silla.js');
 const Producto = require('../models/producto.js');
-const crearOrden = async (req, res) => {
-    const { email } = req.body;
-    try {
-        const usuario = await Usuario.findOne({email: email});
-        if (!usuario) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
-        }
-        
-        const nuevaOrden = new Orden({ usuario: usuario._id });
-        await nuevaOrden.save();
-        usuario.orden = nuevaOrden._id;
-        await usuario.save();
-        res.status(201).json(nuevaOrden);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
+
+
+const obtenerOrdenDeUsuario = async (req, res) => {
+    const {email} = req.params;
+    try{
+        const usuario = await Usuario.findOne({email});
+        const traerOrden = await Orden.findById(usuario.orden);
+        res.status(200).json(traerOrden);
+    }catch(err){
+        res.status(400).json({message: err.message});
     }
-};
+}
 
 const agregarSillaAOrden = async (req, res) => {
     const { ordenId, sillaId } = req.body;
@@ -32,7 +27,7 @@ const agregarSillaAOrden = async (req, res) => {
 
         orden.sillas.push(silla._id);
         await orden.save();
-
+        // falta que a la silla se le relacione la orden
         res.status(200).json(orden);
     } catch (err) {
         res.status(400).json({ message: err.message });
@@ -61,4 +56,4 @@ const agregarProductoAOrden = async (req, res) => {
 
 
 
-module.exports = { crearOrden,agregarProductoAOrden,agregarSillaAOrden }
+module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario }
