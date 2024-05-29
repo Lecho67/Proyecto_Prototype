@@ -32,56 +32,51 @@ function Reserva() {
   function generateSeats() {
     const seats = [];
     let seatId = 0;
-    for (let row = 1; row <= 6; row++) {
-      for (let column = 1; column <= 8; column++) {
-        const state = Math.random() < 0.3 ? 'occupied' : 'free';
-        seats.push({ id: seatId++, state });
-      }
+    for (let asientos = 1; asientos <= 128; asientos++) {
+      const state = Math.random() < 0.3 ? 'occupied' : 'free';
+      seats.push({ id: seatId++, state });
     }
+
     return seats;
   }
 
   return (
-    <div className="reservation-container">
+    <>
+      <div className="reservation-container">
       <div className="seats-container">
-        <div className="container">
-          <div className="screen"></div>
-          {Array.from({ length: 6 }, (_, row) => (
-            <div className="row" key={row}>
-              {seats.slice(row * 8, (row + 1) * 8).map(seat => (
-                <div
-                  className={`seat ${seat.state}`}
-                  key={seat.id}
-                  onClick={() => handleSeatClick(seat.id)}
-                ></div>
-              ))}
-            </div>
-          ))}
+        <div className='salaContainer'>
+          <div className="sala">
+            <div className="screen"></div>
+            <div className="espacio"></div>
+            <div className="espaciov1"></div>
+            <div className="espaciov2"></div>
+            {seats.map(seat => (
+              <div
+                className={`seat ${seat.state}`}
+                key={seat.id}
+                onClick={() => handleSeatClick(seat.id)}
+              ></div>
+            ))}
+          </div>
         </div>
       </div>
       <div className="info-container">
+      <div className="info-models">
+        <div className="seatmodel">
+            <p>Disponible:</p>
+            <div className="seat model free"></div>
+        </div>
+        <div className="seatmodel">
+            <p>No Disponible:</p><div className="seat model occupied"></div>
+        </div>
+        <div className="seatmodel">
+            <p>Seleccionado:</p><div className="seat model selected"></div>
+        </div>
+      </div>
         <p><strong>Pelicula:</strong> The Room </p>
         <p><strong>Fecha:</strong> May 10, 2024 <strong> Hora:</strong> 18:00</p>
         <p><strong>Cantidad de Asientos:</strong> 48</p>
-        <p><strong>Sala:</strong> 1</p>
-        <p><strong>Precio del boleto:</strong> ${ticketPrice} </p>
-        <div className="seat-types">
-          <p><strong>Tipos de Asientos:</strong></p>
-          <ul className="showcase">
-            <li>
-              <div className="seat occupied"></div>
-              <small>Ocupada</small>
-            </li>
-            <li>
-              <div className="seat free"></div>
-              <small>Libre</small>
-            </li>
-            <li>
-              <div className="seat selected"></div>
-              <small>Seleccionada</small>
-            </li>
-          </ul>
-        </div>
+        <p><strong>Precio por asiento:</strong> ${ticketPrice} </p>
         <p className="text">
           <strong>Cantidad: </strong> <span id="count">0</span> <strong>Precio: </strong>$<span id="total">0</span>
         </p>
@@ -89,6 +84,13 @@ function Reserva() {
         <Link to="/Perfil/Orden" className="add-to-order-btn">Agregar a Orden</Link>
       </div>
     </div>
+      <style>{
+        `body {
+          background-color: #021438;  
+        }`
+      }</style>
+    </>
+    
   );
 }
 
