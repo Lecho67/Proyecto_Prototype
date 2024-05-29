@@ -27,32 +27,7 @@ const crearFuncion = async (req, res) => {
     }
 };
 
-const crearOrden = async (req, res) => {
-    const { usuarioId } = req.body;
-    try {
-        const usuario = await Usuario.findById(usuarioId);
-        if (!usuario) {
-            return res.status(404).json({ message: 'Usuario no encontrado' });
-        }
 
-        const nuevaOrden = new Orden({ usuario: usuario._id });
-        await nuevaOrden.save();
-
-        res.status(201).json(nuevaOrden);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-};
-
-const reservarSilla = (req, res) => {
-    console.log("silla reservada con exito")
-}
-const cancelarReservaDeSilla = (req, res) => {
-    console.log("silla cancelada con exito")
-}
-const crearUsuario = (req, res) => {
-    console.log("usuario creado con exito")
-}
 // crear un producto en la base de datos
 const crearProducto = (req, res) => {
     const crearProducto = new producto(req.body);
@@ -66,4 +41,4 @@ const listarProductos = async (req, res) => {
 }
 
 
-module.exports = { crearFuncion, reservarSilla, cancelarReservaDeSilla, crearUsuario,crearProducto,listarProductos }
+module.exports = { crearFuncion,crearProducto,listarProductos }
