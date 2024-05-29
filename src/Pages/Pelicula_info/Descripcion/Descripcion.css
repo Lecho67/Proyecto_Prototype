@@ -58,7 +58,7 @@
     margin-top: 6vw;
     padding: 2%;
     box-sizing: border-box;
-    border-radius: 2vw;
+    border-radius: 2    vw;
     display: flex;
 }
 
@@ -163,3 +163,40 @@
     transform: translateY(3px);
 }
 
+@media screen and (max-width: 840px) {
+    .DescriptionContainer {
+        padding-right: 0;
+        font-size: x-large;
+        width: 100%;
+    }
+    .CalendarioContainer {
+        padding-right: 0;
+        font-size: x-large;
+        width: 100%;
+    }
+    .DescriptionContainer p{
+        font-size: large;
+        text-align: justify;
+    }
+    .DescriptionContainer h6{
+        font-size: large;
+        text-align: justify;
+    }
+    .DescriptionContainer h3{
+        text-align: center;
+    }
+    .DescriptionContainer h4{
+        margin-top: 30px;
+        text-align: center;
+    }
+    .InfoContainer {
+        width: 90%;
+        flex-direction: column;
+    }
+    .button {
+        font-size: x-large;
+    }
+    .YouTubePlayer {
+        height: 47.5vw;
+    }
+}
