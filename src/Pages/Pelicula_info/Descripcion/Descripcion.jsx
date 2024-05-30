@@ -50,8 +50,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
     ]
     const crearFunciones = async () => {
         try {
-            /* const response = await axios.post('http://localhost:4000/crearFuncion' */
-            const response = await axios.get('http://localhost:4000/api/listarProductos',{ 
+            const response = await axios.post('http://localhost:4000/api/crearFuncion',{ 
                 idPelicula: idPelicula,
                 hora: Math.floor(Math.random()*25) + Math.random()>0.3?":00":":30",
                 dia: Math.floor(Math.random()*29),
