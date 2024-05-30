@@ -18,26 +18,23 @@ import { auth } from "../../firebase/config";
 import { useDispatch } from "react-redux";
 import { checkingCredentials } from "../../redux/slices/auth/AuthSlice.js";
 import Reserva from "../Reserva/Reserva.jsx";
-
 function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [countProducts, setCountProducts] = useState(0);
   const dispatch = useDispatch();
 
-  const userAuthenticated = () => {
-    useEffect(() => {
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                dispatch(checkingCredentials({ status: true, email: user.email }));
-            } else {
-                dispatch(checkingCredentials({ status: false, email: null }));
-            }
-        });
-    }, []);
-}
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        dispatch(checkingCredentials({ status: true, email: user.email }));
+      } else {
+        dispatch(checkingCredentials({ status: false, email: null }));
+      }
+    });
+    return () => unsubscribe();
+  }, [dispatch]);
 
-userAuthenticated();
   return (
     <BrowserRouter>
       <Routes>
@@ -169,9 +166,9 @@ userAuthenticated();
           />
         </Route>
         <Route path="/Login" element={<Login />} />
-                <Route path="/Register" element={<Registro />} />
-                <Route path="/PlsSignIn" element={<PlsSignIn />}/>
-                <Route path="/*" element={<Error404 />}/>
+        <Route path="/Register" element={<Registro />} />
+        <Route path="/plssignin" element={<PlsSignIn />}/>
+        <Route path="/*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
   );
