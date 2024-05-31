@@ -1,7 +1,10 @@
 const {Schema,model} = require('mongoose');
 
 const FuncionSchema = Schema({
-
+    idPelicula: {
+        type: Number,
+        required: true
+    },
     hora: {
         type: String,
         required: true

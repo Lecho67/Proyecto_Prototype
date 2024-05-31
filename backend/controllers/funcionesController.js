@@ -5,9 +5,9 @@ const app = express();
 
 // crea una funcion en la base de datos, con todas las sillas que va a tener esta función
 const crearFuncion = async (req, res) => {
-    const { hora, dia, mes, año, dimension, doblaje, sillas } = req.body;
+    const { idPelicula, hora, dia, mes, año, dimension, doblaje, sillas } = req.body;
     try {
-        const nuevaFuncion = new Funcion({ hora, dia, mes, año, dimension, doblaje });
+        const nuevaFuncion = new Funcion({ idPelicula, hora, dia, mes, año, dimension, doblaje });
         // guarda todas las sillas de esta funcion en la base de datos
         const sillasCreadas = await Promise.all(sillas.map(async (silla) => {
             const nuevaSilla = new Silla({ ...silla, funcion: nuevaFuncion._id });
