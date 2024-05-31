@@ -39,4 +39,16 @@ const obtenerFunciones = async (req, res) => {
     }
 }
 
-module.exports = { crearFuncion,obtenerFunciones }
+// endpoint para obtener las funciones por su id
+
+const obtenerFuncionPorId = async (req, res) => {
+    const { idFuncion } = req.params;
+    try {
+        const funcion = await Funcion.findById(idFuncion);
+        res.status(200).json(funcion);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
+
+module.exports = { crearFuncion,obtenerFunciones,obtenerFuncionPorId }
