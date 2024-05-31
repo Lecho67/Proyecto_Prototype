@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { crearFuncion } = require('../controllers/funcionesController.js')
+const { crearFuncion, obtenerFunciones } = require('../controllers/funcionesController.js')
 const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario} = require('../controllers/ordenController.js')
 const {crearUsuario} = require('../controllers/usuarioController.js')
 const {crearProducto,listarProductos} = require("../controllers/productoController.js")
@@ -19,6 +19,7 @@ router.put('/agregarSillaAOrden', agregarSillaAOrden);
 router.put('/agregarProductoAOrden', agregarProductoAOrden);
 // endpoint para obtener la orden de un usuario especifico
 router.get('/obtenerOrdenDeUsuario/:email', obtenerOrdenDeUsuario);
-
+// endpoint para obtener las funciones de una pelicula
+router.get('/obtenerFunciones/:idPelicula', obtenerFunciones);
 
 module.exports = router;
