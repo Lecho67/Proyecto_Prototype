@@ -19,7 +19,7 @@ router.put('/agregarSillaAOrden', agregarSillaAOrden);
 router.put('/agregarProductoAOrden', agregarProductoAOrden);
 // endpoint para obtener la orden de un usuario especifico
 router.get('/obtenerOrdenDeUsuario/:email', obtenerOrdenDeUsuario);
-// endpoint para obtener las funciones de una pelicula
+// endpoint para obtener las funciones de una pelicula por la id de la pelicula
 router.get('/obtenerFunciones/:idPelicula', obtenerFunciones);
 
 module.exports = router;
