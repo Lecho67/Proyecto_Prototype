@@ -104,7 +104,7 @@ function Reserva() {
             <div className="espaciov2"></div>
             {seats.map(seat => (
               <div
-                className={`seat ${seat.state}`}
+                className={`seat ${seat.state? "free" : "occupied"}`}
                 key={seat.id}
                 onClick={() => handleSeatClick(seat.id)}
               ></div>
