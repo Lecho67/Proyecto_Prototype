@@ -41,6 +41,9 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
     const {status} = useSelector(state => state.auth);
     const director = credits.crew ? credits.crew.find(crew => crew.job === 'Director') : { name: 'No disponible' };
 
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [funcionStatus, setFuncionStatus] = useState(null);
     const [dimension, setDimension] = React.useState("");
     const [doblaje, setDoblaje] = React.useState("");
     const [fechaCalendario , setFechaCalendario] = React.useState({dia: fecha.getDate(), mes: fecha.getMonth() + 1, año: fecha.getFullYear()});
@@ -55,13 +58,16 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
         try {
             const response = await axios.get('http://localhost:4000/api/obtenerFunciones/' + idPelicula);
             console.log(response.data);
+            setLoading(false);
             return response.data;
         }
         catch (error) {
             console.error(error);
+            setError(error);
         }
     }
-    const crearFunciones = async (cantidad) => {
+    const crearFunciones = async (cantidad, idPeliculaActual) => {
+
         const fecha = new Date();
         const promises = [];
     
@@ -73,10 +79,10 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
             }
             
             const funcionData = {
-                idPelicula: idPelicula,
+                idPelicula: idPeliculaActual,
                 hora: Math.floor(Math.random() * 25).toString().concat(Math.random() >= 0.3 ? ":00" : ":30"),
                 dia: Math.floor(Math.random() * 29),
-                mes: Math.floor(Math.random() * (12 - fecha.getMonth() + 1)) + fecha.getMonth(),
+                mes: Math.floor(Math.random() * (10 - fecha.getMonth()+1)) + fecha.getMonth(),
                 año: fecha.getFullYear(),
                 dimension: Math.random() > 0.5 ? '2d' : '3d',
                 doblaje: Math.random() > 0.5 ? 'Sub' : 'Dob',
@@ -90,6 +96,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
             responses.forEach(response => console.log(response.data));
         } catch (error) {
             console.error(error);
+            setError(error);
         }
     };
     useEffect(() => {
@@ -107,7 +114,12 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
         }
         console.log(funciones.length);
         if (funciones.length < 40 && !ordendecrearenviada.current) {
-            crearFunciones(40 - funciones.length).then(() => {obtenerFunciones().then((funciones)=>{setFunciones(funciones)});});
+            setFuncionStatus('Creando funciones...');
+            crearFunciones(40 - funciones.length, idPelicula).then(() => {obtenerFunciones().then((funciones)=>{
+                setFunciones(funciones)
+                setFuncionStatus(null);
+            });});
+
             ordendecrearenviada.current = true;
         }
         actualizarFiltros();
@@ -181,9 +193,11 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
                 </div>
                 <div className='CalendarioContainer'>
                     {videos && videos.results.length > 0 && <MovieTrailer videoKey={videos.results[0].key} />}
-                    <Calendario diaInicial={fecha.getDate()} mesInicial={fecha.getMonth() + 1} añoInicial={fecha.getFullYear()} cambioDeFecha={handleFechaCalendario} diasDisponibles={diasDisponibles}/>
-                    
-                    <div className='FiltrosContainer'>
+
+                    {loading ? <p>Cargando...</p>:funcionStatus? <p>{funcionStatus}</p>
+                    :<>
+                        <Calendario diaInicial={fecha.getDate()} mesInicial={fecha.getMonth() + 1} añoInicial={fecha.getFullYear()} cambioDeFecha={handleFechaCalendario} diasDisponibles={diasDisponibles}/>
+                        <div className='FiltrosContainer'>
                         <div className="button-group">
                             {disp2d? <div className={`button ${dimension === "2d" ? "seleccionado" : "noseleccionado"}`} onClick={dimension === "2d" ? () => setDimension("") : () => setDimension("2d")}>2D</div> :<div className="button nodisponible">2D</div> }
                             {disp3d? <div className={`button ${dimension === "3d" ? "seleccionado" : "noseleccionado"}`} onClick={dimension === "3d" ? () => setDimension("") : () => setDimension("3d")}>3D</div> :<div className="button nodisponible">3D</div> }
@@ -192,12 +206,14 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
                             {dispSub? <div className={`button ${doblaje === "Sub" ? "seleccionado" : "noseleccionado"}`} onClick={doblaje === "Sub" ? () => setDoblaje("") : () => setDoblaje("Sub")}>SUB</div> :<div className="button nodisponible">SUB</div> }
                             {dispDob? <div className={`button ${doblaje === "Dob" ? "seleccionado" : "noseleccionado"}`} onClick={doblaje === "Dob" ? () => setDoblaje("") : () => setDoblaje("Dob")}>DOB</div> :<div className="button nodisponible">DOB</div> }
                         </div>
-                    </div>
-                    <div className='FuncionesContainer'>
-                        {filteredFunciones.map((funcion, key)  => {
-                            return <Link key={key} className='funcionlink' to={status?`/reserva?id=${funcion.id}`: "/plssignin"}><div className="button funcion">{funcion.hora}</div></Link>
-                        })}
-                    </div>
+                        </div>
+                        <div className='FuncionesContainer'>
+                            {filteredFunciones.map((funcion, key)  => {
+                                return <Link key={key} className='funcionlink' to={status?`/reserva?id=${funcion.id}`: "/plssignin"}><div className="button funcion">{funcion.hora}</div></Link>
+                            })}
+                        </div>
+                    </>
+                    }
                 </div>
             </div>
         </div>

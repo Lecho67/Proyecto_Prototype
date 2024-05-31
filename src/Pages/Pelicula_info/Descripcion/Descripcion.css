@@ -51,14 +51,21 @@
     flex-wrap: wrap;
 }
 
+.CalendarioContainer p {
+    width: 100%;
+    text-align: center;
+    font-size: x-large;
+}
+
 .InfoContainer {
     width: 72%;
     height: fit-content;
     background-color: aliceblue;
     margin-top: 6vw;
+    margin-bottom: 6vw;
     padding: 2%;
     box-sizing: border-box;
-    border-radius: 2    vw;
+    border-radius: 2vw;
     display: flex;
 }
 
@@ -99,7 +106,8 @@
     display: flex;
     gap: 20px;
     justify-content: space-between;
-    height: fit-content;
+    min-height: 150px;
+    max-height: fit-content;
 }
 
 .button-group {
@@ -144,6 +152,7 @@
 }
 .funcionlink {
     text-decoration: none;
+    height: fit-content;
 }
 .noseleccionado:hover {
     background-color: #224b66;
@@ -205,6 +214,9 @@
     .button {
         font-size: 4vw;
         padding: 8px 15px;
+    }
+    .FuncionesContainer {
+        min-height: 200px;
     }
 
 }
