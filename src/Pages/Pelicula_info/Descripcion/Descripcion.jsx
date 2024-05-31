@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Descripcion.css';
@@ -34,6 +34,10 @@ const defVideos = {
 
 const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits, videos = defVideos }) => {
 
+    const isFirstRender = useRef(true);
+    const renders = useRef(0);
+    const ordendecrearenviada = useRef(false);
+
     const {status} = useSelector(state => state.auth);
     const director = credits.crew ? credits.crew.find(crew => crew.job === 'Director') : { name: 'No disponible' };
 
@@ -45,34 +49,69 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
     const [dispSub, setDispSub] = useState(false);
     const [dispDob, setDispDob] = useState(false);
     const [diasDisponibles, setDiasDisponibles] = useState([]);
+    const [funciones, setFunciones] = useState([]);
 
-    const funciones = [
-    ]
-    const crearFunciones = async () => {
+    const obtenerFunciones = async () => {
         try {
-            const sillas = [];
-            let precio = pelicula.vote_average*3000
-            for (let i = 0; i < 128; i++) {
-                sillas.push({estado: Math.random() < 0.3, precio: precio});
-            }
-            const response = await axios.post('http://localhost:4000/api/crearFuncion',{ 
-                idPelicula: idPelicula,
-                hora: Math.floor(Math.random()*25).toString().concat(Math.random()>=0.3?":00":":30"),
-                dia: Math.floor(Math.random()*29),
-                mes: Math.floor(Math.random()*(12-fecha.getMonth() + 1))+fecha.getMonth(),
-                año: fecha.getFullYear(),
-                dimension: Math.random() > 0.5 ? '2d' : '3d',
-                doblaje: Math.random() > 0.5 ? 'Sub' : 'Dob',
-                sillas: sillas
-            });
-            console.log(response);
+            const response = await axios.get('http://localhost:4000/api/obtenerFunciones/' + idPelicula);
+            console.log(response.data);
+            return response.data;
         }
         catch (error) {
             console.error(error);
         }
     }
+    const crearFunciones = async (cantidad) => {
+        const fecha = new Date();
+        const promises = [];
+    
+        for (let j = 0; j < cantidad; j++) {
+            const sillas = [];
+            let precio = pelicula.vote_average * 3000;
+            for (let i = 0; i < 128; i++) {
+                sillas.push({ estado: Math.random() < 0.3, precio: precio });
+            }
+            
+            const funcionData = {
+                idPelicula: idPelicula,
+                hora: Math.floor(Math.random() * 25).toString().concat(Math.random() >= 0.3 ? ":00" : ":30"),
+                dia: Math.floor(Math.random() * 29),
+                mes: Math.floor(Math.random() * (12 - fecha.getMonth() + 1)) + fecha.getMonth(),
+                año: fecha.getFullYear(),
+                dimension: Math.random() > 0.5 ? '2d' : '3d',
+                doblaje: Math.random() > 0.5 ? 'Sub' : 'Dob',
+                sillas: sillas
+            };
+            promises.push(axios.post('http://localhost:4000/api/crearFuncion', funcionData));
+        }
+    
+        try {
+            const responses = await Promise.all(promises);
+            responses.forEach(response => console.log(response.data));
+        } catch (error) {
+            console.error(error);
+        }
+    };
     useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false;
+            return;
+        }
+        obtenerFunciones().then((funciones)=>{setFunciones(funciones)});
     }, []);
+
+    useEffect(() => {   
+        if (renders.current <= 1) {
+            renders.current++;
+            return; 
+        }
+        console.log(funciones.length);
+        if (funciones.length < 40 && !ordendecrearenviada.current) {
+            crearFunciones(40 - funciones.length).then(() => {obtenerFunciones().then((funciones)=>{setFunciones(funciones)});});
+            ordendecrearenviada.current = true;
+        }
+        actualizarFiltros();
+    }, [funciones]);
     
     const actualizarFiltros= () =>{
         setDisp2d(false);
@@ -155,8 +194,8 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
                         </div>
                     </div>
                     <div className='FuncionesContainer'>
-                        {filteredFunciones.map(funcion => {
-                            return <Link key={funcion.id} className='funcionlink' to={status?`/reserva?id=${funcion.id}`: "/plssignin"}><div className="button funcion">{funcion.hora}</div></Link>
+                        {filteredFunciones.map((funcion, key)  => {
+                            return <Link key={key} className='funcionlink' to={status?`/reserva?id=${funcion.id}`: "/plssignin"}><div className="button funcion">{funcion.hora}</div></Link>
                         })}
                     </div>
                 </div>
