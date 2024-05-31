@@ -62,8 +62,9 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
             return response.data;
         }
         catch (error) {
-            console.error(error);
-            setError(error);
+            console.error(error.message);
+            setError({message: 'Error al obtener las funciones de la película'});
+            return [];
         }
     }
     const crearFunciones = async (cantidad, idPeliculaActual) => {
@@ -96,7 +97,6 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
             responses.forEach(response => console.log(response.data));
         } catch (error) {
             console.error(error);
-            setError(error);
         }
     };
     useEffect(() => {
@@ -104,7 +104,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
             isFirstRender.current = false;
             return;
         }
-        obtenerFunciones().then((funciones)=>{setFunciones(funciones)});
+        obtenerFunciones().then((funciones)=>{setFunciones(funciones)}).catch((error)=>{console.error(error);setError(error)});
     }, []);
 
     useEffect(() => {   
@@ -165,7 +165,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
 
 
 
-
+    
     const filteredFunciones = funciones.filter(funcion => {
 
         const dimensionMatch = dimension ? funcion.dimension === dimension : true;
@@ -194,7 +194,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
                 <div className='CalendarioContainer'>
                     {videos && videos.results.length > 0 && <MovieTrailer videoKey={videos.results[0].key} />}
 
-                    {error? <p>{error}</p>:loading ? <p>Cargando...</p>:funcionStatus? <p>{funcionStatus}</p>
+                    {error? <p>{error.message}</p>:loading ? <p>Cargando...</p>:funcionStatus? <p>{funcionStatus}</p>
                     :<>
                         <Calendario diaInicial={fecha.getDate()} mesInicial={fecha.getMonth() + 1} añoInicial={fecha.getFullYear()} cambioDeFecha={handleFechaCalendario} diasDisponibles={diasDisponibles}/>
                         <div className='FiltrosContainer'>
