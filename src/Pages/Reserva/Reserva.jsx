@@ -9,7 +9,7 @@ function Reserva() {
   const { selectedSeats, ticketPrice, seats } = useSelector(state => state.seats);
 
   useEffect(() => {
-    const initialSeats = generateSeats();
+    const initialSeats = obtenerSillas();
     dispatch(setSeats(initialSeats));
   }, [dispatch]);
 
@@ -29,7 +29,7 @@ function Reserva() {
     dispatch(toggleSeatSelection(seatId));
   }
 
-  function generateSeats() {
+  function obtenerSillas() {
     const seats = [];
     let seatId = 0;
     for (let asientos = 1; asientos <= 128; asientos++) {
