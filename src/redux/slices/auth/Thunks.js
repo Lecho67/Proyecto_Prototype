@@ -2,14 +2,15 @@ import { createUserWithEmailAndPassword, updateProfile,signInWithEmailAndPasswor
 import { signOut } from "firebase/auth";
 import { auth } from "../../../firebase/config.js";
 import { register,login,logout } from "./AuthSlice";
-
+import cinePlusApi from "../../../api/cinePlusApi.js";
 
 export const registerUser = (email, password) => {
     return async (dispatch) => {
         
         try {
+            const {data} = await cinePlusApi.post('/crearUsuario', {email, password});
             const response = await createUserWithEmailAndPassword(auth,email, password);  
-            if(response){
+            if(response && data){
                 console.log(response);
                 dispatch(register({email: response.user.email}));
                 return Promise.resolve(response)

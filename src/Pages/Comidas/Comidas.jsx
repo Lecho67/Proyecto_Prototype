@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import cinePlusApi from "../../api/cinePlusApi";
 
 export const Comidas = ({
     allProducts,
@@ -20,7 +20,7 @@ export const Comidas = ({
     useEffect(() => {
         const fetchProductos = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/api/listarProductos');
+                const response = await cinePlusApi.get('/listarProductos');
                 const data = Array.isArray(response.data) ? response.data : [];
                 setProductos(data);
             } catch (error) {
