@@ -62,7 +62,7 @@ export const Navigation = ({
             <div className="BarraNav">
                 <nav className="BarraNav">
                     <div className="logoContainer">
-                        <img className="logo" src={logo} alt=""></img>
+                        <Link to="/"><img className="logo" src={logo} alt=""></img></Link>
                     </div>
                     <div className="linksContainer">
                         <Link to="/" className="nav-inicio">

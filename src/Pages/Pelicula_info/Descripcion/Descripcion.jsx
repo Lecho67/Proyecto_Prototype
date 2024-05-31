@@ -5,7 +5,7 @@ import './Descripcion.css';
 import Calendario from './Calendario/Calendario.jsx';
 import MovieTrailer from './Trailer/Trailer.jsx';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
+import cinePlusApi from '../../../api/cinePlusApi.js';
 const fecha = new Date();
 
 const defPelicula = {
@@ -56,7 +56,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
 
     const obtenerFunciones = async () => {
         try {
-            const response = await axios.get('http://localhost:4000/api/obtenerFunciones/' + idPelicula);
+            const response = await cinePlusApi.get('/obtenerFunciones/' + idPelicula);
             console.log(response.data);
             setLoading(false);
             return response.data;
@@ -88,7 +88,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
                 doblaje: Math.random() > 0.5 ? 'Sub' : 'Dob',
                 sillas: sillas
             };
-            promises.push(axios.post('http://localhost:4000/api/crearFuncion', funcionData));
+            promises.push(cinePlusApi.post('/crearFuncion', funcionData));
         }
     
         try {
@@ -194,7 +194,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
                 <div className='CalendarioContainer'>
                     {videos && videos.results.length > 0 && <MovieTrailer videoKey={videos.results[0].key} />}
 
-                    {loading ? <p>Cargando...</p>:funcionStatus? <p>{funcionStatus}</p>
+                    {error? <p>{error}</p>:loading ? <p>Cargando...</p>:funcionStatus? <p>{funcionStatus}</p>
                     :<>
                         <Calendario diaInicial={fecha.getDate()} mesInicial={fecha.getMonth() + 1} añoInicial={fecha.getFullYear()} cambioDeFecha={handleFechaCalendario} diasDisponibles={diasDisponibles}/>
                         <div className='FiltrosContainer'>
