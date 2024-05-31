@@ -209,7 +209,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
                         </div>
                         <div className='FuncionesContainer'>
                             {filteredFunciones.map((funcion, key)  => {
-                                return <Link key={key} className='funcionlink' to={status?`/reserva?id=${funcion.id}`: "/plssignin"}><div className="button funcion">{funcion.hora}</div></Link>
+                                return <Link key={key} className='funcionlink' to={status?`/reserva?id=${funcion._id}`: "/plssignin"}><div className="button funcion">{funcion.hora}</div></Link>
                             })}
                         </div>
                     </>
