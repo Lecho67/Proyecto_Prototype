@@ -27,7 +27,16 @@ const crearFuncion = async (req, res) => {
 };
 
 
-// crear un producto en la base de datos
+// obtiene todas las funciones de la base de datos con la id de una pelicula
 
+const obtenerFunciones = async (req, res) => {
+    const { idPelicula } = req.params;
+    try {
+        const funciones = await Funcion.find({ idPelicula: idPelicula });
+        res.status(200).json(funciones);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
 
-module.exports = { crearFuncion}
+module.exports = { crearFuncion,obtenerFunciones }
