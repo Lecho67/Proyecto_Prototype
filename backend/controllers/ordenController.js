@@ -53,7 +53,18 @@ const agregarProductoAOrden = async (req, res) => {
     }
 };
 
+const limpiarProductosDeOrden = async (req, res) => {
+    const { ordenId } = req.body;
+    try {
+        const orden = await Orden.findById(ordenId);
+        orden.productos = [];
+        await orden.save();
+        res.status(200).json(orden);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
 
 
 
-module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario }
+module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden }

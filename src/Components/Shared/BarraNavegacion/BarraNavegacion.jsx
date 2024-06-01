@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import { useParams } from 'react-router-dom';
+import cinePlusApi from "../../../api/cinePlusApi";
 
 export const Navigation = ({
     allProducts,
@@ -20,6 +21,7 @@ export const Navigation = ({
     setTotal,
 }) => {
     const { id } = useParams();
+    const {status, email} = useSelector((state) => state.auth);
     const [active, setActive] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
     const toggleMenu = () => {
@@ -39,14 +41,22 @@ export const Navigation = ({
         setAllProducts(results);
     };
 
-    const onCleanCart = () => {
+    const onCleanCart = async () => {
         setAllProducts([]);
         setTotal(0);
         setCountProducts(0);
+        try{
+            const {data} = await cinePlusApi.get(`/obtenerOrdenDeUsuario/${email}`);
+            const {_id} = data;
+            cinePlusApi.put('limpiarProductosDeOrden', {
+                ordenId: _id});
+        }catch(error){
+            console.log(error)
+        }
     };
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {status, email} = useSelector((state) => state.auth);
+    
     const {pathname, search} = useLocation();
     const lastPath = localStorage.setItem('lastPath', `${pathname}${search}`); 
 

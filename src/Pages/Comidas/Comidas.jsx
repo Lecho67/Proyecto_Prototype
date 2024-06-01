@@ -14,7 +14,7 @@ export const Comidas = ({
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { status } = useSelector(state => state.auth);
+    const { status, email } = useSelector(state => state.auth);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -33,7 +33,7 @@ export const Comidas = ({
         fetchProductos();
     }, []);
 
-    const onAddProduct = product => {
+    const onAddProduct = async product => {
         if (!status) {
             navigate('/plssignin');
             return;
@@ -46,6 +46,19 @@ export const Comidas = ({
             );
             setTotal(total + parseFloat(product.precio));
             setCountProducts(countProducts + 1);
+        // añadir producto a la orden del usuario
+        try{
+            const {data} = await cinePlusApi.get(`/obtenerOrdenDeUsuario/${email}`);
+            const {_id} = data;
+
+            cinePlusApi.put("/agregarProductoAOrden", {
+                ordenId: _id,
+                productoId: product._id
+            });
+
+        }catch(error){
+            console.log(error)
+        }
             return setAllProducts([...products]);
         }
 
