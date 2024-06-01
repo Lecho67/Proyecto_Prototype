@@ -1,16 +1,7 @@
 const Producto = require('../models/producto.js');
 
 
-const crearOrden = async (req, res) => {
-  try {
-    const nuevaOrden = new Order(req.body);
-    await nuevaOrden.save();
-    res.status(201).json(nuevaOrden);
-  } catch (err) {
-    console.error('Error creating order:', err);
-    res.status(500).json({ message: 'Error creating order', error: err });
-  }
-};
+
 // Create a new product
 const crearProducto = async (req, res) => {
     try {
@@ -34,4 +25,18 @@ const listarProductos = async (req, res) => {
     }
 };
 
-module.exports = { crearProducto, listarProductos,crearOrden };
+// Get a product by ID
+const obtenerProductoPorId = async (req, res) => {
+    try {
+        const producto = await Producto.findById(req.params.id);
+        if (!producto) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+        res.status(200).json(producto);
+    } catch (err) {
+        console.error('Error fetching product:', err);
+        res.status(500).json({ message: 'Error fetching product', error: err });
+    }
+};
+
+module.exports = { crearProducto, listarProductos,obtenerProductoPorId };

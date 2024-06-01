@@ -9,6 +9,6 @@ app.use(express.json());
 dbConnection();
 app.use(express.static('public'));
 app.use(express.json());
-app.use('/', routes);
+app.use('/api', routes);
 
 app.listen(process.env.PORT, () => console.log("la aplicacion esta corriendo en el puerto", process.env.PORT))
