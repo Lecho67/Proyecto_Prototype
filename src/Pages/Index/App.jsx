@@ -18,6 +18,7 @@ import { auth } from "../../firebase/config";
 import { useDispatch } from "react-redux";
 import { checkingCredentials } from "../../redux/slices/auth/AuthSlice.js";
 import Reserva from "../Reserva/Reserva.jsx";
+import { About } from "../About/About.jsx";
 function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [total, setTotal] = useState(0);
@@ -129,6 +130,22 @@ function App() {
                 setCountProducts={setCountProducts}
               />
               <Reserva />
+            </div>
+          }
+        />
+        <Route
+          path="/About"
+          element={
+            <div>
+              <Navigation
+                allProducts={allProducts}
+                setAllProducts={setAllProducts}
+                total={total}
+                setTotal={setTotal}
+                countProducts={countProducts}
+                setCountProducts={setCountProducts}
+              />
+              <About />
             </div>
           }
         />

@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { cerrarSesion } from "../../../redux/slices/auth/Thunks";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
-
 import { useParams } from 'react-router-dom';
 import cinePlusApi from "../../../api/cinePlusApi";
 
@@ -83,6 +82,9 @@ export const Navigation = ({
                         </Link>
                         <Link to="/Estrenos" className="nav-estrenos">
                             Estrenos
+                        </Link>
+                        <Link to="/About" className="nav-about">
+                            About
                         </Link>
                         <div className="container-icon">
                             <div
@@ -221,6 +223,9 @@ export const Navigation = ({
                 </Link>
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuDesplegable">Mi Orden</div>
+                </Link>
+                <Link to="/About">
+                    <div className="itemMenuDesplegable">About</div>
                 </Link>
                 <Link>
                     <div className="itemMenuDesplegable" onClick={handleLogout}>Cerrar Sesión</div>
