@@ -113,7 +113,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
             return; 
         }
         console.log(funciones.length);
-        if (funciones.length < 40 && !ordendecrearenviada.current) {
+        if (funciones.length < 40 && !ordendecrearenviada.current && error.message != 'Error al obtener las funciones de la película') {
             setFuncionStatus('Creando funciones...');
             crearFunciones(40 - funciones.length, idPelicula).then(() => {obtenerFunciones().then((funciones)=>{
                 setFunciones(funciones)
