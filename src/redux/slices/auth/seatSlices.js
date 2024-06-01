@@ -2,7 +2,6 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   selectedSeats: [],
-  ticketPrice: 25950,
   seats: [],
 };
 
