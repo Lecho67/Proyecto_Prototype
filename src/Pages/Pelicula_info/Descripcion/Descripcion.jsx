@@ -42,7 +42,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
     const director = credits.crew ? credits.crew.find(crew => crew.job === 'Director') : { name: 'No disponible' };
 
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const [error, setError] = useState({message: ""});
     const [funcionStatus, setFuncionStatus] = useState(null);
     const [dimension, setDimension] = React.useState("");
     const [doblaje, setDoblaje] = React.useState("");
@@ -194,7 +194,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
                 <div className='CalendarioContainer'>
                     {videos && videos.results.length > 0 && <MovieTrailer videoKey={videos.results[0].key} />}
 
-                    {error? <p>{error.message}</p>:loading ? <p>Cargando...</p>:funcionStatus? <p>{funcionStatus}</p>
+                    {error.message? <p>{error.message}</p>:loading ? <p>Cargando...</p>:funcionStatus? <p>{funcionStatus}</p>
                     :<>
                         <Calendario diaInicial={fecha.getDate()} mesInicial={fecha.getMonth() + 1} añoInicial={fecha.getFullYear()} cambioDeFecha={handleFechaCalendario} diasDisponibles={diasDisponibles}/>
                         <div className='FiltrosContainer'>

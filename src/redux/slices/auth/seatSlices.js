@@ -17,11 +17,11 @@ const seatSlice = createSlice({
     toggleSeatSelection(state, action) {
       const seatId = action.payload;
       const seat = state.seats.find(seat => seat.id === seatId);
-      if (seat.state === 'selected') {
-        seat.state = 'free';
+      if (seat.state === true) {
+        seat.state = false;
         state.selectedSeats = state.selectedSeats.filter(id => id !== seatId);
-      } else if (seat.state === 'free') {
-        seat.state = 'selected';
+      } else if (seat.state === 'false') {
+        seat.state = 'true';
         state.selectedSeats.push(seatId);
       }
     },
