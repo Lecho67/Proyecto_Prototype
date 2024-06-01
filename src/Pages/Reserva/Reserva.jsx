@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setSeats, toggleSeatSelection, updateSeats } from "../../redux/slices/auth/seatSlices.js";
 import { Link } from 'react-router-dom'; // Importa Link
 import './Reserva.css';
+import cinePlusApi from '../../api/cinePlusApi.js';
 
 function Reserva() {
+  const queryParams = new URLSearchParams(window.location.search);
   const dispatch = useDispatch();
   const { selectedSeats, ticketPrice, seats } = useSelector(state => state.seats);
 
   useEffect(() => {
-    const initialSeats = obtenerSillas();
-    dispatch(setSeats(initialSeats));
+    const initialSeats = obtenerSillas().then(initialSeats => {console.log(initialSeats);dispatch(setSeats(initialSeats))});
+    
   }, [dispatch]);
 
   useEffect(() => {
@@ -29,14 +31,16 @@ function Reserva() {
     dispatch(toggleSeatSelection(seatId));
   }
 
-  function obtenerSillas() {
-    const seats = [];
-    let seatId = 0;
-    for (let asientos = 1; asientos <= 128; asientos++) {
-      const state = Math.random() < 0.3 ? 'occupied' : 'free';
-      seats.push({ id: seatId++, state });
+  const obtenerSillas = async() => {
+    let seats = [];
+    try {
+      console.log(seats);
+      const response = await cinePlusApi.get('/obtenerFuncionPorId/' + queryParams.get('id'));
+      console.log(response.data);
+      seats = response.data.sillas; 
+    } catch (error) {
+      console.log(error.message);
     }
-
     return seats;
   }
 
@@ -50,9 +54,9 @@ function Reserva() {
             <div className="espacio"></div>
             <div className="espaciov1"></div>
             <div className="espaciov2"></div>
-            {seats.map(seat => (
+            { seats.map(seat => (
               <div
-                className={`seat ${seat.state}`}
+                className={`seat ${seat.estado}`}
                 key={seat.id}
                 onClick={() => handleSeatClick(seat.id)}
               ></div>
