@@ -47,11 +47,20 @@ export const Comidas = ({
             setTotal(total + parseFloat(product.precio));
             setCountProducts(countProducts + 1);
         // añadir producto a la orden del usuario
+
+            return setAllProducts([...products]);
+        }
+
+        setTotal(total + parseFloat(product.precio));
+        setCountProducts(countProducts + 1);
+        setAllProducts([...allProducts, { ...product, id: product._id, quantity: 1 }]);
+
         try{
             const {data} = await cinePlusApi.get(`/obtenerOrdenDeUsuario/${email}`);
             const {_id} = data;
-
-            cinePlusApi.put("/agregarProductoAOrden", {
+            console.log(_id)
+            console.log(data)
+            await cinePlusApi.put("/agregarProductoAOrden", {
                 ordenId: _id,
                 productoId: product._id
             });
@@ -59,12 +68,6 @@ export const Comidas = ({
         }catch(error){
             console.log(error)
         }
-            return setAllProducts([...products]);
-        }
-
-        setTotal(total + parseFloat(product.precio));
-        setCountProducts(countProducts + 1);
-        setAllProducts([...allProducts, { ...product, id: product._id, quantity: 1 }]);
     };
 
     if (loading) return <p>Loading products...</p>;
