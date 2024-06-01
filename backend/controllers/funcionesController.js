@@ -17,6 +17,8 @@ const crearFuncion = async (req, res) => {
 
         // agrega el arreglo de las sillas a la nueva funcion
         nuevaFuncion.sillas = sillasCreadas;
+        //mostrar toda la información de las sillas
+        nuevaFuncion.populate('sillas');
         // guarda la funcion en la base de datos
         await nuevaFuncion.save();
 
