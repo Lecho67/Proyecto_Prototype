@@ -36,11 +36,13 @@ const Pelicula_info = ({ allProducts, setAllProducts, total, setTotal, countProd
     };
     fetchPelicula();
   }, [id]);
+  
 
   return (
     <>
       <Portada pelicula={pelicula} allProducts={allProducts} />
       <Descripcion
+        idPelicula={id}
         pelicula={pelicula}
         credits={credits}
         allProducts={allProducts}

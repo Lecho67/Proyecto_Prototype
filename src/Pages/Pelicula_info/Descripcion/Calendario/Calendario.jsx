@@ -81,6 +81,8 @@ const Calendario = ({
     añoInicial = 2024,
     ToleranciaMesesAtras = 0,
     ToleranciaMesesAdelante = 5,
+    diasDisponibles = [],
+    cambioDeFecha = () => {},
 }) => {
     const [mes, setMes] = useState(mesInicial);
     const [año, setAño] = useState(añoInicial);
@@ -91,7 +93,8 @@ const Calendario = ({
 
     useEffect(() => {
         setDias(diasEnElMes(mes, año));
-    }, [mes, año]);
+        cambioDeFecha(seleccion, mes, año);
+    }, [seleccion, mes, año]);
 
     for (let i = 1; i <= dias; i++) {
         iterableDias.push(i);
@@ -104,10 +107,13 @@ const Calendario = ({
             if (mes === 1) {
                 setMes(12);
                 setAño(año - 1);
+                
             } else {
                 setMes(mes - 1);
+                
             }
         }
+        
     };
     let sePuedeSumarMes =
         mes + 12 * (año - añoInicial) !==
@@ -120,7 +126,8 @@ const Calendario = ({
             } else {
                 setMes(mes + 1);
             }
-        }
+        } 
+        
     };
     return (
         <div className="Calendario">
@@ -146,18 +153,9 @@ const Calendario = ({
                 <li className="DiasSemana">VIE</li>
                 <li className="DiasSemana">SAB</li>
                 {iterableDias.map((dia) => (
-                    <li key={dia} className={`${dia === 1 ? "Primero" : ""}`}>
+                    <li key={dia} className={`${dia === 1 ? "Primero " : ""}`}>
                         <div className="ButtonContainer">
-                            <button
-                                className={
-                                    `${
-                                        seleccion === dia
-                                            ? "SeleccionActual"
-                                            : ""
-                                    }` + " Numero"
-                                }
-                                onClick={() => setSeleccion(dia)}
-                            >
+                            <button className={`${seleccion === dia ? "SeleccionActual " : ""}${diasDisponibles.includes(dia) ? "diaDisponible" : "diaNoDisponible"}` + " Numero"} onClick={() => setSeleccion(dia)}>
                                 {dia}
                             </button>
                         </div>

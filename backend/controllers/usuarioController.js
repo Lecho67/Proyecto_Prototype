@@ -1,5 +1,6 @@
 const Usuario = require('../models/Usuario.js');
-
+const Orden = require('../models/orden.js');
+const bcrypt = require('bcryptjs');
 const crearUsuario = async (req, res) => {
     const { email, password } = req.body;
 
@@ -11,8 +12,13 @@ const crearUsuario = async (req, res) => {
 
     // Crear un nuevo usuario
     const nuevoUsuario = new Usuario({ email, password });
+    const nuevaOrden = new Orden({ usuario: nuevoUsuario._id });
+    const salt = bcrypt.genSaltSync();
+    nuevoUsuario.password = bcrypt.hashSync(password, salt);
+    nuevoUsuario.orden = nuevaOrden._id;
 
     try {
+        await nuevaOrden.save();
         await nuevoUsuario.save();
         res.status(201).json(nuevoUsuario);
     } catch (err) {

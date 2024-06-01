@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 import { useParams } from 'react-router-dom';
+import cinePlusApi from "../../../api/cinePlusApi";
 
 export const Navigation = ({
     allProducts,
@@ -20,6 +21,7 @@ export const Navigation = ({
     setTotal,
 }) => {
     const { id } = useParams();
+    const {status, email} = useSelector((state) => state.auth);
     const [active, setActive] = useState(false);
     const [menuVisible, setMenuVisible] = useState(false);
     const toggleMenu = () => {
@@ -39,14 +41,22 @@ export const Navigation = ({
         setAllProducts(results);
     };
 
-    const onCleanCart = () => {
+    const onCleanCart = async () => {
         setAllProducts([]);
         setTotal(0);
         setCountProducts(0);
+        try{
+            const {data} = await cinePlusApi.get(`/obtenerOrdenDeUsuario/${email}`);
+            const {_id} = data;
+            cinePlusApi.put('limpiarProductosDeOrden', {
+                ordenId: _id});
+        }catch(error){
+            console.log(error)
+        }
     };
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {status, email} = useSelector((state) => state.auth);
+    
     const {pathname, search} = useLocation();
     const lastPath = localStorage.setItem('lastPath', `${pathname}${search}`); 
 
@@ -62,7 +72,7 @@ export const Navigation = ({
             <div className="BarraNav">
                 <nav className="BarraNav">
                     <div className="logoContainer">
-                        <img className="logo" src={logo} alt=""></img>
+                        <Link to="/"><img className="logo" src={logo} alt=""></img></Link>
                     </div>
                     <div className="linksContainer">
                         <Link to="/" className="nav-inicio">
@@ -74,11 +84,6 @@ export const Navigation = ({
                         <Link to="/Estrenos" className="nav-estrenos">
                             Estrenos
                         </Link>
-                        {/* Wea de prueba no funcional que metió simón
-                        <Link to="/Reserva" className="nav-reserva"></Link>
-                        <Link to={{ pathname: `/Pelicula`, search: `?id=${id}` }} className="nav-pelicula"></Link> */}
-                        
-
                         <div className="container-icon">
                             <div
                                 className="container-cart-icon"
@@ -201,12 +206,10 @@ export const Navigation = ({
                 </nav>
             </div>
             <div
-                className={`${
-                    menuVisible
-                        ? "menuDesplegableVisible"
-                        : "menuDesplegableInvisible"
-                }`}
-            >
+                className={`${menuVisible? "menuDesplegableVisible": "menuDesplegableInvisible"}`}>
+                {status?<Link><div className="itemMenuDesplegable">{email}</div></Link>:<Link to="/Login">
+                    <div className="itemMenuDesplegable">Iniciar Sesión</div>
+                </Link>}
                 <Link to="/">
                     <div className="itemMenuDesplegable">Inicio</div>
                 </Link>
@@ -216,14 +219,11 @@ export const Navigation = ({
                 <Link to="/Estrenos">
                     <div className="itemMenuDesplegable">Próximos Estrenos</div>
                 </Link>
-                <Link to="/Reserva">
-                    <div className="itemMenuDesplegable">Reserva</div>
-                </Link>
-                <Link to="/Perfil">
-                    <div className="itemMenuDesplegable">Mi Perfil</div>
-                </Link>
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuDesplegable">Mi Orden</div>
+                </Link>
+                <Link>
+                    <div className="itemMenuDesplegable" onClick={handleLogout}>Cerrar Sesión</div>
                 </Link>
             </div>
             <div
@@ -236,17 +236,11 @@ export const Navigation = ({
                 {status?<Link><div className="itemMenuPerfilDesplegable">{email}</div></Link>:<Link to="/Login">
                     <div className="itemMenuPerfilDesplegable">Iniciar Sesión</div>
                 </Link>}
-                
-                <Link to="/Perfil">
-                    <div className="itemMenuPerfilDesplegable">Mi Perfil</div>
-                </Link>
                 <Link to="/Perfil/Orden">
                     <div className="itemMenuPerfilDesplegable">Mi Orden</div>
                 </Link>
                 <Link>
-                    <div className="itemMenuPerfilDesplegable" onClick={handleLogout}>
-                        Cerrar Sesión
-                    </div>
+                    <div className="itemMenuPerfilDesplegable" onClick={handleLogout}>Cerrar Sesión</div>
                 </Link>
             </div>
         </>

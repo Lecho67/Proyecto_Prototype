@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-
+import cinePlusApi from "../../api/cinePlusApi";
+import { useRef } from "react";
 export const Comidas = ({
     allProducts,
     setAllProducts,
@@ -14,13 +14,14 @@ export const Comidas = ({
     const [productos, setProductos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const { status } = useSelector(state => state.auth);
+    const { status, email } = useSelector(state => state.auth);
     const navigate = useNavigate();
+    const isAddingRef = useRef(false);
 
     useEffect(() => {
         const fetchProductos = async () => {
             try {
-                const response = await axios.get('http://localhost:4000/listarProductos');
+                const response = await cinePlusApi.get('/listarProductos');
                 const data = Array.isArray(response.data) ? response.data : [];
                 setProductos(data);
             } catch (error) {
@@ -32,27 +33,49 @@ export const Comidas = ({
         };
         fetchProductos();
     }, []);
-
-    const onAddProduct = product => {
+    
+    const onAddProduct = async product => {
         if (!status) {
             navigate('/plssignin');
             return;
         }
-        if (allProducts.find(item => item.id === product._id)) {
-            const products = allProducts.map(item =>
-                item.id === product._id
-                    ? { ...item, quantity: item.quantity + 1 }
-                    : item
-            );
-            setTotal(total + parseFloat(product.precio));
-            setCountProducts(countProducts + 1);
-            return setAllProducts([...products]);
+        isAddingRef.current = true; // Deshabilitar el botón al comenzar la petición
+    
+        try {
+            let products = [];
+            if (allProducts.find(item => item.id === product._id)) {
+                products = allProducts.map(item =>
+                    item.id === product._id
+                        ? { ...item, quantity: item.quantity + 1 }
+                        : item
+                );
+                setTotal(total + parseFloat(product.precio));
+                setCountProducts(countProducts + 1);
+            } else {
+                products = [...allProducts, { ...product, id: product._id, quantity: 1 }];
+                setTotal(total + parseFloat(product.precio));
+                setCountProducts(countProducts + 1);
+            }
+    
+            // Añadir producto a la orden del usuario
+            const { data } = await cinePlusApi.get(`/obtenerOrdenDeUsuario/${email}`);
+            const { _id } = data;
+            console.log(_id);
+            console.log(data);
+            await cinePlusApi.put("/agregarProductoAOrden", {
+                ordenId: _id,
+                productoId: product._id
+            });
+    
+            setAllProducts(products);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            isAddingRef.current = false; // Habilitar el botón después de que la petición haya terminado
         }
-
-        setTotal(total + parseFloat(product.precio));
-        setCountProducts(countProducts + 1);
-        setAllProducts([...allProducts, { ...product, id: product._id, quantity: 1 }]);
     };
+    
+    
 
     if (loading) return <p>Loading products...</p>;
     if (error) return <p>{error}</p>;
@@ -67,7 +90,7 @@ export const Comidas = ({
                     <div className='info-product'>
                         <h2>{product.name}</h2>
                         <p className='price'>${product.precio}</p>
-                        <button onClick={() => onAddProduct(product)}>
+                        <button disabled={isAddingRef.current} onClick={() => onAddProduct(product)}>
                             Añadir al carrito
                         </button>
                     </div>
