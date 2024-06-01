@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { crearFuncion, obtenerFunciones } = require('../controllers/funcionesController.js')
+const { crearFuncion, obtenerFunciones, obtenerFuncionPorId } = require('../controllers/funcionesController.js')
 const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario} = require('../controllers/ordenController.js')
 const {crearUsuario} = require('../controllers/usuarioController.js')
 const {crearProducto,listarProductos} = require("../controllers/productoController.js")
@@ -21,5 +21,6 @@ router.put('/agregarProductoAOrden', agregarProductoAOrden);
 router.get('/obtenerOrdenDeUsuario/:email', obtenerOrdenDeUsuario);
 // endpoint para obtener las funciones de una pelicula por la id de la pelicula
 router.get('/obtenerFunciones/:idPelicula', obtenerFunciones);
-
+// endpoint para obtener los datos de una funcion a partir de su id
+router.get('/obtenerFuncionPorId/:idFuncion', obtenerFuncionPorId);
 module.exports = router;
