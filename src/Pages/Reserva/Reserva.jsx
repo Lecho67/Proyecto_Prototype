@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setSeats, toggleSeatSelection, updateSeats } from "../../redux/slices/auth/seatSlices.js";
 import { Link } from 'react-router-dom'; // Importa Link
@@ -10,8 +10,11 @@ function Reserva() {
   const dispatch = useDispatch();
   const { selectedSeats, ticketPrice, seats } = useSelector(state => state.seats);
 
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState({message: ""});
+
   useEffect(() => {
-    const initialSeats = obtenerSillas().then(initialSeats => {console.log(initialSeats);dispatch(setSeats(initialSeats))});
+    obtenerSillas().then(seats => {console.log(seats);dispatch(setSeats(seats))});
     
   }, [dispatch]);
 
@@ -32,38 +35,53 @@ function Reserva() {
   }
 
   const obtenerSillas = async() => {
-    let seats = [];
+    let sillasPorFetchear = [];
+    let sillasFetcheadas = [];
     try {
       console.log(seats);
       const response = await cinePlusApi.get('/obtenerFuncionPorId/' + queryParams.get('id'));
       console.log(response.data);
-      seats = response.data.sillas; 
+      sillasPorFetchear = response.data.sillas.map(silla => {
+        return cinePlusApi.get('/obtenerSillaPorId/' + silla);
+      })
+      const responses = await Promise.all(sillasPorFetchear);
+      responses.forEach(response => {
+        sillasFetcheadas.push(response.data);
+      })
+      setLoading(false);
     } catch (error) {
       console.log(error.message);
+      setError({message: 'Error al obtener las sillas de la película'});
     }
-    return seats;
+    return sillasFetcheadas;
   }
 
   return (
     <>
       <div className="reservation-container">
-      <div className="seats-container">
-        <div className='salaContainer'>
-          <div className="sala">
-            <div className="screen"></div>
-            <div className="espacio"></div>
-            <div className="espaciov1"></div>
-            <div className="espaciov2"></div>
-            { seats.map(seat => (
-              <div
-                className={`seat ${seat.estado}`}
-                key={seat.id}
-                onClick={() => handleSeatClick(seat.id)}
-              ></div>
-            ))}
-          </div>
+        <div className="seats-container">
+          <div className='salaContainer'>
+            <div className="sala">
+              <div className="screen"></div>
+              <div className="espacio"></div>
+                {error.message?<p className="messageSillas">{error.message}</p>:loading?<p className="messageSillas">Cargando Asientos...</p>:
+              <>
+                
+                <div className="espaciov1"></div>
+                <div className="espaciov2"></div>
+                { seats.map((seat, key) => (
+                  <div
+                    className={`seat ${seat.estado?'occupied':'free'}`}
+                    key={key}
+                    onClick={() => handleSeatClick(seat.id)}
+                  ></div>
+                ))}
+              </>
+        }
+        </div>
         </div>
       </div>
+      
       <div className="info-container">
       <div className="info-models">
         <div className="seatmodel">

@@ -53,7 +53,7 @@ const obtenerFuncionPorId = async (req, res) => {
     }
 }
 
-const obtenerSillasPorId = async (req, res) => {
+const obtenerSillaPorId = async (req, res) => {
     const { idSilla } = req.params;
     try {
         const silla = await Silla.findById(idSilla);
@@ -63,4 +63,4 @@ const obtenerSillasPorId = async (req, res) => {
     }
     
 }
-module.exports = { crearFuncion,obtenerFunciones,obtenerFuncionPorId,obtenerSillasPorId }
+module.exports = { crearFuncion,obtenerFunciones,obtenerFuncionPorId,obtenerSillaPorId }
