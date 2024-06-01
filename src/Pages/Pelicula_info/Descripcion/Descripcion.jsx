@@ -68,9 +68,8 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
         }
     }
     const crearFunciones = async (cantidad, idPeliculaActual) => {
-
         const fecha = new Date();
-        const promises = [];
+        const funciones = [];
     
         for (let j = 0; j < cantidad; j++) {
             const sillas = [];
@@ -78,23 +77,24 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
             for (let i = 0; i < 128; i++) {
                 sillas.push({ estado: Math.random() < 0.3, precio: precio });
             }
-            
+    
             const funcionData = {
                 idPelicula: idPeliculaActual,
                 hora: Math.floor(Math.random() * 25).toString().concat(Math.random() >= 0.3 ? ":00" : ":30"),
                 dia: Math.floor(Math.random() * 29),
-                mes: Math.floor(Math.random() * (11 - fecha.getMonth()+1)) + fecha.getMonth(),
+                mes: Math.floor(Math.random() * (11 - fecha.getMonth() + 1)) + fecha.getMonth(),
                 año: fecha.getFullYear(),
                 dimension: Math.random() > 0.5 ? '2d' : '3d',
                 doblaje: Math.random() > 0.5 ? 'Sub' : 'Dob',
                 sillas: sillas
             };
-            promises.push(cinePlusApi.post('/crearFuncion', funcionData));
+    
+            funciones.push(funcionData);
         }
     
         try {
-            const responses = await Promise.all(promises);
-            responses.forEach(response => console.log(response.data));
+            const response = await cinePlusApi.post('/crearFunciones', funciones);
+            console.log(response.data);
         } catch (error) {
             console.error(error);
         }
@@ -114,7 +114,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
         }
         console.log(funciones.length);
         if (funciones.length < 40 && !ordendecrearenviada.current && error.message != 'Error al obtener las funciones de la película') {
-            setFuncionStatus('Creando funciones...');
+            setFuncionStatus('Buscando funciones...');
             crearFunciones(40 - funciones.length, idPelicula).then(() => {obtenerFunciones().then((funciones)=>{
                 setFunciones(funciones)
                 setFuncionStatus(null);
