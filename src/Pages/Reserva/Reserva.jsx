@@ -14,10 +14,10 @@ function Reserva() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({ message: "" });
   const [funcionInfo, setFuncionInfo] = useState({ id: "", idPelicula: "", hora: "", dia: "", mes: "", año: "", dimension: "", doblaje: "" });
-  const [peliculaInfo, setPeliculaInfo] = useState({ id: "", title: "Buscando...", vote_average: 0 });
+  const [peliculaInfo, setPeliculaInfo] = useState({ id: "", title: "Buscando...", vote_average: 0, overview: "Cargando..." });
   const [seats, setSeats] = useState([]);
   const idFuncion = queryParams.get('id');
-
+  const [precioSillas, setPrecioSillas] = useState(0);
   useEffect(() => {
     obtenerSillas().then(seats => { setSeats(seats) });
   }, []);
@@ -29,8 +29,9 @@ function Reserva() {
   useEffect(() => {
     const fetchPelicula = async () => {
       try {
-        const data = await obtenerDatosFuncion();
-        setFuncionInfo(data);
+        let data = await obtenerDatosFuncion();
+        setFuncionInfo(data[0]);
+        setPrecioSillas(data[1]);
       } catch (error) {
         console.error('Error al obtener la función:');
       }
@@ -46,7 +47,7 @@ function Reserva() {
 
   function updateSelectedCount() {
     const selectedSeatsCount = selectedSeats.length;
-    const totalPrice = selectedSeatsCount * peliculaInfo.vote_average * 3000;
+    const totalPrice = precioSillas * selectedSeatsCount;
 
     document.getElementById('count').innerText = selectedSeatsCount;
     document.getElementById('total').innerText = totalPrice;
@@ -59,7 +60,10 @@ function Reserva() {
   const obtenerDatosFuncion = async () => {
     try {
       const response = await cinePlusApi.get('/obtenerFuncionPorId/' + idFuncion);
-      return response.data;
+      const idSilla = response.data.sillas[0]
+      console.log(idSilla)
+      const response2 = await cinePlusApi.get('/obtenerSillaPorId/' + idSilla);
+      return [response.data,response2.data.precio];
     } catch (error) {
       console.log(error.message);
     }
@@ -129,7 +133,7 @@ function Reserva() {
           <p><strong>Fecha:</strong> {funcionInfo.dia}/{funcionInfo.mes}/{funcionInfo.año}</p>
           <p><strong> Hora:</strong> {funcionInfo.hora}</p>
           <p><strong>Cantidad de Asientos:</strong> {seats.length}</p>
-          <p><strong>Precio por asiento:</strong>  ${peliculaInfo.vote_average * 3000}</p>
+          <p><strong>Precio por asiento:</strong>  ${precioSillas}</p>
           <p className="text">
             <strong>Cantidad: </strong> <span id="count">0</span> <strong>Precio: </strong>$<span id="total">0</span>
           </p>
