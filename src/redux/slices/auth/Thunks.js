@@ -45,10 +45,27 @@ export const loginUser = (email, password) => {
 }
 
 export const loginGoogle = () => {
-
     return async (dispatch) => {
         const provider = new GoogleAuthProvider();
-        return await signInWithPopup(auth, provider);
+        try {
+            // Autenticar al usuario con Google
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            // Intentar registrar/verificar al usuario en la base de datos
+            try {
+                const { data } = await cinePlusApi.post('/crearUsuarioGoogle', { email: user.email });
+                // Despachar la acción de login
+                dispatch(login({ email: user.email }));
+                return Promise.resolve(result);
+            } catch (error) {
+                // Si falla, cerrar la sesión de Firebase
+                await signOut(auth);
+                return Promise.reject(error);
+            }
+        } catch (error) {
+            return Promise.reject(error);
+        }
     }
 }
 
