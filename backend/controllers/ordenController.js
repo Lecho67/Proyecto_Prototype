@@ -78,6 +78,18 @@ const quitarProductoPorId = async (req, res) => {
     }
 }
 
+const actualizarEstadoSilla = async (req, res) => {
+    const { sillaIds } = req.body;
+    try {
+        const sillasActualizadas = await Silla.updateMany(
+            { _id: { $in: sillaIds } },
+            { $set: { estado: true } }
+        );
+        res.status(200).json(sillasActualizadas);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
 
 
-module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId}
+module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,actualizarEstadoSilla}

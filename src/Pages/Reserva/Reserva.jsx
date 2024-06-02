@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSeatSelection } from "../../redux/slices/auth/seatSlices.js";
+import { toggleSeatSelection, clearSeatSelection } from "../../redux/slices/auth/seatSlices.js";
 import useFetchPelicula from '../../Hooks/useFetchPelicula';
 import { Link } from 'react-router-dom'; // Importa Link
 import './Reserva.css';
@@ -10,7 +10,10 @@ function Reserva() {
   const queryParams = new URLSearchParams(window.location.search);
   const dispatch = useDispatch();
   const { selectedSeats } = useSelector(state => state.seats);
-
+  useEffect(() => {
+    dispatch(clearSeatSelection());
+  },[]);
+  const { email } = useSelector(state => state.auth);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({ message: "" });
   const [funcionInfo, setFuncionInfo] = useState({ id: "", idPelicula: "", hora: "", dia: "", mes: "", año: "", dimension: "", doblaje: "" });
@@ -89,6 +92,35 @@ function Reserva() {
     return sillasFetcheadas;
   };
 
+  const agregarSillasAOrden = async () => {
+    try {
+      const ordenResponse = await cinePlusApi.get(`/obtenerOrdenDeUsuario/${email}`);
+      const ordenId = ordenResponse.data._id;
+
+      const agregarSillaPromises = selectedSeats.map(seatId =>
+        cinePlusApi.put('/agregarSillaAOrden', { ordenId, sillaId: seatId })
+      );
+
+      await Promise.all(agregarSillaPromises);
+
+      // Actualizar estado de las sillas a false
+      await cinePlusApi.put('/actualizarEstadoSilla', { sillaIds: selectedSeats });
+
+      return true;
+    } catch (error) {
+      console.error('Error al agregar sillas a la orden:', error);
+      setError({ message: 'Error al agregar sillas a la orden' });
+      return false;
+    }
+  };
+
+  const handleAgregarSillasClick = async (event) => {
+    const success = await agregarSillasAOrden();
+    if (!success) {
+      event.preventDefault();
+    }
+  };
+
   return (
     <>
       <div className="reservation-container">
@@ -138,7 +170,7 @@ function Reserva() {
             <strong>Cantidad: </strong> <span id="count">0</span> <strong>Precio: </strong>$<span id="total">0</span>
           </p>
           {/* Utiliza Link para redirigir a la página de orden */}
-          <Link to="/Perfil/Orden" className="add-to-order-btn">Agregar a Orden</Link>
+          <Link to="/" className="add-to-order-btn" onClick={handleAgregarSillasClick}>Agregar a Orden</Link>
         </div>
       </div>
       <style>{

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { crearFuncion,crearFunciones, obtenerFunciones, obtenerFuncionPorId, obtenerSillaPorId } = require('../controllers/funcionesController.js')
-const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId} = require('../controllers/ordenController.js')
+const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,actualizarEstadoSilla} = require('../controllers/ordenController.js')
 const {crearUsuario, crearUsuarioGoogle} = require('../controllers/usuarioController.js')
 const {crearProducto,listarProductos} = require("../controllers/productoController.js")
 // endpoint para crear una funcion con todas sus sillas asociadas.
@@ -35,6 +35,8 @@ router.get('/obtenerFuncionPorId/:idFuncion', obtenerFuncionPorId);
 
 // Endpoint to get the details of a seat by its ID.
 router.get('/obtenerSillaPorId/:idSilla', obtenerSillaPorId);
+
+router.put('/actualizarEstadoSilla', actualizarEstadoSilla);
 // endpoint para limpiar los productos de una orden
 router.put('/limpiarProductosDeOrden', limpiarProductosDeOrden);
 // endpoint para quitar un producto de una orden por su id
