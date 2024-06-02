@@ -17,12 +17,40 @@ const crearFuncion = async (req, res) => {
 
         // agrega el arreglo de las sillas a la nueva funcion
         nuevaFuncion.sillas = sillasCreadas;
-        //mostrar toda la información de las sillas
-        nuevaFuncion.populate('sillas');
+
         // guarda la funcion en la base de datos
         await nuevaFuncion.save();
 
         res.status(201).json(nuevaFuncion);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+const crearFunciones = async (req, res) => {
+    const funciones = req.body;
+    try {
+        const funcionesCreadas = await Promise.all(funciones.map(async (funcionData) => {
+            const { idPelicula, hora, dia, mes, año, dimension, doblaje, sillas } = funcionData;
+            const nuevaFuncion = new Funcion({ idPelicula, hora, dia, mes, año, dimension, doblaje });
+
+            // guarda todas las sillas de esta funcion en la base de datos
+            const sillasCreadas = await Promise.all(sillas.map(async (silla) => {
+                const nuevaSilla = new Silla({ ...silla, funcion: nuevaFuncion._id });
+                await nuevaSilla.save();
+                return nuevaSilla._id;
+            }));
+
+            // agrega el arreglo de las sillas a la nueva funcion
+            nuevaFuncion.sillas = sillasCreadas;
+
+            // guarda la funcion en la base de datos
+            await nuevaFuncion.save();
+
+            return nuevaFuncion;
+        }));
+
+        res.status(201).json(funcionesCreadas);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
@@ -61,6 +89,5 @@ const obtenerSillaPorId = async (req, res) => {
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
-    
 }
-module.exports = { crearFuncion,obtenerFunciones,obtenerFuncionPorId,obtenerSillaPorId }
+module.exports = { crearFuncion,crearFunciones,obtenerFunciones,obtenerFuncionPorId,obtenerSillaPorId }
