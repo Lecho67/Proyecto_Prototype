@@ -18,6 +18,7 @@ export const Navigation = ({
     countProducts,
     setCountProducts,
     setTotal,
+    orderProducts,
 }) => {
     const { id } = useParams();
     const {status, email} = useSelector((state) => state.auth);
