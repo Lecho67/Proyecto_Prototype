@@ -76,58 +76,33 @@ export const Navigation = ({
         }
     };
 
-    const addToCart = (productToAdd) => {
-        const existingProductIndex = allProducts.findIndex((product) => product._id === productToAdd._id);
-
-        if (existingProductIndex !== -1) {
-            const updatedProducts = [...allProducts];
-            updatedProducts[existingProductIndex].quantity += productToAdd.quantity;
-            setAllProducts(updatedProducts);
-        } else {
-            setAllProducts([...allProducts, productToAdd]);
-        }
-    };
-
-    const combineProducts = (databaseProducts) => {
-        const combinedProducts = [...allProducts];
-
-        databaseProducts.forEach((databaseProduct) => {
-            const existingProductIndex = combinedProducts.findIndex((product) => product._id === databaseProduct._id);
-
-            if (existingProductIndex !== -1) {
-                combinedProducts[existingProductIndex].quantity += databaseProduct.quantity;
-            } else {
-                combinedProducts.push(databaseProduct);
-            }
-        });
-
-        setAllProducts(combinedProducts);
-    };
-
     const fetchCartData = async () => {
         try {
             const { data } = await cinePlusApi.get(`/obtenerOrdenDeUsuario/${email}`);
             const { productos, _id } = data;
 
-            const productQuantities = productos.reduce((acc, productId) => {
-                acc[productId] = (acc[productId] || 0) + 1;
-                return acc;
-            }, {});
+            const productMap = new Map();
+            productos.forEach(productoId => {
+                if (productMap.has(productoId)) {
+                    productMap.get(productoId).quantity += 1;
+                } else {
+                    productMap.set(productoId, { id: productoId, quantity: 1 });
+                }
+            });
 
             const detailedProducts = await Promise.all(
-                Object.keys(productQuantities).map(async (productId) => {
-                    const productData = await cinePlusApi.get(`/productos/${productId}`);
-                    return { ...productData.data, quantity: productQuantities[productId] };
+                Array.from(productMap.values()).map(async (product) => {
+                    const productData = await cinePlusApi.get(`/productos/${product.id}`);
+                    return { ...productData.data, quantity: product.quantity };
                 })
             );
-
-            combineProducts(detailedProducts);
 
             const totalProducts = detailedProducts.reduce((acc, product) => acc + product.quantity, 0);
             const totalPrice = detailedProducts.reduce((acc, product) => acc + (product.precio * product.quantity), 0);
 
             setCountProducts(totalProducts);
             setTotal(totalPrice);
+            setAllProducts(detailedProducts);
             setOrdenId(_id);
         } catch (error) {
             console.error('Error fetching cart data:', error);
@@ -203,16 +178,16 @@ export const Navigation = ({
             </div>
             <div className={`${menuVisible ? "menuDesplegableVisible" : "menuDesplegableInvisible"}`}>
                 {status ? <Link><div className="itemMenuDesplegable">{email}</div></Link> : <Link to="/Login"><div className="itemMenuDesplegable">Iniciar Sesión</div></Link>}
+                <Link to="/Perfil/Orden"><div className="itemMenuDesplegable">Mi Orden</div></Link>
                 <Link to="/"><div className="itemMenuDesplegable">Inicio</div></Link>
                 <Link to="/Comidas"><div className="itemMenuDesplegable">Comidas</div></Link>
-                <Link to="/Estrenos"><div className="itemMenuDesplegable">Próximos Estrenos</div></Link>
-                <Link to="/Perfil/Orden"><div className="itemMenuDesplegable">Mi Orden</div></Link>
-                <Link><div className="itemMenuDesplegable" onClick={handleLogout}>Cerrar Sesión</div></Link>
+                <Link to="/Estrenos"><div className="itemMenuDesplegable">Estrenos</div></Link>
+                {status ? <Link onClick={handleLogout}><div className="itemMenuDesplegable">Cerrar Sesión</div></Link> : <Link to="/Login"><div className="itemMenuDesplegable">Login</div></Link>}
             </div>
             <div className={`${menuPerfilVisible ? "menuPerfilDesplegableVisible" : "menuPerfilDesplegableInvisible"}`}>
-                {status ? <Link><div className="itemMenuPerfilDesplegable">{email}</div></Link> : <Link to="/Login"><div className="itemMenuPerfilDesplegable">Iniciar Sesión</div></Link>}
-                <Link to="/Perfil/Orden"><div className="itemMenuPerfilDesplegable">Mi Orden</div></Link>
-                <Link><div className="itemMenuPerfilDesplegable" onClick={handleLogout}>Cerrar Sesión</div></Link>
+                {status ? <Link><div className="itemMenuDesplegable">{email}</div></Link> : <Link to="/Login"><div className="itemMenuDesplegable">Iniciar Sesión</div></Link>}
+                <Link to="/Perfil/Orden"><div className="itemMenuDesplegable">Mi Orden</div></Link>
+                {status ? <Link onClick={handleLogout}><div className="itemMenuDesplegable">Cerrar Sesión</div></Link> : <Link to="/Login"><div className="itemMenuDesplegable">Login</div></Link>}
             </div>
         </>
     );
