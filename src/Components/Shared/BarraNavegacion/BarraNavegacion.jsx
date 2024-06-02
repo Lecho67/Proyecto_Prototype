@@ -23,7 +23,7 @@ export const Navigation = ({
     const [menuVisible, setMenuVisible] = useState(false);
     const [menuPerfilVisible, setMenuPerfilVisible] = useState(false);
     const [ordenId, setOrdenId] = useState(null);
-    const [deleteCooldown, setDeleteCooldown] = useState(false); // Add delete cooldown state
+    const [deleteCooldown, setDeleteCooldown] = useState(false);
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -41,17 +41,17 @@ export const Navigation = ({
 
     const onDeleteProduct = async (product) => {
         try {
-            if (!deleteCooldown) { // Check if delete cooldown is active
-                setDeleteCooldown(true); // Enable delete cooldown
+            if (!deleteCooldown) {
+                setDeleteCooldown(true);
                 await cinePlusApi.put('/quitarProductosPorId', { email, productoId: product._id });
                 const results = allProducts.filter((item) => item._id !== product._id);
                 setTotal(total - product.precio * product.quantity);
                 setCountProducts(countProducts - product.quantity);
                 setAllProducts(results);
                 
-                setTimeout(() => { // Reset delete cooldown after 2 seconds
+                setTimeout(() => {
                     setDeleteCooldown(false);
-                }, 2000); // 2 seconds cooldown
+                }, 2000);
             }
         } catch (error) {
             console.error('Error deleting product from cart:', error);
@@ -76,34 +76,27 @@ export const Navigation = ({
         }
     };
 
-    // Función para agregar un producto al carrito desde el frontend
     const addToCart = (productToAdd) => {
         const existingProductIndex = allProducts.findIndex((product) => product._id === productToAdd._id);
 
         if (existingProductIndex !== -1) {
-            // Si el producto ya existe en el carrito, actualiza solo la cantidad
             const updatedProducts = [...allProducts];
             updatedProducts[existingProductIndex].quantity += productToAdd.quantity;
             setAllProducts(updatedProducts);
         } else {
-            // Si el producto no existe en el carrito, agrégalo a la lista
             setAllProducts([...allProducts, productToAdd]);
         }
     };
 
-    // Lógica para combinar los productos del carrito con los productos de la base de datos
     const combineProducts = (databaseProducts) => {
         const combinedProducts = [...allProducts];
 
-        // Recorre los productos de la base de datos y agrega los nuevos o actualiza las cantidades
         databaseProducts.forEach((databaseProduct) => {
             const existingProductIndex = combinedProducts.findIndex((product) => product._id === databaseProduct._id);
 
             if (existingProductIndex !== -1) {
-                // Si el producto ya existe en el carrito, actualiza la cantidad
                 combinedProducts[existingProductIndex].quantity += databaseProduct.quantity;
             } else {
-                // Si el producto no existe en el carrito, agrégalo
                 combinedProducts.push(databaseProduct);
             }
         });
@@ -116,14 +109,19 @@ export const Navigation = ({
             const { data } = await cinePlusApi.get(`/obtenerOrdenDeUsuario/${email}`);
             const { productos, _id } = data;
 
+            const productQuantities = productos.reduce((acc, productId) => {
+                acc[productId] = (acc[productId] || 0) + 1;
+                return acc;
+            }, {});
+
             const detailedProducts = await Promise.all(
-                productos.map(async (productId) => {
+                Object.keys(productQuantities).map(async (productId) => {
                     const productData = await cinePlusApi.get(`/productos/${productId}`);
-                    return { ...productData.data, quantity: productos.filter(id => id === productId).length };
+                    return { ...productData.data, quantity: productQuantities[productId] };
                 })
             );
 
-            combineProducts(detailedProducts); // Combina los productos de la base de datos con los del carrito
+            combineProducts(detailedProducts);
 
             const totalProducts = detailedProducts.reduce((acc, product) => acc + product.quantity, 0);
             const totalPrice = detailedProducts.reduce((acc, product) => acc + (product.precio * product.quantity), 0);
