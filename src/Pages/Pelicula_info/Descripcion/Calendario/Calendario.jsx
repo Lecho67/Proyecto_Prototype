@@ -80,7 +80,7 @@ const Calendario = ({
     diaInicial = 1,
     añoInicial = 2024,
     ToleranciaMesesAtras = 0,
-    ToleranciaMesesAdelante = 5,
+    ToleranciaMesesAdelante = 2,
     diasDisponibles = [],
     cambioDeFecha = () => {},
 }) => {

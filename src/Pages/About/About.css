@@ -12,10 +12,10 @@
 .team-member {
     margin: 20px;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 8px;
     width: 200px;
     text-align: center;
+    background-color: #b9daf5;
 }
 
 .team-member-image {

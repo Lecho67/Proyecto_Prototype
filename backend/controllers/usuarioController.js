@@ -35,7 +35,7 @@ const crearUsuarioGoogle = async (req, res) => {
         if (usuario) {
             return res.status(200).json(usuario); 
         }
-        let password = "1234"
+        let password = "bff149a0b87f5b0e00d9dd364e9ddaa0"
 
         const nuevoUsuario = new Usuario({ email, password });
         const nuevaOrden = new Orden({ usuario: nuevoUsuario._id });
