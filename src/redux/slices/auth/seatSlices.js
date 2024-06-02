@@ -17,8 +17,12 @@ const seatSlice = createSlice({
       }
       console.log("Selected Seats:", state.selectedSeats);
     },
+
+    clearSeatSelection(state){
+      state.selectedSeats = [];
+    }
   },
 });
 
-export const { toggleSeatSelection } = seatSlice.actions;
+export const { toggleSeatSelection, clearSeatSelection } = seatSlice.actions;
 export default seatSlice.reducer;

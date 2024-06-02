@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toggleSeatSelection } from "../../redux/slices/auth/seatSlices.js";
+import { clearSeatSelection, toggleSeatSelection } from "../../redux/slices/auth/seatSlices.js";
 import useFetchPelicula from '../../Hooks/useFetchPelicula';
 import { Link } from 'react-router-dom'; // Importa Link
 import './Reserva.css';
@@ -10,6 +10,11 @@ function Reserva() {
   const queryParams = new URLSearchParams(window.location.search);
   const dispatch = useDispatch();
   const { selectedSeats } = useSelector(state => state.seats);
+
+  useEffect(() => {
+    dispatch(clearSeatSelection());
+  },[]);
+
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState({ message: "" });

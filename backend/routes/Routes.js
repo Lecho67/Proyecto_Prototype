@@ -1,28 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const { crearFuncion,crearFunciones, obtenerFunciones, obtenerFuncionPorId, obtenerSillaPorId } = require('../controllers/funcionesController.js')
-<<<<<<< HEAD
 const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId} = require('../controllers/ordenController.js')
-const {crearUsuario} = require('../controllers/usuarioController.js')
-=======
-const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden} = require('../controllers/ordenController.js')
 const {crearUsuario, crearUsuarioGoogle} = require('../controllers/usuarioController.js')
->>>>>>> ChristianCardenas
 const {crearProducto,listarProductos} = require("../controllers/productoController.js")
 // endpoint para crear una funcion con todas sus sillas asociadas.
 router.post('/crearFuncion', crearFuncion);
-// endpoint para crear varias funciones para una sola pelicula, con todas sus sillas asociadas.
+
 router.post('/crearFunciones', crearFunciones);
 // endpoint para crear un usuario con su email y contraseña
 router.post('/crearUsuario', crearUsuario);
-<<<<<<< HEAD
 
-// Endpoint to create a product in the database.
-=======
 // endpoint para crear un usuario con google
 router.post('/crearUsuarioGoogle', crearUsuarioGoogle);
-// endpoint para crear un producto en la base de datos
->>>>>>> ChristianCardenas
+// Endpoint to create a product in the database.
 router.post('/crearProducto', crearProducto);
 
 // Endpoint to fetch an array of all products from the database.
@@ -49,4 +40,5 @@ router.get('/obtenerSillaPorId/:idSilla', obtenerSillaPorId);
 router.put('/limpiarProductosDeOrden', limpiarProductosDeOrden);
 // endpoint para quitar un producto de una orden por su id
 router.put('/quitarProductosPorId',quitarProductoPorId);
+
 module.exports = router;
