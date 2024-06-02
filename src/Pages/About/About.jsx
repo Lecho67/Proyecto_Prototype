@@ -18,7 +18,7 @@ export const About = () => {
         {
             name: "Christian David Cardenas",
             role: "Diseñador de About",
-            description: "Diseño la pagina que estas viendo, poco mas.",
+            description: "Diseñó la pagina que estas viendo, poco mas.",
             image: "../../assets/PlayGTAV.exe",
         },
         {
