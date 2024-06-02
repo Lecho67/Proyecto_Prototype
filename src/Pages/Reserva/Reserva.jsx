@@ -170,7 +170,7 @@ function Reserva() {
             <strong>Cantidad: </strong> <span id="count">0</span> <strong>Precio: </strong>$<span id="total">0</span>
           </p>
           {/* Utiliza Link para redirigir a la página de orden */}
-          <Link to="/" className="add-to-order-btn" onClick={handleAgregarSillasClick}>Agregar a Orden</Link>
+          <Link to="/Perfil/Orden" className="add-to-order-btn" onClick={handleAgregarSillasClick}>Agregar a Orden</Link>
         </div>
       </div>
       <style>{

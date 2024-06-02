@@ -1,31 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const { crearFuncion,crearFunciones, obtenerFunciones, obtenerFuncionPorId, obtenerSillaPorId } = require('../controllers/funcionesController.js')
-<<<<<<< HEAD
-const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId, mostrarInformacionDeSillasReservadas} = require('../controllers/ordenController.js')
+
+const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,mostrarInformacionDeSillasReservadas,actualizarEstadoSilla} = require('../controllers/ordenController.js')
+
 const {crearUsuario, crearUsuarioGoogle} = require('../controllers/usuarioController.js')
+
 const {crearProducto,listarProductos,obtenerProductoPorId} = require("../controllers/productoController.js")
-=======
-const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,actualizarEstadoSilla} = require('../controllers/ordenController.js')
-const {crearUsuario, crearUsuarioGoogle} = require('../controllers/usuarioController.js')
-const {crearProducto,listarProductos} = require("../controllers/productoController.js")
->>>>>>> ChristianCardenas
 // endpoint para crear una funcion con todas sus sillas asociadas.
 router.post('/crearFuncion', crearFuncion);
 
 router.post('/crearFunciones', crearFunciones);
 // endpoint para crear un usuario con su email y contraseña
 router.post('/crearUsuario', crearUsuario);
-<<<<<<< HEAD
+
+
+// Endpoint to create a product in the database.
 
 // endpoint para crear un usuario con google
 router.post('/crearUsuarioGoogle', crearUsuarioGoogle);
-// Endpoint to create a product in the database.
-=======
-// endpoint para crear un usuario con google
-router.post('/crearUsuarioGoogle', crearUsuarioGoogle);
 // endpoint para crear un producto en la base de datos
->>>>>>> ChristianCardenas
+
 router.post('/crearProducto', crearProducto);
 
 // Endpoint to fetch an array of all products from the database.
