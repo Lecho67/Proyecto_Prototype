@@ -55,6 +55,8 @@ export const Orden = () => {
   }, [email]);
 
   useEffect(() => {
+    if (!seats) return;
+
     const selectedSeatDetails = seats.filter(seat => selectedSeats.includes(seat.id));
     const seatTotal = selectedSeats.length * parseFloat(ticketPrice || 0);
     console.log("Seat total:", seatTotal);
@@ -75,7 +77,7 @@ export const Orden = () => {
   if (loading) return <p>Loading order details...</p>;
   if (error) return <p>{error}</p>;
 
-  const selectedSeatDetails = seats.filter(seat => selectedSeats.includes(seat.id));
+  const selectedSeatDetails = seats ? seats.filter(seat => selectedSeats.includes(seat.id)) : [];
 
   return (
     <div className="order-container">

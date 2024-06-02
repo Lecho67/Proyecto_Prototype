@@ -7,7 +7,7 @@ const ordenSchema = Schema({
     },
     sillas: [{
         type:Schema.Types.ObjectId,
-        ref: 'Sillas'
+        ref: 'Silla'
     }],
     productos: [
         {

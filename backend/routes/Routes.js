@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { crearFuncion,crearFunciones, obtenerFunciones, obtenerFuncionPorId, obtenerSillaPorId } = require('../controllers/funcionesController.js')
-const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId} = require('../controllers/ordenController.js')
+const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId, mostrarInformacionDeSillasReservadas} = require('../controllers/ordenController.js')
 const {crearUsuario, crearUsuarioGoogle} = require('../controllers/usuarioController.js')
-const {crearProducto,listarProductos} = require("../controllers/productoController.js")
+const {crearProducto,listarProductos,obtenerProductoPorId} = require("../controllers/productoController.js")
 // endpoint para crear una funcion con todas sus sillas asociadas.
 router.post('/crearFuncion', crearFuncion);
 
@@ -40,5 +40,9 @@ router.get('/obtenerSillaPorId/:idSilla', obtenerSillaPorId);
 router.put('/limpiarProductosDeOrden', limpiarProductosDeOrden);
 // endpoint para quitar un producto de una orden por su id
 router.put('/quitarProductosPorId',quitarProductoPorId);
-
+// endpoint para obtener un producto por su id
+router.get('/productos/:id', obtenerProductoPorId);
+// endpoint para mostrar la informacion de las sillas reservadas por un usuario
+router.get('/informacionSillasReservadas/:email', mostrarInformacionDeSillasReservadas);
 module.exports = router;
+

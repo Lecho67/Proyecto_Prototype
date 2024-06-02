@@ -2,7 +2,7 @@ const Orden = require('../models/orden.js');
 const Usuario = require('../models/Usuario.js');
 const Silla = require('../models/Silla.js');
 const Producto = require('../models/producto.js');
-
+const Funcion = require('../models/Funcion.js');
 
 const obtenerOrdenDeUsuario = async (req, res) => {
     const {email} = req.params;
@@ -64,7 +64,6 @@ const limpiarProductosDeOrden = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
-
 const quitarProductoPorId = async (req, res) => {
     const { email, productoId } = req.body;
     try {
@@ -80,4 +79,33 @@ const quitarProductoPorId = async (req, res) => {
 
 
 
-module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId}
+
+
+
+
+
+
+
+
+
+
+
+
+
+const mostrarInformacionDeSillasReservadas = async (req, res) => {
+    const { email } = req.params;
+    try {
+        const usuario = await Usuario.findOne({ email });
+        const orden = await Orden.findById(usuario.orden).populate("sillas");
+        // console.log("orden de las sillas",orden.sillas[0])
+        const funcion = await Funcion.findById(orden.sillas[0].funcion);
+        res.status(200).json({orden,funcion});
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
+
+
+
+
+module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,mostrarInformacionDeSillasReservadas}
