@@ -8,12 +8,7 @@ const {
   obtenerSillaPorId
 } = require('../controllers/funcionesController.js');
 
-const {
-  agregarSillaAOrden,
-  agregarProductoAOrden,
-  obtenerOrdenDeUsuario,
-  limpiarProductosDeOrden
-} = require('../controllers/ordenController.js');
+const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId} = require('../controllers/ordenController.js')
 
 const { crearUsuario } = require('../controllers/usuarioController.js');
 const { crearProducto, listarProductos,obtenerProductoPorId } = require('../controllers/productoController.js');
@@ -53,4 +48,6 @@ router.put('/limpiarProductosDeOrden', limpiarProductosDeOrden);
 
 router.get('/productos/:id', obtenerProductoPorId);
 
+
+router.put('/quitarProductosPorId',quitarProductoPorId);
 module.exports = router;

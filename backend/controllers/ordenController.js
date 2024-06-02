@@ -64,7 +64,19 @@ const limpiarProductosDeOrden = async (req, res) => {
         res.status(400).json({ message: err.message });
     }
 };
+const quitarProductoPorId = async (req, res) => {
+    const { email, productoId } = req.body;
+    try {
+        const usuario = await Usuario.findOne({ email });
+        const orden = await Orden.findById(usuario.orden);
+        orden.productos = orden.productos.filter((id) => id.toString() !== productoId);
+        await orden.save();
+        res.status(200).json(orden);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
 
 
-
-module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden }
+module.exports = {agregarProductoAOrden,agregarSillaAOrden,
+     obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId}
