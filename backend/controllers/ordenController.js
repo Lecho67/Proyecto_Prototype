@@ -95,10 +95,8 @@ const mostrarInformacionDeSillasReservadas = async (req, res) => {
     const { email } = req.params;
     try {
         const usuario = await Usuario.findOne({ email });
-        const orden = await Orden.findById(usuario.orden).populate("sillas");
-        // console.log("orden de las sillas",orden.sillas[0])
-        const funcion = await Funcion.findById(orden.sillas[0].funcion);
-        res.status(200).json({orden,funcion});
+        const orden = await Orden.findById(usuario.orden).populate({path:'sillas',populate:{path:'funcion',select:"-sillas"}});
+        res.status(200).json(orden);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
