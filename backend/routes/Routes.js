@@ -1,12 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {
-  crearFuncion,
-  obtenerFunciones,
-  obtenerFuncionPorId,
-  obtenerSillaPorId
-} = require('../controllers/funcionesController.js');
+const {crearFuncion,obtenerFunciones,obtenerFuncionPorId,obtenerSillaPorId} = require('../controllers/funcionesController.js');
 
 const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId} = require('../controllers/ordenController.js')
 
