@@ -136,7 +136,7 @@ export const Orden = () => {
                   <p>Total: ${orderSeats[funcionid].reduce((acc, seat) => acc + seat.precio, 0)}</p>
                 </div>
               </div>
-              <div className="delete-button" onClick={() => handleDeleteSeat({sillasId: orderSeats[funcionid], email})}>
+              <div className="delete-button" onClick={() => handleDeleteSeat({sillasId: orderSeats[funcionid].map(silla => silla._id), email})}>
                   <img className="delete-img" src={equis} alt="equis"/>
               </div>
             </div>
