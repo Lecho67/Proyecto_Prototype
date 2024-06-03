@@ -68,7 +68,7 @@
     display: flex;
     flex-grow: 1;
     min-width: 200px;
-    max-width: 470px;
+    max-width: 560px;
     justify-content: space-between;
     align-items: center;
   }
@@ -240,5 +240,16 @@
         position: fixed;
         flex-direction: column;
         right: 15px;
+    }
+}
+@media screen and (max-width: 260px) {
+    .BarraNav nav {
+        padding: 0;
+    }
+}
+
+@media screen and (max-width: 220px) {
+    .BarraNav {
+        padding: 0 5px 0 5px;
     }
 }

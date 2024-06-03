@@ -2,7 +2,7 @@ const Orden = require('../models/orden.js');
 const Usuario = require('../models/Usuario.js');
 const Silla = require('../models/Silla.js');
 const Producto = require('../models/producto.js');
-
+const Funcion = require('../models/Funcion.js');
 
 const obtenerOrdenDeUsuario = async (req, res) => {
     const {email} = req.params;
@@ -53,7 +53,56 @@ const agregarProductoAOrden = async (req, res) => {
     }
 };
 
+const limpiarProductosDeOrden = async (req, res) => {
+    const { ordenId } = req.body;
+    try {
+        const orden = await Orden.findById(ordenId);
+        orden.productos = [];
+        await orden.save();
+        res.status(200).json(orden);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+const quitarProductoPorId = async (req, res) => {
+    const { email, productoId } = req.body;
+    try {
+        const usuario = await Usuario.findOne({ email });
+        const orden = await Orden.findById(usuario.orden);
+        orden.productos = orden.productos.filter((id) => id.toString() !== productoId);
+        await orden.save();
+        res.status(200).json(orden);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
+
+const actualizarEstadoSilla = async (req, res) => {
+    const { sillaIds } = req.body;
+    try {
+        const sillasActualizadas = await Silla.updateMany(
+            { _id: { $in: sillaIds } },
+            { $set: { estado: true } }
+        );
+        res.status(200).json(sillasActualizadas);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+};
+
+
+const mostrarInformacionDeSillasReservadas = async (req, res) => {
+    const { email } = req.params;
+    try {
+        const usuario = await Usuario.findOne({ email });
+        const orden = await Orden.findById(usuario.orden).populate({path:'sillas',populate:{path:'funcion',select:"-sillas"}});
+        res.status(200).json(orden);
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
 
 
 
-module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario }
+
+module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,mostrarInformacionDeSillasReservadas,actualizarEstadoSilla}

@@ -1,7 +1,10 @@
 const {Schema,model} = require('mongoose');
 
 const FuncionSchema = Schema({
-
+    idPelicula: {
+        type: Number,
+        required: true
+    },
     hora: {
         type: String,
         required: true
@@ -17,11 +20,7 @@ const FuncionSchema = Schema({
     año: {  
         type: Number,
         required: true},
-    // },
-    // id: {
-    //     type: Number,
-    //     required: true
-    // },
+        
     dimension: {
         type: String,
         required: true

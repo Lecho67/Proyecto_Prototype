@@ -19,7 +19,7 @@ export const Registro = () =>{
     const onSubmit = async (evt) => {
         evt.preventDefault();
         try{
-            console.log(formState)
+            
             await dispatch(registerUser(email, password))
             onResetForm();
             const lastPath = localStorage.getItem('lastPath') || '/';
