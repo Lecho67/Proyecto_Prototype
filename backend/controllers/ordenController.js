@@ -102,7 +102,20 @@ const mostrarInformacionDeSillasReservadas = async (req, res) => {
     }
 }
 
+const quitarSillasDeOrden = async (req, res) => {
+    const { email, sillasId } = req.body;
+    try {
+        const usuario = await Usuario.findOne({ email });
+        const orden = await Orden.findById(usuario.orden);
+        orden.sillas = orden.sillas.filter((id) => !sillasId.includes(id.toString()));
+        await orden.save();
+        res.status(200).json({ message: 'Sillas eliminadas de la orden' });
+    } catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+}
 
 
 
-module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,mostrarInformacionDeSillasReservadas,actualizarEstadoSilla}
+
+module.exports = {agregarProductoAOrden,agregarSillaAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,mostrarInformacionDeSillasReservadas,actualizarEstadoSilla,quitarSillasDeOrden};

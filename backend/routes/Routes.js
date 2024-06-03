@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { crearFuncion,crearFunciones, obtenerFunciones, obtenerFuncionPorId, obtenerSillaPorId } = require('../controllers/funcionesController.js')
 
-const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,mostrarInformacionDeSillasReservadas,actualizarEstadoSilla} = require('../controllers/ordenController.js')
+const { agregarSillaAOrden, agregarProductoAOrden, obtenerOrdenDeUsuario,limpiarProductosDeOrden,quitarProductoPorId,mostrarInformacionDeSillasReservadas,actualizarEstadoSilla,quitarSillasDeOrden} = require('../controllers/ordenController.js')
 
 const {crearUsuario, crearUsuarioGoogle} = require('../controllers/usuarioController.js')
 
@@ -53,5 +53,8 @@ router.put('/quitarProductosPorId',quitarProductoPorId);
 router.get('/productos/:id', obtenerProductoPorId);
 // endpoint para mostrar la informacion de las sillas reservadas por un usuario
 router.get('/informacionSillasReservadas/:email', mostrarInformacionDeSillasReservadas);
+
+//enpoint para quitar sillas de una orden
+router.put('/quitarSillasDeOrden', quitarSillasDeOrden);
 module.exports = router;
 
