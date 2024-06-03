@@ -103,16 +103,20 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
     useEffect(() => {
         if (isFirstRender.current) {
             isFirstRender.current = false;
+            console.log('primer render');
             return;
         }
+        console.log('segundo render');
         obtenerFunciones().then((funciones)=>{setFunciones(funciones)}).catch((error)=>{console.error(error);setError(error)});
     }, []);
 
     useEffect(() => {   
         if (renders.current <= 1) {
+            console.log('primer ejecucion del useEffect que recibe si funciones ha cambiado');
             renders.current++;
             return; 
         }
+        console.log('segunda ejecucion del useEffect que recibe si funciones ha cambiado');
         console.log(funciones.length);
         if (funciones.length < 40 && !ordendecrearenviada.current && error.message != 'Error al obtener las funciones de la película') {
             setFuncionStatus('Buscando funciones...');
