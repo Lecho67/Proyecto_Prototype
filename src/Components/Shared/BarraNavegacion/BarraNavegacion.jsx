@@ -24,7 +24,7 @@ export const Navigation = ({
     const [menuVisible, setMenuVisible] = useState(false);
     const [menuPerfilVisible, setMenuPerfilVisible] = useState(false);
     const [ordenId, setOrdenId] = useState(null);
-    const [deleteCooldown, setDeleteCooldown] = useState(false);
+    const [loadingProducts, setLoadingProducts] = useState({}); // Estado para manejar el loading de cada producto
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -42,20 +42,27 @@ export const Navigation = ({
 
     const onDeleteProduct = async (product) => {
         try {
-            if (!deleteCooldown) {
-                setDeleteCooldown(true);
-                await cinePlusApi.put('/quitarProductosPorId', { email, productoId: product._id });
-                const results = allProducts.filter((item) => item._id !== product._id);
-                setTotal(total - product.precio * product.quantity);
-                setCountProducts(countProducts - product.quantity);
-                setAllProducts(results);
-                
-                setTimeout(() => {
-                    setDeleteCooldown(false);
-                }, 2000);
-            }
+            setLoadingProducts((prevLoading) => ({
+                ...prevLoading,
+                [product._id]: true,
+            }));
+
+            await cinePlusApi.put('/quitarProductosPorId', { email, productoId: product._id });
+            const results = allProducts.filter((item) => item._id !== product._id);
+            setTotal(total - product.precio * product.quantity);
+            setCountProducts(countProducts - product.quantity);
+            setAllProducts(results);
+
+            setLoadingProducts((prevLoading) => ({
+                ...prevLoading,
+                [product._id]: false,
+            }));
         } catch (error) {
             console.error('Error deleting product from cart:', error);
+            setLoadingProducts((prevLoading) => ({
+                ...prevLoading,
+                [product._id]: false,
+            }));
         }
     };
 
@@ -109,6 +116,12 @@ export const Navigation = ({
             console.error('Error fetching cart data:', error);
         }
     };
+
+    useEffect(() => {
+        if (status && email) {
+            fetchCartData();
+        }
+    }, [status, email]);
 
     useEffect(() => {
         if (status && email) {
