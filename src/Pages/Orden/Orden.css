@@ -58,9 +58,9 @@
 
 
 .order-info-container {
+    width: 100%;
     display: flex;
     align-items: flex-start;
-    height: 227 px;
 }
 
 .order-item-info h3 {
@@ -79,22 +79,17 @@
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
     padding: 20px; /* Espacio interno */
+    transition: all 0.3s ease;
 }
 
 .order-item-image {
-    aspect-ratio: 1 / 1;
-    height: 100%;
-    object-fit: cover;
-    margin-right: 20px;
-    border-radius: 10px;
-}
-.order-seats-image {
     aspect-ratio: 1/1;
     height: 100%;
-    max-width: 300px;
+    width: 300px;
     object-fit: cover;
     margin-right: 20px;
     border-radius: 10px; /* Bordes redondeados para la imagen */
+    transition: all 0.3s ease;
 }
 .order-item-info {
     display: flex;
@@ -135,4 +130,56 @@ h2 {
 
 p {
     color: #666;
+}
+
+@media screen and (max-width: 1000px) {
+    .order-item-image {
+        height: 100%;
+        width: 200px;
+    }
+    .delete-img{
+        width: 30px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .order-item{
+        flex-direction: column-reverse;
+        align-items: flex-end;
+    }
+    .delete-button{
+        margin-bottom: 20px;
+    }
+    .delete-img{
+        width: 20px;
+    }
+
+}
+
+@media screen and (max-width: 560px) {
+    .order-info-container{
+        flex-direction: column;
+        align-items: center;
+    }
+    .order-item-info{
+        width: 100%;
+        text-align: center;
+    }
+    .order-item-info h3{
+        text-align: center;
+    }
+    .order-item-image{
+        margin-right: 0px;
+        aspect-ratio: 2/1;    
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .order-item-image{
+        aspect-ratio: 1.5/1;
+        width: 100%;
+    }
+
 }

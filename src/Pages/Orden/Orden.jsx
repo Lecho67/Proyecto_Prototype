@@ -138,7 +138,7 @@ export const Orden = () => {
           {Object.keys(orderSeats).map((funcionid, key) => (
             <div className="order-item" key={key}>
               <div className="order-info-container">
-              <img className="order-seats-image" src={`https://image.tmdb.org/t/p/w300/${orderSeats[funcionid][0]?.poster}`} alt={orderSeats[funcionid][0]?.titulo} />
+              <img className="order-item-image" src={`https://image.tmdb.org/t/p/w300/${orderSeats[funcionid][0]?.poster}`} alt={orderSeats[funcionid][0]?.titulo} />
                 <div className="order-item-info">
                   <h3>{orderSeats[funcionid][0]?.titulo}</h3>
                   <p>Hora: {orderSeats[funcionid][0]?.funcion.hora}</p>
@@ -161,7 +161,7 @@ export const Orden = () => {
           {orderProducts.map((product, key) => (
             <div className="order-item" key={key}>
             <div className="order-info-container">
-            <img className="order-seats-image"  src={product.img} alt={product.name} />
+            <img className="order-item-image"  src={product.img} alt={product.name} />
               <div className="order-item-info">
                 <h3>{product.nameProduct}</h3>
                 
