@@ -3,12 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toggleSeatSelection, clearSeatSelection } from "../../redux/slices/auth/seatSlices.js";
 import useFetchPelicula from '../../Hooks/useFetchPelicula';
 import { Link } from 'react-router-dom'; // Importa Link
+import { useNavigate } from 'react-router-dom';
 import './Reserva.css';
 import cinePlusApi from '../../api/cinePlusApi.js';
 
 function Reserva() {
   const queryParams = new URLSearchParams(window.location.search);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { selectedSeats } = useSelector(state => state.seats);
   useEffect(() => {
     dispatch(clearSeatSelection());
@@ -116,9 +118,11 @@ function Reserva() {
 
   const handleAgregarSillasClick = async (event) => {
     const success = await agregarSillasAOrden();
+
     if (!success) {
       event.preventDefault();
     }
+    navigate('/Perfil/Orden');
   };
 
   return (
@@ -170,7 +174,7 @@ function Reserva() {
             <strong>Cantidad: </strong> <span id="count">0</span> <strong>Precio: </strong>$<span id="total">0</span>
           </p>
           {/* Utiliza Link para redirigir a la página de orden */}
-          <Link to="/Perfil/Orden" className="add-to-order-btn" onClick={handleAgregarSillasClick}>Agregar a Orden</Link>
+          <button className="add-to-order-btn" onClick={handleAgregarSillasClick}>Agregar a Orden</button>
         </div>
       </div>
       <style>{
