@@ -1,31 +1,36 @@
 import React from "react";
 import './About.css'
 
+import frotenImage from "../../assets/froten.png";
+import cuelloImage from "../../assets/cuello.png";
+import playGTAImage from "../../assets/PlayGTAV.png";
+import apiImage from "../../assets/api.png";
+
 export const About = () => {
     const teamMembers = [
         {
             name: "Juan Pablo Castaño",
             role: "Desarrollador Frontend",
-            description: "Encargado de aprender a usar Grid y Flex, e increiblemente lo logro!!11!!.",
-            image: "../../assets/froten.pn",
+            description: "Encargado de aprender a usar Grid y Flex, e increíblemente lo logró!!11!!.",
+            image: frotenImage,
         },
         {
             name: "Juan Esteban Cuello",
             role: "Desarrolladora Backend",
-            description: "Responsable de preguntar si eres de Back o de Front, todo lo busco ayer.",
-            image: "../../assets/cuello.gif",
+            description: "Responsable de preguntar si eres de Back o de Front, todo lo buscó ayer.",
+            image: cuelloImage,
         },
         {
             name: "Christian David Cardenas",
             role: "Diseñador de About",
-            description: "Diseñó la pagina que estas viendo, poco mas.",
-            image: "../../assets/PlayGTAV.exe",
+            description: "Diseñó la página que estás viendo, poco más.",
+            image: playGTAImage,
         },
         {
             name: "Simon Colonia Amador",
             role: "Gestora de Proyecto",
-            description: "Dañaba el codigo, hacia commits con codigo inservible y era grosero con Cuello, y aún así ahí va el mejor empleado de CP",
-            image: "../../assets/api.yml",
+            description: "Dañaba el código, hacía commits con código inservible y era grosero con Cuello, y aún así ahí va el mejor empleado de CP",
+            image: apiImage,
         },
     ];
 
