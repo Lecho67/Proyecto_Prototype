@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const cinePlusApi = axios.create({
-    baseURL: 'http://localhost:4000/api'});
+    baseURL: 'https://proyectoprototype-production.up.railway.app/api'});
 
 export default cinePlusApi
 
