@@ -206,14 +206,12 @@ export const Navigation = ({
                 <Link to="/About">
                     <div className="itemMenuDesplegable">About</div>
                 </Link>
-                <Link>
-                    <div className="itemMenuDesplegable" onClick={handleLogout}>Cerrar Sesión</div>
-                </Link>
+                {status ? <Link onClick={handleLogout}><div className="itemMenuDesplegable">Cerrar Sesión</div></Link> : null}
             </div>
             <div className={`${menuPerfilVisible ? "menuPerfilDesplegableVisible" : "menuPerfilDesplegableInvisible"}`}>
                 {status ? <Link><div className="itemMenuDesplegable">{email}</div></Link> : <Link to="/Login"><div className="itemMenuDesplegable">Iniciar Sesión</div></Link>}
                 <Link to="/Perfil/Orden"><div className="itemMenuDesplegable">Mi Orden</div></Link>
-                {status ? <Link onClick={handleLogout}><div className="itemMenuDesplegable">Cerrar Sesión</div></Link> : <Link to="/Login"><div className="itemMenuDesplegable">Login</div></Link>}
+                {status ? <Link onClick={handleLogout}><div className="itemMenuDesplegable">Cerrar Sesión</div></Link> : null}
             </div>
         </>
     );

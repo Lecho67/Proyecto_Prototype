@@ -166,21 +166,6 @@ function App() {
               </div>
             }
           />
-          <Route
-            path="/Perfil"
-            element={
-              <div>
-                <Navigation
-                  allProducts={allProducts}
-                  setAllProducts={setAllProducts}
-                  total={total}
-                  setTotal={setTotal}
-                  countProducts={countProducts}
-                  setCountProducts={setCountProducts}
-                />
-              </div>
-            }
-          />
         </Route>
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Registro />} />

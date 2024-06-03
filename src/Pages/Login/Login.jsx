@@ -58,7 +58,7 @@ export const Login = () =>{
                             <input type="checkbox" />
                             Recuérdame
                         </label>
-                        <a href="#">Olvidé mi contraseña</a>
+                        <Link href="#">Olvidé mi contraseña</Link>
                     </div>
                     {error && <div className='loginErrorContainer'> <box-icon name='error-alt' animation='tada' color='red'></box-icon> <p>Email o contraseña incorrectos</p></div>}
                     {errorGoogle && <div className='loginErrorContainer'> <box-icon name='error-alt' animation='tada' color='red'></box-icon> <p>Error al iniciar sesión con Google</p></div>}
