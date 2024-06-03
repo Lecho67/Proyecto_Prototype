@@ -4,8 +4,15 @@ const cors = require('cors');
 const {dbConnection} = require('./database/config');
 
 require('dotenv').config();
+const headers = {
+    cors:{
+        origin: "https://cinepluscp.netlify.app/",
+        optionsSuccessStatus: 200
+    }
+}
+
 const routes = require('./routes/Routes.js');
-app.use(cors());
+app.use(cors(headers));
 app.use(express.json({ limit: '250mb' }));
 
 dbConnection();
