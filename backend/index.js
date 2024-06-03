@@ -7,7 +7,9 @@ require('dotenv').config();
 const headers = {
     cors:{
         origin: "https://cinepluscp.netlify.app/",
-        optionsSuccessStatus: 200
+        optionsSuccessStatus: 200,
+        allowedHeaders: 'Content-Type,Authorization',
+        methods: 'GET,POST,PUT,DELETE'
     }
 }
 
