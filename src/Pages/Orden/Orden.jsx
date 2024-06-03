@@ -57,15 +57,25 @@ export const Orden = () => {
     try {
       const response = await cinePlusApi.get(`/informacionSillasReservadas/${email}`);
       const { sillas } = response.data;
-      let sillasAgrupadas = {};
-      sillas.forEach(silla => {
-        useFetchPelicula(silla.funcion.idPelicula).then((data) => {
-          const sillaConDatosDePelicula = { ...silla, titulo: data.title , poster: data.poster_path};
-          sillasAgrupadas[silla.funcion._id] = [...sillasAgrupadas[silla.funcion._id] || [], sillaConDatosDePelicula];
-        });
-      });
+
+      const sillasConDatos = await Promise.all(sillas.map(async silla => {
+        try {
+          const data = await useFetchPelicula(silla.funcion.idPelicula);
+          return { ...silla, titulo: data.title, poster: data.poster_path };
+        } catch (error) {
+          console.error(`Error fetching pelicula data for silla ${silla._id}:`, error);
+          return null;
+        }
+      }));
+
+      const validSillasConDatos = sillasConDatos.filter(silla => silla !== null);
+
+      const sillasAgrupadas = validSillasConDatos.reduce((acc, silla) => {
+        acc[silla.funcion._id] = [...(acc[silla.funcion._id] || []), silla];
+        return acc;
+      }, {});
+
       setOrderSeats(sillasAgrupadas);
-      console.log(sillasAgrupadas);
     } catch (error) {
       console.error('Error Obteniendo Asientos: ', error);
       setError('Error Obteniendo Asientos');
