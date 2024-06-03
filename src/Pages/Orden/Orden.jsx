@@ -53,15 +53,26 @@ export const Orden = () => {
       setLoading(false);
     }
   };
-  const handleDeleteSeat= async (sillas) => {
+  const handleDeleteSeat= async (info) => {
     try {
-      const response = await cinePlusApi.put(`/quitarSillasDeOrden`, sillas);
+      const response = await cinePlusApi.put(`/quitarSillasDeOrden`, info);
       console.log(response);
       if (response.status === 200) {
         fetchOrderSeats();
       }
     } catch (error) {
       console.error('Error eliminando las sillas: ', error);
+    }
+  };
+  const handleDeleteProduct= async (info) => {
+    try {
+      const response = await cinePlusApi.put(`/quitarProductosPorId`, info);
+      console.log(response);
+      if (response.status === 200) {
+        fetchOrderProducts();
+      }
+    } catch (error) {
+      console.error('Error eliminando los productos: ', error);
     }
   };
 
@@ -147,16 +158,22 @@ export const Orden = () => {
       {orderProducts.length > 0 && (
         <>
           <h2>Productos</h2>
-          {orderProducts.map(product => (
-            <div className="order-item" key={product._id}>
-              <img className ="order-item-image" src={product.img} alt={product.nameProduct} />
+          {orderProducts.map((product, key) => (
+            <div className="order-item" key={key}>
+            <div className="order-info-container">
+            <img className="order-seats-image"  src={product.img} alt={product.name} />
               <div className="order-item-info">
-                <h2>{product.nameProduct}</h2>
+                <h3>{product.nameProduct}</h3>
+                
                 <p>Precio: ${parseFloat(product.precio).toFixed(2)}</p>
                 <p>Cantidad: {product.quantity}</p>
                 <p>Total: ${parseFloat(product.totalPrice).toFixed(2)}</p>
               </div>
             </div>
+            <div className="delete-button" onClick={() => handleDeleteProduct({idProducto: product.id, email})}>
+                <img className="delete-img" src={equis} alt="equis"/>
+            </div>
+          </div>
           ))}
         </>
       )}

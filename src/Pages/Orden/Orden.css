@@ -82,15 +82,16 @@
 }
 
 .order-item-image {
-    aspect-ratio: 1/1;
-    width: 30%;
+    aspect-ratio: 1 / 1;
     height: 100%;
+    object-fit: cover;
     margin-right: 20px;
-    border-radius: 10px; /* Bordes redondeados para la imagen */
+    border-radius: 10px;
 }
 .order-seats-image {
     aspect-ratio: 1/1;
     height: 100%;
+    max-width: 300px;
     object-fit: cover;
     margin-right: 20px;
     border-radius: 10px; /* Bordes redondeados para la imagen */
