@@ -108,6 +108,7 @@ const quitarSillasDeOrden = async (req, res) => {
         const usuario = await Usuario.findOne({ email });
         const orden = await Orden.findById(usuario.orden);
         orden.sillas = orden.sillas.filter((id) => !sillasId.includes(id.toString()));
+        const sillas = await Silla.updateMany({ _id: { $in: sillasId } }, { $set: { estado: false } });
         await orden.save();
         res.status(200).json({ message: 'Sillas eliminadas de la orden' });
     } catch (err) {
