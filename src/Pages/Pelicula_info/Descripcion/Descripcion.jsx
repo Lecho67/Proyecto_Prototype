@@ -71,7 +71,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
     
         for (let j = 0; j < cantidad; j++) {
             const sillas = [];
-            let precio = pelicula.vote_average * 3000;
+            let precio = Math.random() * 10000 + 10000;
             for (let i = 0; i < 128; i++) {
                 sillas.push({ estado: Math.random() < 0.3, precio: precio });
             }
