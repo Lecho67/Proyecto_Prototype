@@ -112,7 +112,7 @@ export const Orden = () => {
       setTotalPayment(totalFromProducts + totalFromSeats);
     };
     calculateTotalPayment();
-  }, [orderProducts]);
+  }, [orderProducts, orderSeats]);
 
 
   if (loading || loading2) return <div className="loadingContainer"><p className="loadingMiOrden">Cargando Datos De La Orden...</p></div>;
