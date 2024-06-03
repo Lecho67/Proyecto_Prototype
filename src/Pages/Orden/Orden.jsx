@@ -170,7 +170,7 @@ export const Orden = () => {
                 <p>Total: ${parseFloat(product.totalPrice).toFixed(2)}</p>
               </div>
             </div>
-            <div className="delete-button" onClick={() => handleDeleteProduct({idProducto: product.id, email})}>
+            <div className="delete-button" onClick={() => {handleDeleteProduct({productoId: product._id, email: email})}}>
                 <img className="delete-img" src={equis} alt="equis"/>
             </div>
           </div>
@@ -178,11 +178,11 @@ export const Orden = () => {
         </>
       )}
 
-      {0 === 0 && orderProducts.length === 0 && (
+      {Object.keys(orderSeats).length === 0 && orderProducts.length === 0 && (
         <p>No hay productos en el carrito</p>
       )}
 
-      {(0 > 0 || orderProducts.length > 0) && (
+      {(Object.keys(orderSeats).length > 0 || orderProducts.length > 0) && (
         <div className="order-total">
           <h2>Total a pagar: ${totalPayment.toFixed(2)}</h2>
         </div>
