@@ -99,9 +99,10 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
     
     useEffect(() => {
         obtenerFunciones().then((funciones)=>{setFunciones(funciones);console.log(funciones)}).catch((error)=>{console.error(error);setError(error)});
-    }, []);
+    }, []); 
 
     useEffect(() => {   
+    if (!loading){
         console.log(funciones.length);
         if (funciones.length < 40 && !ordendecrearenviada.current && error.message != 'Error al obtener las funciones de la película') {
             setFuncionStatus('Buscando funciones...');
@@ -112,8 +113,10 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
 
             ordendecrearenviada.current = true;
         }
+    }
+        
         actualizarFiltros();
-    }, [funciones]);
+    }, [funciones,loading]);
     
     const actualizarFiltros= () =>{
         setDisp2d(false);
