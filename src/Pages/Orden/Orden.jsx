@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import cinePlusApi from "../../api/cinePlusApi";
 import useFetchPelicula from "../../Hooks/useFetchPelicula";
 import "./Orden.css";
+import equis from "../../assets/equis.png";
 
 export const Orden = () => {
   const { email } = useSelector(state => state.auth);
@@ -52,6 +53,17 @@ export const Orden = () => {
       setLoading(false);
     }
   };
+  const handleDeleteSeat= async (sillas) => {
+    try {
+      const response = await cinePlusApi.put(`/quitarSillasDeOrden`, sillas);
+      console.log(response);
+      if (response.status === 200) {
+        fetchOrderSeats();
+      }
+    } catch (error) {
+      console.error('Error eliminando las sillas: ', error);
+    }
+  };
 
   const fetchOrderSeats = async () => {
     try {
@@ -87,6 +99,7 @@ export const Orden = () => {
   useEffect(() => {
     fetchOrderProducts();
     fetchOrderSeats();
+    console.log(orderSeats);
   }, [email]);
 
   useEffect(() => {
@@ -113,14 +126,18 @@ export const Orden = () => {
           <h2>Asientos Seleccionados</h2>
           {Object.keys(orderSeats).map((funcionid, key) => (
             <div className="order-item" key={key}>
-              <img src={`https://image.tmdb.org/t/p/w300/${orderSeats[funcionid][0]?.poster}`} alt={orderSeats[funcionid][0]?.titulo} />
-              <div className="order-item-info">
-              
-                <h3>{orderSeats[funcionid][0]?.titulo}</h3>
-                <p>Hora: {orderSeats[funcionid][0]?.funcion.hora}</p>
-                <p>Fecha: {orderSeats[funcionid][0]?.funcion.dia}/{orderSeats[funcionid][0]?.funcion.mes}/{orderSeats[funcionid][0]?.funcion.año}</p>
-                <p>Cantidad De Asientos: {orderSeats[funcionid].length}</p>
-                <p>Total: ${orderSeats[funcionid].reduce((acc, seat) => acc + seat.precio, 0)}</p>
+              <div className="order-info-container">
+              <img className="order-seats-image" src={`https://image.tmdb.org/t/p/w300/${orderSeats[funcionid][0]?.poster}`} alt={orderSeats[funcionid][0]?.titulo} />
+                <div className="order-item-info">
+                  <h3>{orderSeats[funcionid][0]?.titulo}</h3>
+                  <p>Hora: {orderSeats[funcionid][0]?.funcion.hora}</p>
+                  <p>Fecha: {orderSeats[funcionid][0]?.funcion.dia}/{orderSeats[funcionid][0]?.funcion.mes}/{orderSeats[funcionid][0]?.funcion.año}</p>
+                  <p>Cantidad De Asientos: {orderSeats[funcionid].length}</p>
+                  <p>Total: ${orderSeats[funcionid].reduce((acc, seat) => acc + seat.precio, 0)}</p>
+                </div>
+              </div>
+              <div className="delete-button" onClick={() => handleDeleteSeat({sillasId: orderSeats[funcionid], email})}>
+                  <img className="delete-img" src={equis} alt="equis"/>
               </div>
             </div>
           ))}
@@ -132,7 +149,7 @@ export const Orden = () => {
           <h2>Productos</h2>
           {orderProducts.map(product => (
             <div className="order-item" key={product._id}>
-              <img src={product.img} alt={product.nameProduct} />
+              <img className ="order-item-image" src={product.img} alt={product.nameProduct} />
               <div className="order-item-info">
                 <h2>{product.nameProduct}</h2>
                 <p>Precio: ${parseFloat(product.precio).toFixed(2)}</p>

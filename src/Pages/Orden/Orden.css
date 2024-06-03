@@ -28,31 +28,73 @@
     text-align: center;
     color: #0f2f75;
 }
+.order-item-info{
+    width: 100%;
+}
+.delete-button{
+    display: flex;
+    justify-items: flex-end;
+    align-content: flex-start;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.delete-button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.delete-button:active{
+    cursor: pointer;
+    transform: scale(0.95);
+}
+
+.delete-img{
+    aspect-ratio: 1/1;
+    width: 40px;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.order-info-container {
+    display: flex;
+    align-items: flex-start;
+    height: 227 px;
+}
+
 .order-item-info h3 {
     text-align: left;
     color: #3d6292;
     margin-bottom: 0px;
+    margin-top: 0px;
 }
 .order-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: space-between;
     margin-bottom: 20px;
     background-color: #fff; /* Fondo de cada producto */
     border: 1px solid #ddd; /* Borde del cuadro */
     border-radius: 10px; /* Bordes redondeados */
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra para destacar */
-    padding: 10px; /* Espacio interno */
+    padding: 20px; /* Espacio interno */
 }
 
-.order-item img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+.order-item-image {
+    aspect-ratio: 1/1;
+    width: 30%;
+    height: 100%;
     margin-right: 20px;
-    margin-left: 10px;
     border-radius: 10px; /* Bordes redondeados para la imagen */
 }
-
+.order-seats-image {
+    aspect-ratio: 1/1;
+    height: 100%;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 10px; /* Bordes redondeados para la imagen */
+}
 .order-item-info {
     display: flex;
     flex-direction: column;
