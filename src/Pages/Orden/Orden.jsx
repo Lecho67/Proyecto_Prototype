@@ -60,7 +60,6 @@ export const Orden = () => {
       let sillasAgrupadas = {};
       sillas.forEach(silla => {
         useFetchPelicula(silla.funcion.idPelicula).then((data) => {
-          console.log(data);
           const sillaConDatosDePelicula = { ...silla, titulo: data.title , poster: data.poster_path};
           sillasAgrupadas[silla.funcion._id] = [...sillasAgrupadas[silla.funcion._id] || [], sillaConDatosDePelicula];
         });
