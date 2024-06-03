@@ -7,8 +7,9 @@ require('dotenv').config();
 const routes = require('./routes/Routes.js');
 app.use(cors());
 app.use(express.json({ limit: '250mb' }));
-const bodyParser = require('body-parser');
 
+
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use( bodyParser.json({ limit:'250mb'}))
 dbConnection();
 app.use(express.static('public'));
