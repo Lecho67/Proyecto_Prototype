@@ -109,7 +109,7 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
     }, []);
 
     useEffect(() => {   
-        if (renders.current <= 0) {
+        if (renders.current <= 1) {
             console.log('primer ejecucion del useEffect que recibe si funciones ha cambiado');
             renders.current++;
             return; 
