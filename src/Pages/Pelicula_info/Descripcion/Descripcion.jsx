@@ -103,9 +103,10 @@ const Descripcion = ({ idPelicula, pelicula = defPelicula, credits = defCredits,
     useEffect(() => {
         if (isFirstRender.current) {
             isFirstRender.current = false;
+            console.log('primer render del useffect normal');
             return;
         }
-        obtenerFunciones().then((funciones)=>{setFunciones(funciones)}).catch((error)=>{console.error(error);setError(error)});
+        obtenerFunciones().then((funciones)=>{setFunciones(funciones);console.log(funciones)}).catch((error)=>{console.error(error);setError(error)});
     }, []);
 
     useEffect(() => {   
