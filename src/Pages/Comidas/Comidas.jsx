@@ -90,7 +90,7 @@ export const Comidas = ({
                     <div className='info-product'>
                         <h2>{product.name}</h2>
                         <p className='price'>${product.precio}</p>
-                        <button style={isAddingRef.current ? { cursor: 'progress' } : { cursor: 'pointer' }} disabled={isAddingRef.current} onClick={() => onAddProduct(product)}>
+                        <button style={isAddingRef.current ? { cursor: 'wait' } : { cursor: 'pointer' }} disabled={isAddingRef.current} onClick={() => onAddProduct(product)}>
                             Añadir al carrito
                         </button>
                     </div>

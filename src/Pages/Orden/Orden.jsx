@@ -11,12 +11,14 @@ export const Orden = () => {
   const [orderSeats, setOrderSeats] = useState({});
   const [loading, setLoading] = useState(true);
   const [loading2, setLoading2] = useState(true);
+  const [loading3, setLoading3] = useState(false);
   const [error, setError] = useState(null);
   const [totalPayment, setTotalPayment] = useState(0);
 
 
   const fetchOrderProducts = async () => {
     try {
+      setLoading3(true);
       const response = await cinePlusApi.get(`/obtenerOrdenDeUsuario/${email}`);
       const { productos } = response.data;
 
@@ -50,6 +52,7 @@ export const Orden = () => {
       console.error('Error Obteniendo Productos: ', error);
       setError('Error Obteniendo Productos');
     } finally {
+      setLoading3(false);
       setLoading(false);
     }
   };
@@ -78,6 +81,7 @@ export const Orden = () => {
 
   const fetchOrderSeats = async () => {
     try {
+      setLoading3(true);
       const response = await cinePlusApi.get(`/informacionSillasReservadas/${email}`);
       const { sillas } = response.data;
 
@@ -104,6 +108,7 @@ export const Orden = () => {
       setError('Error Obteniendo Asientos');
     } finally {
       setLoading2(false);
+      setLoading3(false);
     }
   };
 
@@ -126,7 +131,7 @@ export const Orden = () => {
   }, [orderProducts, orderSeats]);
 
 
-  if (loading || loading2) return <div className="loadingContainer"><p className="loadingMiOrden">Cargando Datos De La Orden...</p></div>;
+  if (loading || loading2) return <><div className="loadingContainer"><p className="loadingMiOrden">Cargando Datos De La Orden...</p></div><style>{"body {cursor: wait}"}</style></>;
   if (error) return <p>{error}</p>;
 
   return (
@@ -187,6 +192,7 @@ export const Orden = () => {
           <h2>Total a pagar: ${totalPayment.toFixed(2)}</h2>
         </div>
       )}
+      <style>{loading3 && "body {cursor: wait}"}</style>
     </div>
   );
 };

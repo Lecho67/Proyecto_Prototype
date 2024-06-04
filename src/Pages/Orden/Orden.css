@@ -40,12 +40,10 @@
 }
 
 .delete-button:hover{
-    cursor: pointer;
     transform: scale(1.1);
 }
 
 .delete-button:active{
-    cursor: pointer;
     transform: scale(0.95);
 }
 

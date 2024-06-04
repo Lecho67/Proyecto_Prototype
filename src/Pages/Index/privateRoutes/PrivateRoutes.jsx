@@ -26,7 +26,7 @@ export const PrivateRoutes = () => {
 const { status } = useSelector(state => state.auth);
 
 if (loading) {
-    return <div>Loading...</div>;
+    return <><div className="loadingContainer"><p className="loadingMiOrden">Cargando...</p></div><style>{"body {cursor: wait}"}</style></>;
 }
 
 return status ? <Outlet /> : <Navigate to="/login" />;
