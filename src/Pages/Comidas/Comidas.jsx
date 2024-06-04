@@ -77,7 +77,7 @@ export const Comidas = ({
     
     
 
-    if (loading) return <div className="loadingContainer"><p className="loadingMiOrden">Cargando Comidas...</p></div>;
+    if (loading) return <><div className="loadingContainer"><p className="loadingMiOrden">Cargando Comidas...</p></div><style>{"body {cursor: wait}"}</style></>;
     if (error) return <p>{error}</p>;
 
     return (
